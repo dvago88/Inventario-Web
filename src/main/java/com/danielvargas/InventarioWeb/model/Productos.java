@@ -27,6 +27,8 @@ public class Productos {
 
     private String descripcion;
 
+    public Productos() {}
+
     public int getId() {
         return id;
     }
