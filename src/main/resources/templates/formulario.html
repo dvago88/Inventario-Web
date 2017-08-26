@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{mainStyle.css}"/>
+</head>
+<body>
+<header class="main-header group">
+    <div>
+        <ul>
+            <li><a th:href="@{/}">Todos</a></li>
+            <li><a th:href="@{/agregar}">Agregar</a></li>
+            <li><a th:href="@{/actualizar}">Actualizar</a></li>
+            <li><a th:href="@{/eliminar}">Eliminar</a></li>
+        </ul>
+    </div>
+</header>
+
+</body>
+</html>

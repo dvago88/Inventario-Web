@@ -42,12 +42,20 @@ public class ProductosDaoImpl implements ProductosDao {
 
     @Override
     public void agregarProducto(Productos productos) {
-
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(productos);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public void eliminarProducto(Productos productos) {
-
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.delete(productos);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override

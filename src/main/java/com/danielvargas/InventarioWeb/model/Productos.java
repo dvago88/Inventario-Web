@@ -1,10 +1,9 @@
 package com.danielvargas.InventarioWeb.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Daniel on 20/08/2017
@@ -25,6 +24,7 @@ public class Productos {
     @NotNull
     private double precio;
 
+    @Size(max = 100)
     private String descripcion;
 
     public Productos() {}

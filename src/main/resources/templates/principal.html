@@ -6,8 +6,33 @@
     <link rel="stylesheet" th:href="@{mainStyle.css}"/>
 </head>
 <body>
-    <header class="main-header">
-        <h1 class="titulo">Inventario Papelería Carusso</h1>
+    <header class="main-header group">
+        <div>
+            <ul>
+                <li><a th:href="@{/}">Todos</a></li>
+                <li><a th:href="@{/agregar}">Agregar</a></li>
+                <li><a th:href="@{/actualizar}">Actualizar</a></li>
+                <li><a th:href="@{/eliminar}">Eliminar</a></li>
+            </ul>
+        </div>
     </header>
+    <h1 class="titulo">Inventario Papelería Carusso</h1>
+    <h2>Lista de productos</h2>
+    <div class="lista-productos">
+        <table border="1" class="tabla">
+            <tr>
+                <th>Codigo</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+            </tr>
+            <tr th:each="pro:${productos}">
+                <td th:text="${pro.id}">prueba</td>
+                <td th:text="${pro.nombre}">prueba</td>
+                <td th:text="${pro.precio}">prueba</td>
+                <td th:text="${pro.cantidad}">prueba</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
