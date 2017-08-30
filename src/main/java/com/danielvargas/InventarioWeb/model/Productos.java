@@ -19,6 +19,7 @@ public class Productos {
     private int cantidad;
 
     @NotNull
+    @Size(min=1, max=20)
     private String Nombre;
 
     @NotNull

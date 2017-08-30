@@ -3,36 +3,49 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Inventario</title>
-    <link rel="stylesheet" th:href="@{mainStyle.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mainStyle.css}"/>
 </head>
 <body>
-    <header class="main-header group">
-        <div>
-            <ul>
-                <li><a th:href="@{/}">Todos</a></li>
-                <li><a th:href="@{/agregar}">Agregar</a></li>
-                <li><a th:href="@{/actualizar}">Actualizar</a></li>
-                <li><a th:href="@{/eliminar}">Eliminar</a></li>
-            </ul>
+    <div class="cuerpo-real">
+        <header class="main-header group">
+            <div>
+                <ul>
+                    <li><a th:href="@{/}">Todos</a></li>
+                    <li><a th:href="@{/agregar}">Agregar</a></li>
+                    <li><a th:href="@{/actualizar}">Actualizar</a></li>
+                    <li><a th:href="@{/eliminar}">Eliminar</a></li>
+                </ul>
+            </div>
+        </header>
+        <h1 class="titulo">Inventario Papelería Carusso</h1>
+        <h2>Lista de productos</h2>
+        <div class="main-body">
+            <table border="1" class="tabla">
+                <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+                <tr th:each="pro:${productos}">
+                    <td th:text="${pro.id}">prueba</td>
+                    <td>
+                        <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">prueba</a>
+                    </td>
+                    <td class="moneda" th:text="${pro.precio}">prueba</td>
+                    <td th:text="${pro.cantidad}">prueba</td>
+                    <td>
+                        <form th:action="@{|/${pro.id}|}" method="post">
+                            <button type="submit" class="button">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </header>
-    <h1 class="titulo">Inventario Papelería Carusso</h1>
-    <h2>Lista de productos</h2>
-    <div class="lista-productos">
-        <table border="1" class="tabla">
-            <tr>
-                <th>Código</th>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-            </tr>
-            <tr th:each="pro:${productos}">
-                <td th:text="${pro.id}">prueba</td>
-                <td th:text="${pro.nombre}">prueba</td>
-                <td th:text="${pro.precio}">prueba</td>
-                <td th:text="${pro.cantidad}">prueba</td>
-            </tr>
-        </table>
+        <div th:fragment="flash" th:if="${flash != null}" class="container">
+            <i class="right material-icons" data-close="">close</i>
+            <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
+        </div>
     </div>
 </body>
 </html>

@@ -2,38 +2,43 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{mainStyle.css}"/>
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" th:href="@{css/mainStyle.css}"/>
 </head>
 <body>
-<header class="main-header group">
-    <div>
-        <ul>
-            <li><a th:href="@{/}">Todos</a></li>
-            <li><a th:href="@{/agregar}">Agregar</a></li>
-            <li><a th:href="@{/actualizar}">Actualizar</a></li>
-            <li><a th:href="@{/eliminar}">Eliminar</a></li>
-        </ul>
-    </div>
-</header>
-<div class="container">
-    <form th:action="@{${accion}}" method="post" th:object="${productos}">
-        <input type="hidden" th:field="*{id}"/>
-        <h2 th:text="${encabezado}">Prueba</h2>
+    <header class="main-header group">
+        <div>
+            <ul>
+                <li><a th:href="@{/}">Todos</a></li>
+                <li><a th:href="@{/agregar}">Agregar</a></li>
+                <li><a th:href="@{/actualizar}">Actualizar</a></li>
+                <li><a th:href="@{/eliminar}">Eliminar</a></li>
+            </ul>
+        </div>
+    </header>
+    <h2 th:text="${encabezado}" class="titulo">Prueba</h2>
+    <div class="main-body container">
+        <form th:action="@{${accion}}" method="post" th:object="${productos}">
+            <input type="hidden" th:field="*{id}"/>
 
-            <div class="formulario" th:classappend="${#fields.hasErrors('nombre')}? 'error': ''">
-                <input type="text" th:field="*{nombre}" placeholder="Nombre del producto"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
-                <input type="text" th:field="*{precio}" placeholder="Precio"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
-                <input type="text" th:field="*{cantidad}" placeholder="Cantidad"/><br/>
-                <textarea name="Descripcion" rows="10" cols="30" th:field="*{descripcion}" placeholder="Pequeña descripción"></textarea>
-            </div>
-            <div class="formulario">
-                <button  th:text="${boton}" type="submit" class="button">Agregar</button>
-                <a th:href="@{/}" class="button">Cancelar</a>
-            </div>
-    </form>
+                <div class="formulario" th:classappend="${#fields.hasErrors('nombre')}? 'error': ''">
+                    <input type="text" th:field="*{nombre}" placeholder="Nombre del producto"/><br/>
+                    <div class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                    <input type="number" step="1000" th:field="*{precio}" placeholder="Precio"/><br/>
+                    <div class="error-message" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+                    <input type="number" step="10" th:field="*{cantidad}" placeholder="Cantidad"/><br/>
+                    <textarea name="Descripcion" rows="10" cols="30" th:field="*{descripcion}" placeholder="Pequeña descripción"></textarea>
+                </div>
+                <div class="formulario">
+                    <button  th:text="${boton}" type="submit" class="button">Agregar</button>
+                    <a th:href="@{/}" id="dañado" class="button">Cancelar</a>
+                </div>
+        </form>
+    </div>
+
+<div th:fragment="flash" th:if="${flash != null}" class="container">
+    <i class="right material-icons" data-close="">close</i>
+    <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
 </div>
 
 </body>
