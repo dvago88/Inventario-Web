@@ -25,8 +25,14 @@ public class Productos {
     @NotNull
     private double precio;
 
+    @NotNull
+    private double precioEntrada;
+
     @Size(max = 100)
     private String descripcion;
+
+    @ManyToOne
+    private Proveedor proveedor;
 
     public Productos() {}
 
@@ -68,5 +74,21 @@ public class Productos {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public double getPrecioEntrada() {
+        return precioEntrada;
+    }
+
+    public void setPrecioEntrada(double precioEntrada) {
+        this.precioEntrada = precioEntrada;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 }
