@@ -1,12 +1,62 @@
 package com.danielvargas.InventarioWeb.dao;
 
+import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.Proveedor;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class ProveedorDaoImpl implements ProveedorDao {
 
     @Autowired
     SessionFactory sessionFactory;
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Proveedor> todosLosProveedores() {
+        Session session = sessionFactory.openSession();
+        List<Proveedor> proveedores = session.createCriteria(Proveedor.class).list();
+        session.close();
+        return proveedores;
+    }
+
+    @Override
+    public List<Proveedor> obtenerPorNombre(String nombre) {
+        return null;
+    }
+
+    @Override
+    public Proveedor obtenerPorCodigo(int id) {
+        Session session = sessionFactory.openSession();
+        Proveedor proveedor = session.get(Proveedor.class, id);
+        session.close();
+        return proveedor;
+    }
+
+    @Override
+    public void agregarProveedor(Proveedor proveedor) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(proveedor);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void eliminarProveedor(Proveedor proveedor) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.delete(proveedor);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void actualizarProveedor(Proveedor proveedor) {
+
+    }
 }

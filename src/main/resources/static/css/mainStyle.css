@@ -1,3 +1,5 @@
+/*TODO: refactorizar, mucho codigo repetido*/
+
 * {
     box-sizing: border-box;
 }
@@ -129,18 +131,30 @@ input[type=text], select, textarea, input[type=number] {
 
 }
 
+/*TODO: El formulario se sale del container si se reduce el tamaño de la ventana*/
 .formulario {
-    border-radius: 5px;
+
     padding: 20px;
 }
+
 
 /*esto es para que quede centrado el formulario*/
 .container{
     position: absolute;
-    left: 50%;
+    left: 25%;
     top: 55%;
     transform: translate(-50%, -50%);
     width: 40%;
+    height: 65%
+
+}
+.container2{
+    position: absolute;
+    left: 75%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 65%
 }
 
 .moneda::before{
@@ -148,7 +162,7 @@ input[type=text], select, textarea, input[type=number] {
 }
 
 
-#producto{
+#producto, #proveedor{
     color: #111;
 }
 

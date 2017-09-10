@@ -19,7 +19,8 @@ public class Productos {
     private int cantidad;
 
     @NotNull
-    @Size(min=1, max=20)
+    @Size(min=1, max=35)
+    @Column(unique = true)
     private String Nombre;
 
     @NotNull
@@ -28,10 +29,11 @@ public class Productos {
     @NotNull
     private double precioEntrada;
 
-    @Size(max = 100)
+    @Size(max = 150)
     private String descripcion;
 
     @ManyToOne
+    @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
 
     public Productos() {}

@@ -1,22 +1,9 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Inventario</title>
-    <link rel="stylesheet" th:href="@{/css/mainStyle.css}"/>
-</head>
+<head th:replace="layout::head('Principal')"></head>
 <body>
     <div class="cuerpo-real">
-        <header class="main-header group">
-            <div>
-                <ul>
-                    <li><a th:href="@{/}">Todos</a></li>
-                    <li><a th:href="@{/agregar}">Agregar</a></li>
-                    <li><a th:href="@{/actualizar}">Actualizar</a></li>
-                    <li><a th:href="@{/eliminar}">Eliminar</a></li>
-                </ul>
-            </div>
-        </header>
+        <div th:replace="layout::mainbar"></div>
         <h1 class="titulo">Inventario Papelería Carusso</h1>
         <h2>Lista de productos</h2>
         <div class="main-body">
@@ -24,15 +11,21 @@
                 <tr>
                     <th>Código</th>
                     <th>Producto</th>
-                    <th>Precio</th>
+                    <th>Precio Salida</th>
+                    <th>Precio Entrada</th>
+                    <th>Proveedor</th>
                     <th>Cantidad</th>
                 </tr>
                 <tr th:each="pro:${productos}">
-                    <td th:text="${pro.id}">prueba</td>
+                    <td th:text="${pro.id}">id</td>
                     <td>
-                        <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">prueba</a>
+                        <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">nombre</a>
                     </td>
-                    <td class="moneda" th:text="${pro.precio}">prueba</td>
+                    <td class="moneda" th:text="${pro.precio}">precioE</td>
+                    <td class="moneda" th:text="${pro.precioEntrada}">precioE</td>
+                    <td>
+                        <a id="proveedor" th:text="${pro.proveedor}" th:href="@{|/proveedores/${pro.proveedor.id}|}"></a>
+                    </td>
                     <td th:text="${pro.cantidad}">prueba</td>
                     <td>
                         <form th:action="@{|/${pro.id}|}" method="post">

@@ -13,8 +13,9 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min = 1, max = 20)
-    private String nombre;
+    @Size(min = 1, max = 35)
+    @Column(name = "nombre", unique = true)
+    private String nombreP;
 
     @OneToMany(mappedBy = "proveedor")
     private List<Productos> productos=new ArrayList<>();
@@ -23,10 +24,16 @@ public class Proveedor {
 
     private long telefono;
 
-    @Size(max = 100)
-    private String descripcion;
+    @Size(max = 150)
+    @Column(name = "descripcion")
+    private String descripcionP;
 
     public Proveedor() {
+    }
+
+    @Override
+    public String toString(){
+        return nombreP;
     }
 
     public int getId() {
@@ -37,12 +44,12 @@ public class Proveedor {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreP() {
+        return nombreP;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreP(String nombreP) {
+        this.nombreP = nombreP;
     }
 
     public List<Productos> getProductos() {
@@ -69,11 +76,11 @@ public class Proveedor {
         this.telefono = telefono;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripcionP() {
+        return descripcionP;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcionP(String descripcionP) {
+        this.descripcionP = descripcionP;
     }
 }
