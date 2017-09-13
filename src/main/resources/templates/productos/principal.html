@@ -16,7 +16,7 @@
                     <th>Proveedor</th>
                     <th>Cantidad</th>
                 </tr>
-                <tr th:each="pro:${productos}">
+                <tr th:each="pro:${productos}" id="tableRow" onmouseover="this.id='tableRow'" onmouseout="this.id='ow'">
                     <td th:text="${pro.id}">id</td>
                     <td>
                         <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">nombre</a>
@@ -27,9 +27,17 @@
                         <a id="proveedor" th:text="${pro.proveedor}" th:href="@{|/proveedores/${pro.proveedor.id}|}"></a>
                     </td>
                     <td th:text="${pro.cantidad}">prueba</td>
-                    <td>
-                        <form th:action="@{|/${pro.id}|}" method="post">
-                            <button type="submit" class="button">Borrar</button>
+                    <td class="group">
+                        <div class="masYmenos">
+                            <form th:action="@{|/actualizarMas/${pro.id}|}" method="post">
+                                <button type="submit" id="mas">+</button>
+                            </form>
+                            <form th:action="@{|/actualizarMenos/${pro.id}|}" method="post">
+                                <button type="submit" id="menos">-</button>
+                            </form>
+                        </div>
+                        <form th:action="@{|/${pro.id}|}" method="post" class="tirarALaDerecha" onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
+                            <button type="submit" class="button" id="borrar">Borrar</button>
                         </form>
                     </td>
                 </tr>
@@ -40,5 +48,6 @@
             <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
         </div>
     </div>
+    <script th:src="@{/javascript/app.js}"></script>
 </body>
 </html>

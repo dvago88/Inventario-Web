@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -24,8 +25,9 @@ public class ProveedorDaoImpl implements ProveedorDao {
         return proveedores;
     }
 
+
     @Override
-    public List<Proveedor> obtenerPorNombre(String nombre) {
+    public Proveedor obtenerPorNombre(String nombre) {
         return null;
     }
 
@@ -57,6 +59,11 @@ public class ProveedorDaoImpl implements ProveedorDao {
 
     @Override
     public void actualizarProveedor(Proveedor proveedor) {
-
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.update(proveedor);
+        session.getTransaction().commit();
+        session.close();
     }
 }
+

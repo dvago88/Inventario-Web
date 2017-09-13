@@ -33,12 +33,7 @@ public class ProductosController {
     public String todosLosProductos(Model model) {
         List<Productos> todos = productosService.todosLosProductos();
         model.addAttribute("productos", todos);
-        return "principal";
-    }
-
-    @RequestMapping("/actualizar")
-    public String actualizar(Model model) {
-        return "formulario";
+        return "productos/principal";
     }
 
     @RequestMapping("/agregar")
@@ -46,7 +41,6 @@ public class ProductosController {
 
         if (!model.containsAttribute("productos")) {
             //agregamos el modelo para poder usar el formulario
-            //TODO: No siempre debe crear un nuevo proveedor, debe revisar si ya existia.
             model.addAttribute("proveedor", new Proveedor());
             model.addAttribute("productos", new Productos());
         }
@@ -65,11 +59,44 @@ public class ProductosController {
             redirectAttributes.addFlashAttribute("productos", productos);
             return "redirect:/agregar";
         }
-        proveedorService.agregarProveedor(proveedor);
-        productos.setProveedor(proveedor);
+
+        if (proveedorService.obtenerPorNombre(proveedor.getNombreP()) == null) {
+            proveedorService.agregarProveedor(proveedor);
+            productos.setProveedor(proveedor);
+        } else {
+            Proveedor pro = proveedorService.actualizarProveedor(proveedor);
+            productos.setProveedor(pro);
+        }
+
         productosService.agregarProducto(productos);
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente agregado", FlashMessage.Status.SUCCESS));
         return "redirect:/agregar";
+    }
+
+    @RequestMapping(value = "/actualizarMas/{productosId}", method = RequestMethod.POST)
+    public String agregarUno(@PathVariable int productosId, RedirectAttributes redirectAttributes) {
+        Productos pro = productosService.obtenerPorCodigo(productosId);
+        int cantidad = pro.getCantidad();
+        cantidad++;
+        pro.setCantidad(cantidad);
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
+        productosService.agregarProducto(pro);
+
+        return "redirect:/";
+    }
+
+    // TODO: Implementar este metodo en uno solo con el de agregar 1
+    @RequestMapping(value = "/actualizarMenos/{productosId}", method = RequestMethod.POST)
+    public String eliminarUno(@PathVariable int productosId, RedirectAttributes redirectAttributes) {
+
+        Productos pro = productosService.obtenerPorCodigo(productosId);
+        int cantidad = pro.getCantidad();
+        cantidad--;
+        pro.setCantidad(cantidad);
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
+        productosService.agregarProducto(pro);
+
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/{productosId}", method = RequestMethod.POST)
@@ -81,11 +108,11 @@ public class ProductosController {
     }
 
     @RequestMapping("/{productosId}")
-    public String producto(@PathVariable int productosId, Model model){
-        Productos pro=productosService.obtenerPorCodigo(productosId);
+    public String producto(@PathVariable int productosId, Model model) {
+        Productos pro = productosService.obtenerPorCodigo(productosId);
         model.addAttribute("producto", pro);
 
-        return "producto";
+        return "productos/producto";
     }
 }
 

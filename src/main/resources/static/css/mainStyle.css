@@ -12,7 +12,7 @@ body {
 }
 
 h2 {
-    margin-left: 10px;
+    margin-left: 25px;
 
 }
 
@@ -29,7 +29,7 @@ th{
     background-color: #959DFF;
     color: white
 }
-tr:hover {
+tr:hover,#menos:hover,#mas:hover {
     background-color: #f5f5f5
 }
 
@@ -128,8 +128,27 @@ input[type=text], select, textarea, input[type=number] {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-
 }
+
+/*TODO: Arreglar el overfloating...*/
+.masYmenos{
+
+    float: left;
+}
+
+#mas,#menos{
+    background-color:#fff;
+    border: none;
+    color: #959DFF;
+    padding: 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
 
 /*TODO: El formulario se sale del container si se reduce el tamaño de la ventana*/
 .formulario {
@@ -162,6 +181,8 @@ input[type=text], select, textarea, input[type=number] {
 }
 
 
+
+
 #producto, #proveedor{
     color: #111;
 }
@@ -169,4 +190,9 @@ input[type=text], select, textarea, input[type=number] {
 /*esto es mientras tanto para que el boton cancelar se vea bien*/
 #dañado{
     padding: 12px 29px;
+}
+
+#borrar{
+    padding-left: 15px;
+    padding-right: 15px;
 }

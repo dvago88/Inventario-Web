@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProveedorDao {
     List<Proveedor> todosLosProveedores();
 
-    List<Proveedor> obtenerPorNombre(String nombre);
+    Proveedor obtenerPorNombre(String nombre);
 
     Proveedor obtenerPorCodigo(int id);
 

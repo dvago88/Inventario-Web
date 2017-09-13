@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProveedorService {
     List<Proveedor> todosLosProveedores();
 
-    List<Proveedor> obtenerPorNombre(String nombre);
+    Proveedor obtenerPorNombre(String nombre);
 
     Proveedor obtenerPorCodigo(int id);
 
@@ -15,5 +15,5 @@ public interface ProveedorService {
 
     void eliminarProveedor(Proveedor proveedor);
 
-    void actualizarProveedor(Proveedor proveedor);
+    Proveedor actualizarProveedor(Proveedor proveedor);
 }
