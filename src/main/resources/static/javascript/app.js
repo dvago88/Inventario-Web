@@ -1,10 +1,9 @@
-/*TODO: Implementar confirmacion botón borrar*/
-/*TODO: Implementar onhover para el fondo del mas y el menos*/
 
 
 
 
 //Esto solo funciona para la primera fila...
+/*
 document.getElementById("tableRow").onmouseover = function () {
     mouseOver()
 };
@@ -20,5 +19,6 @@ function mouseOut() {
     document.getElementById("mas").style.background = "#fff";
     document.getElementById("menos").style.background = "#fff";
 }
+*/
 
 

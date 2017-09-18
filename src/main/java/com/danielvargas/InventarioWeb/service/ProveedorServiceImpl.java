@@ -52,16 +52,17 @@ public class ProveedorServiceImpl implements ProveedorService {
         proveedorDao.eliminarProveedor(proveedor);
     }
 
+    //Revisa si los campos del proveedor están vacios y de ser así los deja como estaban antes.
     @Override
     public Proveedor actualizarProveedor(Proveedor proveedor) {
         Proveedor pro = obtenerPorNombre(proveedor.getNombreP());
-        if (proveedor.getDireccion() != null) {
+        if (!proveedor.getDireccion().equals("")) {
             pro.setDireccion(proveedor.getDireccion());
         }
         if (proveedor.getTelefono() != 0) {
             pro.setTelefono(proveedor.getTelefono());
         }
-        if (proveedor.getDescripcionP() != null) {
+        if (!proveedor.getDescripcionP().equals("")) {
             pro.setDescripcionP(proveedor.getDescripcionP());
         }
         proveedorDao.actualizarProveedor(pro);

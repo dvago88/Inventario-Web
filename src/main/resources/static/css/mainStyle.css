@@ -29,9 +29,7 @@ th{
     background-color: #959DFF;
     color: white
 }
-tr:hover,#menos:hover,#mas:hover {
-    background-color: #f5f5f5
-}
+
 
 a:link{
     color: beige;
@@ -40,6 +38,10 @@ a:link{
 
 a:visited{
     color: beige;
+}
+
+tr:hover,#menos:hover,#mas:hover {
+    background-color: #f5f5f5
 }
 
 
@@ -137,16 +139,10 @@ input[type=text], select, textarea, input[type=number] {
 }
 
 #mas,#menos{
-    background-color:#fff;
-    border: none;
     color: #959DFF;
+    background-color: inherit;
     padding: 0.5rem;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
     margin: 0 2px;
-    cursor: pointer;
 }
 
 
@@ -195,4 +191,21 @@ input[type=text], select, textarea, input[type=number] {
 #borrar{
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.cont{
+    background: #4CBB17;
+    padding: 0 0.5rem;
+    margin: 1rem;
+    width: 30rem;
+    border-radius: 5px;
+    box-shadow: 1px 0 5px #888888;
+
+
+}
+
+.flashy{
+}
+
+.flash{
 }

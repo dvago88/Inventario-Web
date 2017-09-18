@@ -2,10 +2,12 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout::head('Principal')"></head>
 <body>
+
     <div class="cuerpo-real">
         <div th:replace="layout::mainbar"></div>
         <h1 class="titulo">Inventario Papelería Carusso</h1>
         <h2>Lista de productos</h2>
+        <div th:replace="layout :: flash"></div>
         <div class="main-body">
             <table border="1" class="tabla">
                 <tr>
@@ -30,10 +32,10 @@
                     <td class="group">
                         <div class="masYmenos">
                             <form th:action="@{|/actualizarMas/${pro.id}|}" method="post">
-                                <button type="submit" id="mas">+</button>
+                                <button type="submit" id="mas" class="button">+</button>
                             </form>
                             <form th:action="@{|/actualizarMenos/${pro.id}|}" method="post">
-                                <button type="submit" id="menos">-</button>
+                                <button type="submit" id="menos" class="button">-</button>
                             </form>
                         </div>
                         <form th:action="@{|/${pro.id}|}" method="post" class="tirarALaDerecha" onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
@@ -42,10 +44,6 @@
                     </td>
                 </tr>
             </table>
-        </div>
-        <div th:fragment="flash" th:if="${flash != null}" class="container">
-            <i class="right material-icons" data-close="">close</i>
-            <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
         </div>
     </div>
     <script th:src="@{/javascript/app.js}"></script>
