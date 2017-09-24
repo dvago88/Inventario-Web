@@ -24,9 +24,8 @@ public class Productos {
     private int cantidad;
 
     @NotNull
-    @Size(min = 1, max = 35)
+    @Size(min = 1, max = 35, message = "El nombre debe tener entre {min} y {max} caracteres")
     @Column(unique = true)
-    //TODO: El nombre estaba en mayuscula y lo cambié a minuscula, corroborar que nada se haya dañado!!!
     private String nombre;
 
     /**
@@ -35,13 +34,14 @@ public class Productos {
      * toca cambiar el mensaje en messages.properties y luego ir al app.config y hacer otros cambios
      */
     @NotNull
-    @Range(min = 10, max = 10000000)
+    @Range(min = 10, max = 10000000, message = "El valor tiene que estar entre ${min} y $10.000.000")
     private double precio;
 
     @NotNull
+    @Range(min = 10, max = 10000000, message = "El valor tiene que estar entre ${min} y $10.000.000")
     private double precioEntrada;
 
-    @Size(max = 150)
+    @Size(max = 150, message = "Maximo 150 caracteres para la descripción")
     private String descripcion;
 
     @ManyToOne

@@ -13,18 +13,18 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min = 1, max = 35)
+    @Size(min = 1, max = 35, message = "El nombre debe tener entre {min} y {max} caracteres")
     @Column(name = "nombre", unique = true)
     private String nombreP;
 
     @OneToMany(mappedBy = "proveedor")
-    private List<Productos> productos=new ArrayList<>();
+    private List<Productos> productos = new ArrayList<>();
 
     private String direccion;
 
     private long telefono;
 
-    @Size(max = 150)
+    @Size(max = 150, message = "Maximo 150 caracteres para la descripción")
     @Column(name = "descripcion")
     private String descripcionP;
 
@@ -37,7 +37,7 @@ public class Proveedor {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return nombreP;
     }
 

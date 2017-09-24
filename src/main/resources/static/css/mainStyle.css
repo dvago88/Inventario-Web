@@ -185,6 +185,10 @@ input[type=text], select, textarea, input[type=number] {
     box-shadow: 1px 0 5px #888888;
 }
 
+.error-message{
+    color: darkred;
+}
+
 
 
 #producto, #proveedor{
