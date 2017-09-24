@@ -31,6 +31,11 @@ public class Proveedor {
     public Proveedor() {
     }
 
+    //Este constructor fue creado para poder testear
+    public Proveedor(String nombreP) {
+        this.nombreP = nombreP;
+    }
+
     @Override
     public String toString(){
         return nombreP;

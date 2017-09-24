@@ -39,7 +39,7 @@ public class ProductosController {
     @RequestMapping("/agregar")
     public String formularioAgregar(Model model) {
 
-        if (!model.containsAttribute("productos")) {
+        if (!model.containsAttribute("productos") && !model.containsAttribute("proveedor")) {
             //agregamos el modelo para poder usar el formulario
             model.addAttribute("proveedor", new Proveedor());
             model.addAttribute("productos", new Productos());
@@ -53,10 +53,12 @@ public class ProductosController {
     }
 
     @RequestMapping(value = "/agregar", method = RequestMethod.POST)
-    public String agregarProducto(@Valid Productos productos, Proveedor proveedor, BindingResult result, RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
+    public String agregarProducto(@Valid Productos productos, BindingResult result, @Valid Proveedor proveedor, BindingResult result2, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()|| result2.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productos", result);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.proveedor", result2);
             redirectAttributes.addFlashAttribute("productos", productos);
+            redirectAttributes.addFlashAttribute("proveedor", proveedor);
             return "redirect:/agregar";
         }
 

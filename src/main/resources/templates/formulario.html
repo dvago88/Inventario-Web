@@ -9,25 +9,43 @@
     <div class="">
         <form th:action="@{${accion}}" method="post">
 
-            <div class="formulario main-body container" th:classappend="${#fields.hasErrors('nombre')}? 'error': ''"  th:object="${productos}">
+            <div class="formulario main-body container" th:object="${productos}">
                 <input type="hidden" th:field="*{id}"/>
-                <input type="text" th:field="*{nombre}" placeholder="Nombre del producto"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
-                <input type="number" th:field="*{precio}" placeholder="Precio salida"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
-                <input type="number" th:field="*{precioEntrada}" placeholder="Precio entrada"/><br/>
-                <input type="number" th:field="*{cantidad}" placeholder="Cantidad"/><br/>
-                <textarea name="Descripcion" rows="10" cols="30" th:field="*{descripcion}" placeholder="Pequeña descripción"></textarea>
+                <div  th:classappend="${#fields.hasErrors('nombre')}? 'error': ''">
+                    <input type="text" th:field="*{nombre}" placeholder="Nombre del producto"/><br/>
+                    <div class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                </div>
+                <div th:classappend="${#fields.hasErrors('precio')}? 'error': ''">
+                    <input type="number" th:field="*{precio}" placeholder="Precio salida"/><br/>
+                    <div class="error-message" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+                </div>
+                <div th:classappend="${#fields.hasErrors('precioEntrada')}? 'error': ''">
+                    <input type="number" th:field="*{precioEntrada}" placeholder="Precio entrada"/><br/>
+                    <div class="error-message" th:if="${#fields.hasErrors('precioEntrada')}" th:errors="*{precioEntrada}"></div>
+                </div>
+                <div th:classappend="${#fields.hasErrors('cantidad')}? 'error': ''">
+                    <input type="number" th:field="*{cantidad}" placeholder="Cantidad"/><br/>
+                    <div class="error-message" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></div>
+                </div>
+                <div>
+                    <textarea name="Descripcion" rows="10" cols="30" th:field="*{descripcion}" placeholder="Pequeña descripción"></textarea>
+                </div>
             </div>
 
 
             <!--TODO:hay que hacer que maneje los errores-->
-            <div class="formulario main-body container2" th:classappend="${#fields.hasErrors('nombreP')}? 'error': ''" th:object="${proveedor}">
-                <input type="hidden" th:field="*{id}"/>
-                <input type="text" th:field="*{nombreP}" placeholder="Proveedor"/><br/>
+            <div class="formulario main-body container2"  th:object="${proveedor}">
+                    <input type="hidden" th:field="*{id}"/>
+                <div th:classappend="${#fields.hasErrors('nombreP')}? 'error': ''">
+                    <input type="text" th:field="*{nombreP}" placeholder="Proveedor"/><br/>
+                    <div class="error-message" th:if="${#fields.hasErrors('nombreP')}" th:errors="*{nombreP}"></div>
+                </div>
                 <input type="text" th:field="*{direccion}" placeholder="Direccion"/><br/>
                 <input type="number" th:field="*{telefono}" placeholder="Télefono"/><br/>
-                <textarea name="Descripcion" rows="10" cols="30" th:field="*{descripcionP}" placeholder="Pequeña descripción"></textarea>
+                <div th:classappend="${#fields.hasErrors('descripcionP')}? 'error': ''">
+                    <textarea name="Descripcion" rows="10" cols="30" th:field="*{descripcionP}" placeholder="Pequeña descripción"></textarea>
+                    <div class="error-message" th:if="${#fields.hasErrors('descripcionP')}" th:errors="*{descripcionP}"></div>
+                </div>
                     <div class="formulario">
                         <button  th:text="${boton}" type="submit" class="button">Agregar</button>
                         <a th:href="@{/}" id="dañado" class="button">Cancelar</a>

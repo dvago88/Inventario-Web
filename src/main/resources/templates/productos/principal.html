@@ -18,7 +18,7 @@
                     <th>Proveedor</th>
                     <th>Cantidad</th>
                 </tr>
-                <tr th:each="pro:${productos}" id="tableRow" onmouseover="this.id='tableRow'" onmouseout="this.id='ow'">
+                <tr th:each="pro:${productos}">
                     <td th:text="${pro.id}">id</td>
                     <td>
                         <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">nombre</a>

@@ -176,6 +176,14 @@ input[type=text], select, textarea, input[type=number] {
     content: "$";
 }
 
+.cont{
+    background: #4CBB17;
+    padding: 0 0.5rem;
+    margin: 1rem;
+    width: 30rem;
+    border-radius: 5px;
+    box-shadow: 1px 0 5px #888888;
+}
 
 
 
@@ -193,19 +201,4 @@ input[type=text], select, textarea, input[type=number] {
     padding-right: 15px;
 }
 
-.cont{
-    background: #4CBB17;
-    padding: 0 0.5rem;
-    margin: 1rem;
-    width: 30rem;
-    border-radius: 5px;
-    box-shadow: 1px 0 5px #888888;
 
-
-}
-
-.flashy{
-}
-
-.flash{
-}

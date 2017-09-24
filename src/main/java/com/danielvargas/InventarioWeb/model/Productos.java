@@ -1,8 +1,13 @@
 package com.danielvargas.InventarioWeb.model;
 
 
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -19,11 +24,18 @@ public class Productos {
     private int cantidad;
 
     @NotNull
-    @Size(min=1, max=35)
+    @Size(min = 1, max = 35)
     @Column(unique = true)
-    private String Nombre;
+    //TODO: El nombre estaba en mayuscula y lo cambié a minuscula, corroborar que nada se haya dañado!!!
+    private String nombre;
 
+    /**
+     * Seguir acá:
+     * la respuesta está acá: https://teamtreehouse.com/library/displaying-validation-messages
+     * toca cambiar el mensaje en messages.properties y luego ir al app.config y hacer otros cambios
+     */
     @NotNull
+    @Range(min = 10, max = 10000000)
     private double precio;
 
     @NotNull
@@ -36,7 +48,18 @@ public class Productos {
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
 
-    public Productos() {}
+    public Productos() {
+    }
+
+    //No estoy seguro si este constructor pondrá algún problema en el futuro (lo use para testear más facilmente)
+    public Productos(int cantidad, String nombre, double precio, double precioEntrada, String descripcion, Proveedor proveedor) {
+        this.cantidad = cantidad;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.precioEntrada = precioEntrada;
+        this.descripcion = descripcion;
+        this.proveedor = proveedor;
+    }
 
     public int getId() {
         return id;
@@ -55,11 +78,11 @@ public class Productos {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public double getPrecio() {
