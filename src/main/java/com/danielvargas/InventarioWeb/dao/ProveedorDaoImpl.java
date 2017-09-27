@@ -1,13 +1,11 @@
 package com.danielvargas.InventarioWeb.dao;
 
-import com.danielvargas.InventarioWeb.model.Productos;
 import com.danielvargas.InventarioWeb.model.Proveedor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -23,12 +21,6 @@ public class ProveedorDaoImpl implements ProveedorDao {
         List<Proveedor> proveedores = session.createCriteria(Proveedor.class).list();
         session.close();
         return proveedores;
-    }
-
-
-    @Override
-    public Proveedor obtenerPorNombre(String nombre) {
-        return null;
     }
 
     @Override

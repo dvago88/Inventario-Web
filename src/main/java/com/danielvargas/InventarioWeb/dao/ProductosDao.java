@@ -12,13 +12,9 @@ public interface ProductosDao {
 
     Productos obtenerPorCodigo(int id);
 
-    //Encuentra varios productos que tengan el nombre o parte de el
-    List<Productos> obtenerPorNombre(String nombre);
-
     void agregarProducto(Productos productos);
 
     void eliminarProducto(Productos productos);
 
     void actualizarProducto(Productos productos);
-
 }

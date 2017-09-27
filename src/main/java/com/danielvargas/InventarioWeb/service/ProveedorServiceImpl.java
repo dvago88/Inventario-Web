@@ -2,11 +2,9 @@ package com.danielvargas.InventarioWeb.service;
 
 import com.danielvargas.InventarioWeb.dao.ProveedorDao;
 import com.danielvargas.InventarioWeb.model.Proveedor;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

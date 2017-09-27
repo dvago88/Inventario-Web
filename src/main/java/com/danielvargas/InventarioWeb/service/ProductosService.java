@@ -3,7 +3,6 @@ package com.danielvargas.InventarioWeb.service;
 import com.danielvargas.InventarioWeb.model.Productos;
 
 import java.util.List;
-import java.util.TreeSet;
 
 /**
  * Created by Daniel on 20/08/2017
@@ -20,7 +19,5 @@ public interface ProductosService {
     void eliminarProducto(Productos productos);
 
     void actualizarProducto(Productos productos);
-
-    TreeSet<String> todaLaInformacion();
 
 }

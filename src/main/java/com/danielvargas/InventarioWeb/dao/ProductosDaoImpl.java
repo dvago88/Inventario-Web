@@ -36,11 +36,6 @@ public class ProductosDaoImpl implements ProductosDao {
     }
 
     @Override
-    public List<Productos> obtenerPorNombre(String nombre) {
-        return null;
-    }
-
-    @Override
     public void agregarProducto(Productos productos) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
