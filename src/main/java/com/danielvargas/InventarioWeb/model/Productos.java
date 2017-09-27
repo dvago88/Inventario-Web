@@ -1,13 +1,10 @@
 package com.danielvargas.InventarioWeb.model;
 
 
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**

@@ -60,7 +60,11 @@ public class ProductosDaoImpl implements ProductosDao {
 
     @Override
     public void actualizarProducto(Productos productos) {
-
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.update(productos);
+        session.getTransaction().commit();
+        session.close();
     }
 }
 

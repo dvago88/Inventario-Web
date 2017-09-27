@@ -28,8 +28,21 @@ public class ProductosServiceImpl implements ProductosService {
         return productosDao.obtenerPorCodigo(id);
     }
 
+    //Si el producto esta lo devuelve, sino devuelve null
+    //TODO: Mejorar la eficiencia de este metodo
     @Override
-    public List<Productos> obtenerPorNombre(String nombre) {
+    public Productos obtenerPorNombre(String nombre) {
+        List<Productos> productos = todosLosProductos();
+        Productos producto;
+
+        int pro = 0;
+        for (Productos p : productos) {
+            if (p.getNombre().equals(nombre)) {
+                producto = productos.get(pro);
+                return producto;
+            }
+            pro++;
+        }
         return null;
     }
 
@@ -45,20 +58,26 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public void actualizarProducto(Productos productos) {
+        Productos prod = obtenerPorNombre(productos.getNombre());
+        prod.setCantidad(prod.getCantidad() + productos.getCantidad());
 
+        if (!productos.getDescripcion().equals("")) {
+            prod.setDescripcion(productos.getDescripcion());
+        }
+        productosDao.actualizarProducto(prod);
     }
 
     /**
-    * Esta forma de obtener toda la informacion no es la mas eficiente y se debe cambiar despues
-    * */
-   @Override
+     * Esta forma de obtener toda la informacion no es la mas eficiente y se debe cambiar despues
+     */
+    @Override
     public TreeSet<String> todaLaInformacion() {
-        TreeSet<String> todos=new TreeSet<>();
-        List<Productos> productos=productosDao.todosLosProductos();
-        for(Productos p:productos){
-            String i=p.getId()+" ";
-            i+=p.getNombre()+" ";
-            i+=p.getCantidad()+" ";
+        TreeSet<String> todos = new TreeSet<>();
+        List<Productos> productos = productosDao.todosLosProductos();
+        for (Productos p : productos) {
+            String i = p.getId() + " ";
+            i += p.getNombre() + " ";
+            i += p.getCantidad() + " ";
             todos.add(i);
         }
         return todos;

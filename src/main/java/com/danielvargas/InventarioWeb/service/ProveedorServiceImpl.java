@@ -19,7 +19,8 @@ public class ProveedorServiceImpl implements ProveedorService {
         return proveedorDao.todosLosProveedores();
     }
 
-    //TODO: Mejorar la eficiencia de este metodo y verificar que sí funcione
+    //Si el proveedor esta lo devuelve, sino devuelve null
+    //TODO: Mejorar la eficiencia de este metodo
     @Override
     public Proveedor obtenerPorNombre(String nombre) {
         List<Proveedor> proveedores = todosLosProveedores();

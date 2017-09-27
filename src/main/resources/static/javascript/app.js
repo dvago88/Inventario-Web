@@ -13,6 +13,8 @@ function validatorOfNumbers() {
     }
 }
 
+//TODO: Escribir metodo que capitalice siempre el texto que entra del formulario
+
 
 
 

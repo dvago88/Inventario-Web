@@ -54,7 +54,7 @@ public class ProductosController {
 
     @RequestMapping(value = "/agregar", method = RequestMethod.POST)
     public String agregarProducto(@Valid Productos productos, BindingResult result, @Valid Proveedor proveedor, BindingResult result2, RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()|| result2.hasErrors()) {
+        if (result.hasErrors() || result2.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productos", result);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.proveedor", result2);
             redirectAttributes.addFlashAttribute("productos", productos);
@@ -70,7 +70,12 @@ public class ProductosController {
             productos.setProveedor(pro);
         }
 
-        productosService.agregarProducto(productos);
+        if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
+            productosService.agregarProducto(productos);
+        } else {
+            productosService.actualizarProducto(productos);
+        }
+
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente agregado", FlashMessage.Status.SUCCESS));
         return "redirect:/agregar";
     }

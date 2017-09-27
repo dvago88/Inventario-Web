@@ -13,7 +13,7 @@ public interface ProductosService {
 
     Productos obtenerPorCodigo(int id);
 
-    List<Productos> obtenerPorNombre(String nombre);
+    Productos obtenerPorNombre(String nombre);
 
     void agregarProducto(Productos productos);
 
