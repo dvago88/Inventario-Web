@@ -23,6 +23,7 @@ import java.util.List;
 @Controller
 public class ProductosController {
 
+    //TODO: Evitar field injection creando un costructor
     @Autowired
     ProductosService productosService;
 
