@@ -10,7 +10,7 @@
     <div class="">
         <form th:action="@{${accion}}" method="post">
 
-            <div class="formulario main-body container" th:object="${productos}">
+            <div class="formulario main-body container1" th:object="${productos}">
                 <input type="hidden" th:field="*{id}"/>
                 <div  th:classappend="${#fields.hasErrors('nombre')}? 'error': ''">
                     <input type="text" th:field="*{nombre}" placeholder="Nombre del producto"/><br/>

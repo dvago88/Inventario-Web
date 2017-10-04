@@ -34,7 +34,7 @@ public class ProductosController {
     public String todosLosProductos(Model model) {
         List<Productos> todos = productosService.todosLosProductos();
         model.addAttribute("productos", todos);
-        return "productos/principal";
+        return "productos/main";
     }
 
     @RequestMapping("/agregar")

@@ -16,16 +16,16 @@ h2 {
 
 }
 
-table, th, tr, td{
+/*table, th, tr, td{
     border: 2px solid black;
     border-collapse: collapse;
 }
 
 table{
     width: 97%;
-}
+}*/
 th{
-    height: 50px;
+    /*height: 50px;*/
     background-color: #959DFF;
     color: white
 }
@@ -40,9 +40,9 @@ a:visited{
     color: beige;
 }
 
-tr:hover,#menos:hover,#mas:hover {
-    background-color: #f5f5f5
-}
+/*tr:hover,#menos:hover,#mas:hover {*/
+    /*background-color: #f5f5f5*/
+/*}*/
 
 
 input[type=text], select, textarea, input[type=number] {
@@ -62,7 +62,8 @@ input[type=text], select, textarea, input[type=number] {
 }*/
 
 .main-header {
-    padding: 8px 0 8px 20px;
+    /*padding: 8px 10px 8px 20px;*/
+    padding: 2rem 1rem 1rem 2rem;
     background-color: cadetblue;
     text-align: right;
     color: beige;
@@ -71,6 +72,7 @@ input[type=text], select, textarea, input[type=number] {
     top: 0;
     right: 0;
     left: 0;
+    font-size: 1.6rem;
 }
 
 .main-body {
@@ -78,6 +80,7 @@ input[type=text], select, textarea, input[type=number] {
     text-align: center;
     padding: 5px 10px 5px 10px;
     margin: 0 25px 0 25px;
+    font-size: 1.6rem;
 
     background-color: white;
     box-shadow: 2px 0 7px #888888;
@@ -154,7 +157,7 @@ input[type=text], select, textarea, input[type=number] {
 
 
 /*esto es para que quede centrado el formulario*/
-.container{
+.container1{
     position: absolute;
     left: 25%;
     top: 55%;
