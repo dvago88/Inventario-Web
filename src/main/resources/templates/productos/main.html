@@ -3,67 +3,68 @@
 <head th:replace="layout::head('Todos los Productos')"></head>
 <body>
 <div th:replace="layout::mainbar"></div>
-<div class="container text-center">
+<div class="container">
     <h1>Lista de productos</h1>
     <div th:replace="layout :: flash"></div>
-    <div>
-        <table class="table table-condensed table-bordered table-hover" id="mydata">
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Producto</th>
-                    <th>Precio Salida</th>
-                    <th>Precio Entrada</th>
-                    <th>Proveedor</th>
-                    <th>Cantidad</th>
-                    <th>Botones</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>Código</th>
-                    <th>Producto</th>
-                    <th>Precio Salida</th>
-                    <th>Precio Entrada</th>
-                    <th>Proveedor</th>
-                    <th>Cantidad</th>
-                    <th>Botones</th>
-                </tr>
-            </tfoot>
-            <tbody>
-                <tr th:each="pro:${productos}">
-                    <td th:text="${pro.id}">id</td>
-                    <td>
-                        <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">nombre</a>
-                    </td>
-                    <td class="moneda" th:text="${pro.precio}">precioE</td>
-                    <td class="moneda" th:text="${pro.precioEntrada}">precioE</td>
-                    <td>
-                        <a id="proveedor" th:text="${pro.proveedor}" th:href="@{|/proveedores/${pro.proveedor.id}|}"></a>
-                    </td>
-                    <td th:text="${pro.cantidad}">prueba</td>
-                    <td class="group">
-                        <div class="pull-left">
-                            <form th:action="@{|/actualizarMas/${pro.id}|}" method="post">
-                                <button type="submit" class="btn btn-xs btn-primary">+</button>
-                            </form>
-                            <form th:action="@{|/actualizarMenos/${pro.id}|}" method="post">
-                                <button type="submit" class="btn btn-xs btn-primary">-</button>
-                            </form>
-                        </div>
-                        <form th:action="@{|/${pro.id}|}" method="post" class="pull-right" onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
-                            <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
+<div class="container">
+    <table class="table table-sm table-bordered table-hover" id="mydata">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Precio Salida</th>
+            <th>Precio Entrada</th>
+            <th>Proveedor</th>
+            <th>Cantidad</th>
+            <th>Botones</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Precio Salida</th>
+            <th>Precio Entrada</th>
+            <th>Proveedor</th>
+            <th>Cantidad</th>
+            <th>Botones</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        <tr th:each="pro:${productos}">
+            <td th:text="${pro.id}">id</td>
+            <td>
+                <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">nombre</a>
+            </td>
+            <td class="moneda" th:text="${pro.precio}">precioE</td>
+            <td class="moneda" th:text="${pro.precioEntrada}">precioE</td>
+            <td>
+                <a id="proveedor" th:text="${pro.proveedor}" th:href="@{|/proveedores/${pro.proveedor.id}|}"></a>
+            </td>
+            <td th:text="${pro.cantidad}">prueba</td>
+            <td class="group">
+                <div class="float-left">
+                    <form th:action="@{|/actualizarMas/${pro.id}|}" method="post">
+                        <button type="submit" class="btn btn-xs btn-primary">+</button>
+                    </form>
+                    <form th:action="@{|/actualizarMenos/${pro.id}|}" method="post">
+                        <button type="submit" class="btn btn-xs btn-primary">-</button>
+                    </form>
+                </div>
+                <form th:action="@{|/${pro.id}|}" method="post" class="float-right"
+                      onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
+                    <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script th:src="@{/javascript/app.js}"></script>
-<script th:src="@{datatable/js/jQuery-3.2.1/jquery-3.2.1.js}"></script>
 <script th:src="@{datatable/js/bootstrap.min.js}"></script>
 <script th:src="@{datatable/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{datatable/js/dataTables.bootstrap.min.js}"></script>
