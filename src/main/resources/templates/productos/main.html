@@ -8,8 +8,8 @@
     <div th:replace="layout :: flash"></div>
 </div>
 <div class="container">
-    <table class="table table-sm table-bordered table-hover" id="mydata">
-        <thead>
+    <table class="table table-sm table-hover" id="mydata">
+        <thead class="thead-inverse">
         <tr>
             <th>Código</th>
             <th>Producto</th>
@@ -20,7 +20,7 @@
             <th>Botones</th>
         </tr>
         </thead>
-        <tfoot>
+        <tfoot class="thead-default">
         <tr>
             <th>Código</th>
             <th>Producto</th>
@@ -44,18 +44,19 @@
             </td>
             <td th:text="${pro.cantidad}">prueba</td>
             <td class="group">
-                <div class="float-left">
+                <div class="btn-group" role="group" aria-label="Basic example">
                     <form th:action="@{|/actualizarMas/${pro.id}|}" method="post">
-                        <button type="submit" class="btn btn-xs btn-primary">+</button>
+                        <button type="submit" class="btn btn-outline-success">+</button>
                     </form>
                     <form th:action="@{|/actualizarMenos/${pro.id}|}" method="post">
-                        <button type="submit" class="btn btn-xs btn-primary">-</button>
+                        <button type="submit" class="btn btn-outline-success">-</button>
+                    </form>
+
+                    <form th:action="@{|/${pro.id}|}" method="post"
+                          onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
+                        <button type="submit" class="btn btn-outline-danger">Borrar</button>
                     </form>
                 </div>
-                <form th:action="@{|/${pro.id}|}" method="post" class="float-right"
-                      onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
-                    <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
-                </form>
             </td>
         </tr>
         </tbody>
@@ -65,9 +66,10 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script th:src="@{/javascript/app.js}"></script>
-<script th:src="@{datatable/js/bootstrap.min.js}"></script>
-<script th:src="@{datatable/js/jquery.dataTables.min.js}"></script>
-<script th:src="@{datatable/js/dataTables.bootstrap.min.js}"></script>
+<!--<script th:src="@{datatable/js/jQuery-3.2.1/jquery-3.2.1.js}"></script>-->
+<!--<script th:src="@{datatable/js/bootstrap.min.js}"></script>-->
+<!--<script th:src="@{datatable/js/jquery.dataTables.min.js}"></script>-->
+<!--<script th:src="@{datatable/js/dataTables.bootstrap.min.js}"></script>-->
 <script>
     $('#mydata').dataTable();
 </script>

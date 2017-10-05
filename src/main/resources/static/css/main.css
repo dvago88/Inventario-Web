@@ -1,3 +1,6 @@
 body{
     padding-top: 3.5rem;
 }
+ .btn-outline-danger, .btn-outline-success{
+     border: none;
+ }
