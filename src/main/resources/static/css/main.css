@@ -4,3 +4,8 @@ body{
  .btn-outline-danger, .btn-outline-success{
      border: none;
  }
+
+ .float-left, .float-right{
+     width: 30rem;
+ }
+
