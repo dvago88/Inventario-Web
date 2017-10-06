@@ -1,0 +1,9 @@
+<dataset>
+    <proveedor id="1" nombre="prov1" telefono="458247"/>
+    <proveedor id="2" nombre="prov2" telefono="458247"/>
+    <productos id="1" cantidad="10" nombre="producto test1" precio="100" precioEntrada="50" proveedor_id="1"/>
+    <productos id="2" cantidad="10" nombre="producto test2" precio="100" precioEntrada="50" proveedor_id="1"/>
+    <productos id="3" cantidad="10" nombre="producto test3" precio="100" precioEntrada="50" proveedor_id="2"/>
+
+
+</dataset>

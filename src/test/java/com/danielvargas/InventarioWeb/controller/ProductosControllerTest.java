@@ -55,13 +55,13 @@ public class ProductosControllerTest {
 
         //Organizamos el comportamiento del Mock
         List<Productos> productos = Arrays.asList(
-                new Productos(12,
+                new Productos(88,12,
                         "test1",
                         2000,
                         1500,
                         "no hay",
                         new Proveedor()),
-                new Productos(15,
+                new Productos(90,15,
                         "test2",
                         3000,
                         2000,

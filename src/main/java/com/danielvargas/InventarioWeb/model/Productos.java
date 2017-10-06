@@ -49,7 +49,8 @@ public class Productos {
     }
 
     //No estoy seguro si este constructor pondrá algún problema en el futuro (lo use para testear más facilmente)
-    public Productos(int cantidad, String nombre, double precio, double precioEntrada, String descripcion, Proveedor proveedor) {
+    public Productos(int id, int cantidad, String nombre, double precio, double precioEntrada, String descripcion, Proveedor proveedor) {
+        this.id = id;
         this.cantidad = cantidad;
         this.nombre = nombre;
         this.precio = precio;
