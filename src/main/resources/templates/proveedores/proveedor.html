@@ -2,22 +2,24 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title th:text="${proveedor.nombreP}">Inventario</title>
-    <link rel="stylesheet" th:href="@{/css/mainStyle.css}"/>
+    <div th:replace="layout::importes"></div>
 </head>
 <body>
-    <div class="cuerpo-real" th:replace="layout::mainbar"></div>
-
+<div th:replace="layout::mainbar"></div>
+<div class="container text-center">
     <h1 th:text="${proveedor.nombreP}" class="titulo">p</h1>
-    <div class="main-body">
-        <h2>Teléfono</h2>
-        <h3 th:text="${proveedor.telefono}">p</h3>
-        <h2>Dirección</h2>
-        <h3 th:text="${proveedor.direccion}">p</h3>
-        <h2>Descripcion</h2>
-        <h3 th:text="${proveedor.descripcionP}">p</h3>
-
-    </div>
+</div>
+<div class="container">
+    <h2>Teléfono</h2>
+    <h3 th:text="${proveedor.telefono}">p</h3>
+    <h2>Dirección</h2>
+    <h3 th:text="${proveedor.direccion}">p</h3>
+    <h2>Descripcion</h2>
+    <h3 th:text="${proveedor.descripcionP}">p</h3>
+</div>
 <!--TODO: Agregar botón para editar el proveedor-->
 
 

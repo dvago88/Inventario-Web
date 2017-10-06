@@ -3,59 +3,59 @@
 <head th:replace="layout::head('Agregar Producto')"></head>
 <body>
 <div th:replace="layout::mainbar"></div>
-<div th:replace="layout :: flash"></div>
 <div class="container text-center">
     <h2 th:text="${encabezado}">Prueba</h2>
     <div th:replace="layout :: flash"></div>
-
 </div>
 <div class="container text-center">
-    <form th:action="@{${accion}}" method="post">
+    <form class="clearfix" th:action="@{${accion}}" method="post">
 
         <div class="float-left" th:object="${productos}">
             <input type="hidden" th:field="*{id}"/>
             <div class="form-group" th:classappend="${#fields.hasErrors('nombre')}? 'error': ''">
-                <input class="form-control" type="text" th:field="*{nombre}" placeholder="Nombre del producto"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                <input class="form-control" type="text" th:field="*{nombre}" placeholder="Nombre del producto"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('precio')}? 'error': ''">
-                <input class="form-control" type="number" th:field="*{precio}" placeholder="Precio salida"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+                <input class="form-control" type="number" th:field="*{precio}" placeholder="Precio salida"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('precioEntrada')}? 'error': ''">
-                <input class="form-control" type="number" th:field="*{precioEntrada}" placeholder="Precio entrada"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('precioEntrada')}"
+                <input class="form-control" type="number" th:field="*{precioEntrada}" placeholder="Precio entrada"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('precioEntrada')}"
                      th:errors="*{precioEntrada}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('cantidad')}? 'error': ''">
-                <input class="form-control" type="number" th:field="*{cantidad}" placeholder="Cantidad"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></div>
+                <input class="form-control" type="number" th:field="*{cantidad}" placeholder="Cantidad"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('descripcion')}? 'error': ''">
                 <textarea class="form-control" name="Descripcion" rows="10" cols="30" th:field="*{descripcion}"
                           placeholder="Pequeña descripción"></textarea>
-                <div class="error-message" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}"
+                     th:errors="*{descripcion}"></div>
             </div>
         </div>
 
-
         <div class="float-right" th:object="${proveedor}">
             <input type="hidden" th:field="*{id}"/>
-            <div th:classappend="${#fields.hasErrors('nombreP')}? 'error': ''">
-                <input class="form-control" type="text" th:field="*{nombreP}" placeholder="Proveedor"/><br/>
-                <div class="error-message" th:if="${#fields.hasErrors('nombreP')}" th:errors="*{nombreP}"></div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('nombreP')}? 'error': ''">
+                <input class="form-control" type="text" th:field="*{nombreP}" placeholder="Proveedor"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('nombreP')}" th:errors="*{nombreP}"></div>
             </div>
-            <input class="form-control" type="text" th:field="*{direccion}" placeholder="Direccion"/><br/>
-            <input class="form-control" type="number" th:field="*{telefono}" placeholder="Télefono"/><br/>
-            <div th:classappend="${#fields.hasErrors('descripcionP')}? 'error': ''">
+            <div class="form-group">
+                <input class="form-control" type="text" th:field="*{direccion}" placeholder="Direccion"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="number" th:field="*{telefono}" placeholder="Télefono"/>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('descripcionP')}? 'error': ''">
                 <textarea class="form-control" name="Descripcion" rows="10" cols="30" th:field="*{descripcionP}"
                           placeholder="Pequeña descripción"></textarea>
-                <div class="error-message" th:if="${#fields.hasErrors('descripcionP')}"
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('descripcionP')}"
                      th:errors="*{descripcionP}"></div>
             </div>
-            <br/>
-            <br/>
-            <div>
+            <div class="form-group">
                 <button onclick="validatorOfNumbers()" th:text="${boton}" type="submit" class="btn btn-primary">
                     Agregar
                 </button>

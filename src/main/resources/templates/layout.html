@@ -22,7 +22,6 @@
     <!-- Propias -->
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     </div>
-
 </head>
 <body>
 <div th:fragment="mainbar">
@@ -38,14 +37,13 @@
                 <li class="nav-item"><a class="nav-link" th:href="@{/}">Productos</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/agregar}">Agregar</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/proveedores}">Proveedores</a></li>
-                <li class="nav-item"><a class="nav-link disabled" th:href="@{/eliminar}">Eliminar</a></li>
+                <li class="nav-item"><a class="nav-link disabled" th:href="@{/}">Eliminar</a></li>
             </ul>
         </div>
     </nav>
 </div>
 <div th:fragment="flash" th:if="${flash != null}" class="cont">
-    <i class="flashy">close</i>
-    <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
+    <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="alert alert-success"></div>
 </div>
 
 

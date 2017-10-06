@@ -2,13 +2,21 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout::head('Proveedores')"></head>
 <body>
-    <div class="cuerpo-real" th:replace="layout::mainbar"></div>
+<div class="cuerpo-real" th:replace="layout::mainbar"></div>
+<div class="container">
     <h1 class="titulo">Proveedores</h1>
-    <div class="main-body">
-
-
+</div>
+<div class="container">
+    <div th:each="pro:${proveedor}">
+        <ul class="list-group">
+            <li class="list-group-item"><a th:text="${pro.nombreP}" th:href="@{|/proveedores/${pro.id}|}"></a>
+                <ul class="list-group">
+                    <li class="list-group-item">Producto</li>
+                    <li class="list-group-item">Producto</li>
+                </ul>
+            </li>
+        </ul>
     </div>
-
-
+</div>
 </body>
 </html>
