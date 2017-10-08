@@ -18,6 +18,6 @@ public interface ProductosService {
 
     void eliminarProducto(Productos productos);
 
-    void actualizarProducto(Productos productos);
+    void actualizarProducto(Productos productos, boolean revisar);
 
 }

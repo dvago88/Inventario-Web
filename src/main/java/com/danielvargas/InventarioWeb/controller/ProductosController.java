@@ -24,6 +24,7 @@ import java.util.List;
 public class ProductosController {
 
     //TODO: Evitar field injection creando un costructor
+    //TODO: Crear ProductoController y mover algunos metodos para allá
     @Autowired
     ProductosService productosService;
 
@@ -74,7 +75,7 @@ public class ProductosController {
         if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
             productosService.agregarProducto(productos);
         } else {
-            productosService.actualizarProducto(productos);
+            productosService.actualizarProducto(productos,true);
         }
 
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente agregado", FlashMessage.Status.SUCCESS));
@@ -100,10 +101,13 @@ public class ProductosController {
         Productos pro = productosService.obtenerPorCodigo(productosId);
         int cantidad = pro.getCantidad();
         cantidad--;
-        pro.setCantidad(cantidad);
-        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
-        productosService.agregarProducto(pro);
-
+        if (cantidad < 0) {
+            redirectAttributes.addFlashAttribute("flash", new FlashMessage("No puede haber menos de 0 productos, si deseas eliminar el producto presiona borrar", FlashMessage.Status.FAILURE));
+        } else {
+            pro.setCantidad(cantidad);
+            redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
+            productosService.agregarProducto(pro);
+        }
         return "redirect:/";
     }
 
@@ -119,8 +123,38 @@ public class ProductosController {
     public String producto(@PathVariable int productosId, Model model) {
         Productos pro = productosService.obtenerPorCodigo(productosId);
         model.addAttribute("producto", pro);
-
         return "productos/producto";
+    }
+
+    @RequestMapping(value = "/editar/{productosId}", method = RequestMethod.POST)
+    public String editarProducto(@PathVariable int productosId, RedirectAttributes redirectAttributes, Productos productos, BindingResult result) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productos", result);
+            redirectAttributes.addFlashAttribute("productos", productos);
+            return "redirect:/editar/{productosId}";
+        }
+        Productos prod = productosService.obtenerPorCodigo(productosId);
+//        Proveedor prov = prod.getProveedor();
+
+        //TODO: Pasar todos estos ifs para un metodo en el service
+        if (!productos.getNombre().equals(prod.getNombre())) {
+            prod.setNombre(productos.getNombre());
+        }
+        if (productos.getCantidad() != prod.getCantidad()) {
+            prod.setCantidad(productos.getCantidad());
+        }
+        if (productos.getPrecio() != prod.getPrecio()) {
+            prod.setPrecio(productos.getPrecio());
+        }
+        if (productos.getPrecioEntrada() != prod.getPrecioEntrada()) {
+            prod.setPrecioEntrada(productos.getPrecioEntrada());
+        }
+        if (!productos.getDescripcion().equals(prod.getDescripcion())) {
+            prod.setDescripcion(productos.getDescripcion());
+        }
+        productosService.actualizarProducto(prod,false);
+
+        return "redirect:/{productosId}";
     }
 }
 

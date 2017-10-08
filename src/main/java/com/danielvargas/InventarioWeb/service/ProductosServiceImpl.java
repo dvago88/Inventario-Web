@@ -55,13 +55,23 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public void actualizarProducto(Productos productos) {
-        Productos prod = obtenerPorNombre(productos.getNombre());
-        prod.setCantidad(prod.getCantidad() + productos.getCantidad());
+    public void actualizarProducto(Productos productos, boolean revisar) {
+        if (revisar) {
+            Productos prod = obtenerPorNombre(productos.getNombre());
+            prod.setCantidad(prod.getCantidad() + productos.getCantidad());
 
-        if (!productos.getDescripcion().equals("")) {
-            prod.setDescripcion(productos.getDescripcion());
+            if (!productos.getDescripcion().equals("")) {
+                prod.setDescripcion(productos.getDescripcion());
+            }
+            if (productos.getPrecio() != prod.getPrecio()) {
+                prod.setPrecio(productos.getPrecio());
+            }
+            if (productos.getPrecioEntrada() != prod.getPrecioEntrada()) {
+                prod.setPrecioEntrada(productos.getPrecioEntrada());
+            }
+            productosDao.actualizarProducto(prod);
+        } else {
+            productosDao.actualizarProducto(productos);
         }
-        productosDao.actualizarProducto(prod);
     }
 }
