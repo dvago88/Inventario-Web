@@ -3,24 +3,23 @@ package com.danielvargas.InventarioWeb.operation;
 
 import com.danielvargas.InventarioWeb.model.Productos;
 import com.danielvargas.InventarioWeb.model.Proveedor;
-import com.danielvargas.InventarioWeb.service.ProductosServiceImpl;
-import com.danielvargas.InventarioWeb.service.ProveedorServiceImpl;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
-
+//TODO: Hacer que desde este metodo se pueda llamar al service
+// Para no tener que gastar tanta memoria llendo una lista con productos y proveedores.
 public class ProcesadorDeStrings {
     private String texto;
     private StringBuilder error;
-    private ProductosServiceImpl productosService;
-    private ProveedorServiceImpl proveedorService;
+    private LinkedList<Proveedor> proveedores;
+    private LinkedList<Productos> products;
 
     public ProcesadorDeStrings(String texto) {
-        this.texto = texto;
+        products = new LinkedList<>();
+        proveedores = new LinkedList<>();
         error = new StringBuilder();
-        productosService = new ProductosServiceImpl();
-        proveedorService = new ProveedorServiceImpl();
+        this.texto = texto;
     }
 
     public String getTexto() {
@@ -31,6 +30,21 @@ public class ProcesadorDeStrings {
         this.texto = texto;
     }
 
+    public LinkedList<Proveedor> getProveedores() {
+        return proveedores;
+    }
+
+    public void setProveedores(LinkedList<Proveedor> proveedores) {
+        this.proveedores = proveedores;
+    }
+
+    public LinkedList<Productos> getProducts() {
+        return products;
+    }
+
+    public void setProducts(LinkedList<Productos> products) {
+        this.products = products;
+    }
 
     /**
      * Separa las palabras clave del texto y genera los querys necesarios para ingresar los productos a la BD
@@ -58,6 +72,7 @@ public class ProcesadorDeStrings {
         return "";
     }
 
+    //TODO: Testear y mejorar este metodo.
     private void queryMaker(LinkedList<String> columnas, LinkedList<String> datos) {
         Iterator<String> iterator1 = columnas.listIterator();
         Iterator<String> iterator2 = datos.listIterator();
@@ -111,20 +126,11 @@ public class ProcesadorDeStrings {
                     error.append(columna).append(": ").append(dato).append("/n");
             }
             if (contador == 9) {
-                if (proveedorService.obtenerPorNombre(proveedor.getNombreP()) == null) {
-                    proveedorService.agregarProveedor(proveedor);
-                } else {
-                    proveedorService.actualizarProveedor(proveedor);
-                }
-                productos.setProveedor(proveedor);
-                if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
-                    productosService.agregarProducto(productos);
-                } else {
-                    productosService.actualizarProducto(productos, true);
-                }
+                products.add(productos);
+                proveedores.add(proveedor);
                 productos = new Productos();
                 proveedor = new Proveedor();
-                contador=0;
+                contador = 0;
             }
         }
     }

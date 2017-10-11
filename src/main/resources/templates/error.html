@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="layout::head('Error')"></head>
+<body>
+<div th:replace="layout::mainbar"></div>
+<style>
+    .app-error {
+        margin-top: 20px;
+        border: 1px solid #dad7de;
+        padding: 10px;
+        background-color: #f7f5fa;
+        border-radius: 6px;
+    }
+</style>
+<div class="container">
+    <h2 th:text="|${#httpServletRequest.getAttribute('javax.servlet.error.status_code')} Error|">500 Error</h2>
+    <div th:if="${#httpServletRequest.getAttribute('javax.servlet.error.exception')} != null" class="app-error">
+        <code th:text="${#httpServletRequest.getAttribute('javax.servlet.error.exception')}">Error Message</code>
+    </div>
+</div>
+<div class="container mt-3">
+    <h3>Esta es una pagina esta aun en su versión beta es por eso que de vez en cuando va a haber errores, por favor envien los
+    datos de arriba al desarrollador o administrador de la página, él sabrá que hacer.</h3>
+    <h3>Gracias por su compresión</h3>
+</div>
+
+</body>
+</html>

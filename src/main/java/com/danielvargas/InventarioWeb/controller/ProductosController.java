@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -119,6 +120,28 @@ public class ProductosController {
     public String agregarVarios(@RequestParam("areaParaIngresarProdutos") String procesador, RedirectAttributes redirectAttributes) {
         ProcesadorDeStrings procesadorDeStrings = new ProcesadorDeStrings(procesador);
         String error = procesadorDeStrings.procesador();
+
+        //esto es moustrosamente malo en cuestion de memoria, pero no se como más hacerlo pues desde la clase
+        //ProcesadorDeStrings no me deja llamar al services o al dao
+        Iterator<Productos> iterator1 = procesadorDeStrings.getProducts().listIterator();
+        Iterator<Proveedor> iterator2 = procesadorDeStrings.getProveedores().listIterator();
+
+        while (iterator2.hasNext()){
+            Proveedor prov=iterator2.next();
+            Productos prod=iterator1.next();
+            if (proveedorService.obtenerPorNombre(prov.getNombreP()) == null) {
+                proveedorService.agregarProveedor(prov);
+            } else {
+                proveedorService.actualizarProveedor(prov);
+            }
+            prod.setProveedor(prov);
+            if (productosService.obtenerPorNombre(prod.getNombre()) == null) {
+                productosService.agregarProducto(prod);
+            } else {
+                productosService.actualizarProducto(prod, true);
+            }
+        }
+
         if (error.length() > 0) {
             redirectAttributes.addFlashAttribute("flash", new FlashMessage(error, FlashMessage.Status.FAILURE));
             return "redirect:/agregar";
