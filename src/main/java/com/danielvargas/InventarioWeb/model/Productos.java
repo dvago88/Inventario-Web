@@ -59,6 +59,15 @@ public class Productos {
         this.proveedor = proveedor;
     }
 
+    public Productos(int cantidad, String nombre, double precio, double precioEntrada, String descripcion, Proveedor proveedor) {
+        this.cantidad = cantidad;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.precioEntrada = precioEntrada;
+        this.descripcion = descripcion;
+        this.proveedor = proveedor;
+    }
+
     public int getId() {
         return id;
     }

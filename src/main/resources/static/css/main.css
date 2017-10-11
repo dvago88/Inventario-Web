@@ -2,14 +2,28 @@ body {
     padding-top: 3.5rem;
 }
 
+/*Esto hace que el container quede en un cuadro más claro que el resto y como que resalte*/
+/*.fondoGris{
+    background-color:#eee;
+}
+
+.container.uno{
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 1px 0 3px #888888;
+}*/
+
+.dataTables_length{
+    padding-top: 1rem;
+}
+
 .btn-outline-danger, .btn-outline-success {
     border: none;
 }
 
-.float-left, .float-right {
-    /*width: 30rem;*/
-    width: 45%;
-}
+/*.float-left, .float-right {
+     width: 45%;
+ }*/
 
 .list-group-item > ul {
     width: 50%;
@@ -26,10 +40,30 @@ td a:hover, td a:visited, td a:link {
     border-color: #ffe6e6;
 }
 
-@media (max-width: 767px) {
+.footer{
+    margin-top: 3rem;
+    color:#888888;
+}
+
+#mydata_filter{
+    padding-top: 1rem;
+}
+
+
+/*@media (max-width: 767px) {
     .float-left, .float-right {
-        /*width: 30rem;*/
         width: 100%;
         float: none;
     }
+}*/
+
+/*
+@media(min-width: 1200px){
+    .container.uno{
+        !*TODO: hacer que se centre*!
+        max-width: 90%;
+        text-align: center;
+        align-content: center;
+    }
 }
+*/

@@ -2,6 +2,7 @@ package com.danielvargas.InventarioWeb.controller;
 
 import com.danielvargas.InventarioWeb.model.Productos;
 import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.operation.ProcesadorDeStrings;
 import com.danielvargas.InventarioWeb.service.ProductosService;
 import com.danielvargas.InventarioWeb.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -30,6 +32,7 @@ public class ProductosController {
 
     @Autowired
     ProveedorService proveedorService;
+
 
     @RequestMapping("/")
     public String todosLosProductos(Model model) {
@@ -75,7 +78,7 @@ public class ProductosController {
         if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
             productosService.agregarProducto(productos);
         } else {
-            productosService.actualizarProducto(productos,true);
+            productosService.actualizarProducto(productos, true);
         }
 
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente agregado", FlashMessage.Status.SUCCESS));
@@ -102,12 +105,25 @@ public class ProductosController {
         int cantidad = pro.getCantidad();
         cantidad--;
         if (cantidad < 0) {
-            redirectAttributes.addFlashAttribute("flash", new FlashMessage("No puede haber menos de 0 productos, si deseas eliminar el producto presiona borrar", FlashMessage.Status.FAILURE));
+            redirectAttributes.addFlashAttribute("flash", new FlashMessage("No puede haber menos de 0 productos, si deseas eliminar el producto has click en Borrar", FlashMessage.Status.FAILURE));
         } else {
             pro.setCantidad(cantidad);
             redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
             productosService.agregarProducto(pro);
         }
+        return "redirect:/";
+    }
+
+    //TODO: Implementar este metodo
+    @RequestMapping(value = "/agregarvarios", method = RequestMethod.POST)
+    public String agregarVarios(@RequestParam("areaParaIngresarProdutos") String procesador, RedirectAttributes redirectAttributes) {
+        ProcesadorDeStrings procesadorDeStrings = new ProcesadorDeStrings(procesador);
+        String error = procesadorDeStrings.procesador();
+        if (error.length() > 0) {
+            redirectAttributes.addFlashAttribute("flash", new FlashMessage(error, FlashMessage.Status.FAILURE));
+            return "redirect:/agregar";
+        }
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Productos agregados exitosamente", FlashMessage.Status.SUCCESS));
         return "redirect:/";
     }
 
@@ -152,7 +168,7 @@ public class ProductosController {
         if (!productos.getDescripcion().equals(prod.getDescripcion())) {
             prod.setDescripcion(productos.getDescripcion());
         }
-        productosService.actualizarProducto(prod,false);
+        productosService.actualizarProducto(prod, false);
 
         return "redirect:/{productosId}";
     }

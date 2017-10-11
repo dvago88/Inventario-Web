@@ -3,6 +3,7 @@ package com.danielvargas.InventarioWeb.dao;
 import com.danielvargas.InventarioWeb.model.Proveedor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ public class ProveedorDaoImpl implements ProveedorDao {
 
     @Autowired
     SessionFactory sessionFactory;
+
 
     @Override
     @SuppressWarnings("unchecked")

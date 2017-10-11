@@ -3,14 +3,14 @@
 <head th:replace="layout::head('Agregar Producto')"></head>
 <body>
 <div th:replace="layout::mainbar"></div>
-<div class="container text-center">
-    <h2 th:text="${encabezado}">Prueba</h2>
+<div class="container text-center mb-5">
+    <h2 class="pt-3" th:text="${encabezado}">Prueba</h2>
     <div th:replace="layout :: flash"></div>
 </div>
-<div class="container text-center">
-    <form class="clearfix" th:action="@{${accion}}" method="post">
-
-        <div class="float-left" th:object="${productos}">
+<!--Este primer div es el formulario para un solo producto:-->
+<div class="container text-center collapse multi-collapse show" id="multiCollapseExample1">
+    <form th:action="@{${accion}}" method="post" class="row">
+        <div class="col-md-6" th:object="${productos}">
             <input type="hidden" th:field="*{id}"/>
             <div class="form-group" th:classappend="${#fields.hasErrors('nombre')}? 'error': ''">
                 <input class="form-control" type="text" th:field="*{nombre}" placeholder="Nombre del producto"/>
@@ -27,7 +27,8 @@
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('cantidad')}? 'error': ''">
                 <input class="form-control" type="number" th:field="*{cantidad}" placeholder="Cantidad"/>
-                <div class="alert alert-danger" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></div>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('cantidad')}"
+                     th:errors="*{cantidad}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('descripcion')}? 'error': ''">
                 <textarea class="form-control" name="Descripcion" rows="10" cols="30" th:field="*{descripcion}"
@@ -37,11 +38,12 @@
             </div>
         </div>
 
-        <div class="float-right" th:object="${proveedor}">
+        <div class="col-md-6" th:object="${proveedor}">
             <input type="hidden" th:field="*{id}"/>
             <div class="form-group" th:classappend="${#fields.hasErrors('nombreP')}? 'error': ''">
                 <input class="form-control" type="text" th:field="*{nombreP}" placeholder="Proveedor"/>
-                <div class="alert alert-danger" th:if="${#fields.hasErrors('nombreP')}" th:errors="*{nombreP}"></div>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('nombreP')}"
+                     th:errors="*{nombreP}"></div>
             </div>
             <div class="form-group">
                 <input class="form-control" type="text" th:field="*{direccion}" placeholder="Direccion"/>
@@ -60,10 +62,34 @@
                     Agregar
                 </button>
                 <a th:href="@{/}" class="btn btn-primary">Cancelar</a>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    Varios Productos
+                </button>
             </div>
         </div>
     </form>
 </div>
+<!--Este segundo div es el formulario para multiples productos-->
+<div class="container collapse multi-collapse" id="multiCollapseExample2">
+    <form th:action="@{/agregarvarios}" method="post">
+        <div class="form-group">
+            <label for="areaParaIngresarProdutos">Agregar productos:</label>
+            <textarea class="form-control" name="areaParaIngresarProdutos" cols="50" rows="20"
+                      id="areaParaIngresarProdutos" placeholder="Introduce todos los datos acá en orden"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
+                Cancelar
+            </button>
+            <button onclick="validatorOfNumbers()" type="submit" class="btn btn-primary">
+                Agregar
+            </button>
+        </div>
+    </form>
+</div>
+<footer th:replace="layout::footer"></footer>
 <script th:src="@{/javascript/app.js}"></script>
 </body>
 </html>

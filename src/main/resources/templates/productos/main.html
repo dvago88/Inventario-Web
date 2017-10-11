@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout::head('Todos los Productos')"></head>
-<body>
+<body class="fondoGris">
 <div th:replace="layout::mainbar"></div>
 <div class="container">
     <h1>Lista de productos</h1>
-    <div th:replace="layout :: flash"></div>
 </div>
-<div class="container">
+<div th:replace="layout :: flash"></div>
+<div class="container uno">
     <table class="table table-sm table-hover" id="mydata">
         <thead class="thead-inverse">
         <tr>
@@ -62,6 +62,7 @@
         </tbody>
     </table>
 </div>
+<footer th:replace="layout::footer"></footer>
 <script th:src="@{/javascript/app.js}"></script>
 <script>
     $('#mydata').dataTable();
