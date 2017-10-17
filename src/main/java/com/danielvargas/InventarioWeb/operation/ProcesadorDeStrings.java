@@ -7,8 +7,12 @@ import com.danielvargas.InventarioWeb.model.Proveedor;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-//TODO: Hacer que desde este metodo se pueda llamar al service
-// Para no tener que gastar tanta memoria llendo una lista con productos y proveedores.
+/*TODO: Hacer que desde este metodo se pueda llamar al service
+ para no tener que gastar tanta memoria llendo una lista con productos y proveedores.
+En el video a continuacion probablemente estén las respuestas para solucionar esto, yo creo que hay que crear
+otro sessionFactory que no esté autowired para poder interactuar correctamente desde el dao con el y así poder
+llamar al service desde esta clase
+ https://teamtreehouse.com/library/hibernate-basics/getting-started-with-hibernate/building-a-hibernate-sessionfactory*/
 public class ProcesadorDeStrings {
     private String texto;
     private StringBuilder error;

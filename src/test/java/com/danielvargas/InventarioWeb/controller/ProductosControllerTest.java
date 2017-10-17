@@ -1,6 +1,7 @@
 package com.danielvargas.InventarioWeb.controller;
 
 import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.ProductosBuilder;
 import com.danielvargas.InventarioWeb.model.Proveedor;
 import com.danielvargas.InventarioWeb.service.ProductosService;
 import com.danielvargas.InventarioWeb.service.ProveedorService;
@@ -54,20 +55,21 @@ public class ProductosControllerTest {
 
 
         //Organizamos el comportamiento del Mock
-        List<Productos> productos = Arrays.asList(
-                new Productos(88,12,
-                        "test1",
-                        2000,
-                        1500,
-                        "no hay",
-                        new Proveedor()),
-                new Productos(90,15,
-                        "test2",
-                        3000,
-                        2000,
-                        "n/a",
-                        new Proveedor())
+        List<Productos> productos=Arrays.asList(
+                new ProductosBuilder(88,"test")
+                .conCantidad(12)
+                .conPrecio(2000)
+                .conPrecioEntrada(1500)
+                .conProveedor(new Proveedor())
+                .build(),
+                new ProductosBuilder(90,"test2")
+                .conCantidad(15)
+                .conPrecio(3000)
+                .conPrecioEntrada(2000)
+                .conProveedor(new Proveedor())
+                .build()
         );
+
         when(productosService.todosLosProductos()).thenReturn(productos);
 
         //Act (perform the MVC request) and Assert results

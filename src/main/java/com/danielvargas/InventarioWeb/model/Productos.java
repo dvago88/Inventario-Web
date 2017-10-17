@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 
 /**
  * Created by Daniel on 20/08/2017
@@ -38,34 +40,34 @@ public class Productos {
     @Range(min = 10, max = 10000000, message = "El valor tiene que estar entre ${min} y $10.000.000")
     private double precioEntrada;
 
-    @Size(max = 150, message = "Maximo 150 caracteres para la descripción")
+    @Size(max = 200, message = "Maximo 200 caracteres para la descripción")
     private String descripcion;
 
     @ManyToOne
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
 
+    private LocalDateTime dateUploaded = LocalDateTime.now();
+    private HashMap<Integer, Integer> diarias = new HashMap<>();
+    private int diaNumero = 1;
+    private int cantidadVendido;
+
+
     public Productos() {
     }
 
-    //No estoy seguro si este constructor pondrá algún problema en el futuro (lo use para testear más facilmente)
-    public Productos(int id, int cantidad, String nombre, double precio, double precioEntrada, String descripcion, Proveedor proveedor) {
-        this.id = id;
-        this.cantidad = cantidad;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.precioEntrada = precioEntrada;
-        this.descripcion = descripcion;
-        this.proveedor = proveedor;
+    public Productos(ProductosBuilder builder) {
+        this.nombre = builder.getNombre();
+        this.id = builder.getId();
+        this.cantidad = builder.getCantidad();
+        this.precio = builder.getPrecio();
+        this.precioEntrada = builder.getPrecioEntrada();
+        this.descripcion = builder.getDescripcion();
+        this.proveedor = builder.getProveedor();
     }
 
-    public Productos(int cantidad, String nombre, double precio, double precioEntrada, String descripcion, Proveedor proveedor) {
-        this.cantidad = cantidad;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.precioEntrada = precioEntrada;
-        this.descripcion = descripcion;
-        this.proveedor = proveedor;
+    public void actualizarDias(int dia, int cantidad) {
+        diarias.put(dia, cantidad);
     }
 
     public int getId() {
@@ -122,5 +124,37 @@ public class Productos {
 
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
+    }
+
+    public LocalDateTime getDateUploaded() {
+        return dateUploaded;
+    }
+
+    public void setDateUploaded(LocalDateTime dateUploaded) {
+        this.dateUploaded = dateUploaded;
+    }
+
+    public HashMap<Integer, Integer> getDiarias() {
+        return diarias;
+    }
+
+    public void setDiarias(HashMap<Integer, Integer> diarias) {
+        this.diarias = diarias;
+    }
+
+    public int getDiaNumero() {
+        return diaNumero;
+    }
+
+    public void setDiaNumero(int diaNumero) {
+        this.diaNumero = diaNumero;
+    }
+
+    public int getCantidadVendido() {
+        return cantidadVendido;
+    }
+
+    public void setCantidadVendido(int cantidadVendido) {
+        this.cantidadVendido = cantidadVendido;
     }
 }

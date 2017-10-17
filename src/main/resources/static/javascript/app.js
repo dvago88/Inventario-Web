@@ -15,6 +15,10 @@ function validatorOfNumbers() {
 
 //TODO: Escribir metodo que capitalice siempre el texto que entra del formulario
 
+//TODO: Eliminar valores iniciales del formulario
+
+//TODO: Crear grafíca interactiva en la página principal
+
 
 
 

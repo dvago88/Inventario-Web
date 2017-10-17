@@ -24,7 +24,7 @@ public class Proveedor {
 
     private long telefono;
 
-    @Size(max = 150, message = "Maximo 150 caracteres para la descripción")
+    @Size(max = 200, message = "Maximo 200 caracteres para la descripción")
     @Column(name = "descripcion")
     private String descripcionP;
 

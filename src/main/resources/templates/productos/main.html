@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout::head('Todos los Productos')"></head>
-<body class="fondoGris">
+<body>
 <div th:replace="layout::mainbar"></div>
 <div class="container">
     <h1>Lista de productos</h1>
 </div>
 <div th:replace="layout :: flash"></div>
-<div class="container uno">
+<div class="container">
     <table class="table table-sm table-hover" id="mydata">
         <thead class="thead-inverse">
         <tr>
@@ -16,7 +16,8 @@
             <th>Precio Salida</th>
             <th>Precio Entrada</th>
             <th>Proveedor</th>
-            <th>Cantidad</th>
+            <th>En Stock</th>
+            <th>Vendidos</th>
             <th>Botones</th>
         </tr>
         </thead>
@@ -27,7 +28,8 @@
             <th>Precio Salida</th>
             <th>Precio Entrada</th>
             <th>Proveedor</th>
-            <th>Cantidad</th>
+            <th>En Stock</th>
+            <th>Vendidos</th>
             <th>Botones</th>
         </tr>
         </tfoot>
@@ -43,6 +45,7 @@
                 <a id="proveedor" th:text="${pro.proveedor}" th:href="@{|/proveedores/${pro.proveedor.id}|}"></a>
             </td>
             <td th:text="${pro.cantidad}">prueba</td>
+            <td th:text="${pro.cantidadVendido}"></td>
             <td class="group">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <form th:action="@{|/actualizarMas/${pro.id}|}" method="post">
@@ -51,6 +54,8 @@
                     <form th:action="@{|/actualizarMenos/${pro.id}|}" method="post">
                         <button type="submit" class="btn btn-outline-success">-</button>
                     </form>
+                    <!--TODO: lograr obtener el valor de este campo-->
+                    <input class="form-control" name="masomenos" type="number"/>
 
                     <form th:action="@{|/${pro.id}|}" method="post"
                           onsubmit="return confirm('Realmente quieres eliminar este elemento?');">

@@ -23,11 +23,13 @@ import java.util.List;
  * Created by Daniel on 20/08/2017
  */
 
+//TODO: Refactorizar urgentemente este codigo:
+//    *Evitar field injection creando un costructor
+//    *Crear ProductoController y mover algunos metodos para allá
+//    *Evitar que el controller interactue directamente con el entity.
 @Controller
 public class ProductosController {
 
-    //TODO: Evitar field injection creando un costructor
-    //TODO: Crear ProductoController y mover algunos metodos para allá
     @Autowired
     ProductosService productosService;
 
@@ -70,10 +72,10 @@ public class ProductosController {
 
         if (proveedorService.obtenerPorNombre(proveedor.getNombreP()) == null) {
             proveedorService.agregarProveedor(proveedor);
-            productos.setProveedor(proveedor);
+            productos.setProveedor(proveedor);//Esto no lo debe hacer el controller
         } else {
             Proveedor pro = proveedorService.actualizarProveedor(proveedor);
-            productos.setProveedor(pro);
+            productos.setProveedor(pro);//Esto no lo debe hacer el controller
         }
 
         if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
@@ -89,33 +91,28 @@ public class ProductosController {
     @RequestMapping(value = "/actualizarMas/{productosId}", method = RequestMethod.POST)
     public String agregarUno(@PathVariable int productosId, RedirectAttributes redirectAttributes) {
         Productos pro = productosService.obtenerPorCodigo(productosId);
-        int cantidad = pro.getCantidad();
-        cantidad++;
-        pro.setCantidad(cantidad);
+        productosService.cantidadProducto(pro, true);
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
         productosService.agregarProducto(pro);
-
         return "redirect:/";
     }
 
-    // TODO: Implementar este metodo en uno solo con el de agregar 1
+    // TODO: Implementar este metodo en uno solo con el de agregar 1 (Si es que se puede)
     @RequestMapping(value = "/actualizarMenos/{productosId}", method = RequestMethod.POST)
     public String eliminarUno(@PathVariable int productosId, RedirectAttributes redirectAttributes) {
-
         Productos pro = productosService.obtenerPorCodigo(productosId);
-        int cantidad = pro.getCantidad();
-        cantidad--;
-        if (cantidad < 0) {
+        boolean sePudo = productosService.cantidadProducto(pro, false);
+        if (!sePudo) {
             redirectAttributes.addFlashAttribute("flash", new FlashMessage("No puede haber menos de 0 productos, si deseas eliminar el producto has click en Borrar", FlashMessage.Status.FAILURE));
         } else {
-            pro.setCantidad(cantidad);
+            productosService.numeroDeVentas(pro, 1);
+
             redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
             productosService.agregarProducto(pro);
         }
         return "redirect:/";
     }
 
-    //TODO: Implementar este metodo
     @RequestMapping(value = "/agregarvarios", method = RequestMethod.POST)
     public String agregarVarios(@RequestParam("areaParaIngresarProdutos") String procesador, RedirectAttributes redirectAttributes) {
         ProcesadorDeStrings procesadorDeStrings = new ProcesadorDeStrings(procesador);
@@ -125,10 +122,10 @@ public class ProductosController {
         //ProcesadorDeStrings no me deja llamar al services o al dao
         Iterator<Productos> iterator1 = procesadorDeStrings.getProducts().listIterator();
         Iterator<Proveedor> iterator2 = procesadorDeStrings.getProveedores().listIterator();
-
-        while (iterator2.hasNext()){
-            Proveedor prov=iterator2.next();
-            Productos prod=iterator1.next();
+//TODO: Arreglar: si el proveedor ya esta genera error
+        while (iterator2.hasNext()) {
+            Proveedor prov = iterator2.next();
+            Productos prod = iterator1.next();
             if (proveedorService.obtenerPorNombre(prov.getNombreP()) == null) {
                 proveedorService.agregarProveedor(prov);
             } else {
@@ -147,7 +144,7 @@ public class ProductosController {
             return "redirect:/agregar";
         }
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Productos agregados exitosamente", FlashMessage.Status.SUCCESS));
-        return "redirect:/";
+        return "redirect:/agregar";
     }
 
     @RequestMapping(value = "/{productosId}", method = RequestMethod.POST)
@@ -161,7 +158,13 @@ public class ProductosController {
     @RequestMapping("/{productosId}")
     public String producto(@PathVariable int productosId, Model model) {
         Productos pro = productosService.obtenerPorCodigo(productosId);
+        int sieteDias = productosService.vendidosPorSemana(pro);
+        int treintaDias = productosService.vendidoPorMes(pro);
+        int ano = productosService.vendidoPorAno(pro);
         model.addAttribute("producto", pro);
+        model.addAttribute("semana", sieteDias);
+        model.addAttribute("mes", treintaDias);
+        model.addAttribute("ano", ano);
         return "productos/producto";
     }
 
@@ -176,6 +179,7 @@ public class ProductosController {
 //        Proveedor prov = prod.getProveedor();
 
         //TODO: Pasar todos estos ifs para un metodo en el service
+        //(El controller no tiene porqué hacer esto)
         if (!productos.getNombre().equals(prod.getNombre())) {
             prod.setNombre(productos.getNombre());
         }
@@ -194,6 +198,11 @@ public class ProductosController {
         productosService.actualizarProducto(prod, false);
 
         return "redirect:/{productosId}";
+    }
+
+    @RequestMapping("/eliminar")
+    public String paginaEliminar(){
+        return "eliminar";
     }
 }
 

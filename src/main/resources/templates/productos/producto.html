@@ -8,60 +8,87 @@
     <div th:replace="layout::importes"></div>
 </head>
 
-<body>
+<body class="fondoGris">
 <div th:replace="layout::mainbar"></div>
-<div class="container border border-dark rounded collapse multi-collapse show" id="multiCollapseExample1">
+<div class="container fondoGris rounded collapse multi-collapse show" id="multiCollapseExample1">
     <div class="text-center">
         <h1 th:text="${producto.nombre}">p</h1>
     </div>
-    <h2>Cantidad</h2>
-    <h3 th:text="${producto.cantidad}">p</h3>
-    <h2>Proveedor</h2>
-    <h3><a th:text="${producto.proveedor}" th:href="@{|/proveedores/${producto.proveedor.id}|}"></a></h3>
-    <h2>Precio de salida</h2>
-    <h3 th:text="${producto.precio}">p</h3>
-    <h2>Precio de entrada</h2>
-    <h3 th:text="${producto.precioEntrada}"></h3>
-    <h2>Descripción</h2>
-    <h3 th:text="${producto.descripcion}">p</h3>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
-            aria-expanded="false" aria-controls="collapseExample">
-        Editar Producto
-    </button>
+    <!--TODO: cambiar el estilo (muy feo está)-->
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <!--<h4 class="letraGris">Cantidad</h4>-->
+                <li class="list-group-item" th:text="'Cantidad: ' + ${producto.cantidad}">p</li>
+                <!--<h4 class="letraGris">Proveedor</h4>-->
+                <li class="list-group-item"><a th:text="'Proveedor: ' + ${producto.proveedor}"
+                                               th:href="@{|/proveedores/${producto.proveedor.id}|}"></a></li>
+                <!--<h4 class="letraGris">Precio de salida</h4>-->
+                <li class="list-group-item" th:text="'Precio de salida: ' + ${producto.precio}">p</li>
+                <!--<h4 class="letraGris">Precio de entrada</h4>-->
+                <li class="list-group-item" th:text="'Precio de entrada: ' + ${producto.precioEntrada}"></li>
+                <!--<h4 class="letraGris">Descripción</h4>-->
+                <li class="list-group-item" th:text="'Descripcion: '+ ${producto.descripcion}">p</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <!--<h4 class="letraGris">Vendidos en el último día</h4>-->
+                <li class="list-group-item" th:text="'Vendidos en el último día: ' + ${producto.diarias.get(0)}"></li>
+                <!--<h4 class="letraGris">Vendidos en la última semana</h4>-->
+                <li class="list-group-item" th:text="'Vendidos en la última semana: ' + ${semana}"></li>
+                <!--<h4 class="letraGris">Vendidos en los últimos 30 días</h4>-->
+                <li class="list-group-item" th:text="'Vendidos en los últimos 30 días: ' + ${mes}"></li>
+                <!--<h4 class="letraGris">Vendidos en el último año</h4>-->
+                <li class="list-group-item" th:text="'Vendidos en el último año: ' + ${ano}"></li>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                        aria-expanded="false" aria-controls="collapseExample">
+                    Editar Producto
+                </button>
+            </ul>
+        </div>
+
+
+    </div>
 </div>
 <div class="container collapse multi-collapse" id="multiCollapseExample2">
     <form th:action="@{|/editar/${producto.id}|}" method="post">
         <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input class="form-control" id="nombre" type="text" th:value="${producto.nombre}" th:field="${producto.nombre}"/>
+            <input class="form-control" id="nombre" type="text" th:value="${producto.nombre}"
+                   th:field="${producto.nombre}"/>
         </div>
         <div class="form-group">
             <label for="cantidad">Cantidad</label>
-            <input class="form-control" id="cantidad" type="text" th:value="${producto.cantidad}" th:field="${producto.cantidad}"/>
+            <input class="form-control" id="cantidad" type="text" th:value="${producto.cantidad}"
+                   th:field="${producto.cantidad}"/>
         </div>
         <!--<div class="form-group">
             <label for="proveedor">Proveedor</label>
             <input class="form-control" id="proveedor" type="text" th:value="${producto.proveedor}" th:field="${producto.proveedor}"/>
         </div>-->
-
         <div class="form-group">
             <label for="precio">Precio Salida</label>
-            <input class="form-control" id="precio" type="number" th:value="${producto.precio}" th:field="${producto.precio}"/>
+            <input class="form-control" id="precio" type="number" th:value="${producto.precio}"
+                   th:field="${producto.precio}"/>
         </div>
         <div class="form-group">
             <label for="precioEntrada">Precio Entrada</label>
-            <input class="form-control" id="precioEntrada" type="number" th:value="${producto.precioEntrada}" th:field="${producto.precioEntrada}"/>
+            <input class="form-control" id="precioEntrada" type="number" th:value="${producto.precioEntrada}"
+                   th:field="${producto.precioEntrada}"/>
         </div>
         <div class="form-group">
             <label for="descripcion">Descripción</label>
-            <input class="form-control" id="descripcion" type="text" th:value="${producto.descripcion}" th:field="${producto.descripcion}"/>
+            <input class="form-control" id="descripcion" type="text" th:value="${producto.descripcion}"
+                   th:field="${producto.descripcion}"/>
         </div>
-
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
-                aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
-            Cancelar
-        </button>
-        <button class="btn btn-primary" type="submit">Aceptar</button>
+        <div class="form-group">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
+                Cancelar
+            </button>
+            <button class="btn btn-primary" type="submit">Aceptar</button>
+        </div>
     </form>
 </div>
 <footer th:replace="layout::footer"></footer>

@@ -2,6 +2,7 @@ package com.danielvargas.InventarioWeb.dao;
 
 import com.danielvargas.InventarioWeb.InventarioWebWebApplication;
 import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.ProductosBuilder;
 import com.danielvargas.InventarioWeb.model.Proveedor;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -43,10 +44,14 @@ public class ProductosDaoTest {
     //No pasa este test porque hay que persistir primero el proverdor antes que el producto
     @Test
     public void salvarDebePersistirLosEntities() throws Exception {
-        Productos prod = new Productos(5, 12, "prod5", 1000, 500, "bla", new Proveedor());
+        Productos prod = new ProductosBuilder(5,"prod5")
+                .conCantidad(5)
+                .conPrecio(1000)
+                .conPrecioEntrada(500)
+                .conDescripcion("bla")
+                .conProveedor(new Proveedor())
+                .build();
         productosDao.agregarProducto(prod);
         assertThat(productosDao.obtenerPorCodigo(5), notNullValue(Productos.class));
     }
-
-
 }
