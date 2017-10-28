@@ -47,20 +47,32 @@
             <td th:text="${pro.cantidad}">prueba</td>
             <td th:text="${pro.cantidadVendido}"></td>
             <td class="group">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <form th:action="@{|/actualizarMas/${pro.id}|}" method="post">
-                        <button type="submit" class="btn btn-outline-success">+</button>
-                    </form>
-                    <form th:action="@{|/actualizarMenos/${pro.id}|}" method="post">
-                        <button type="submit" class="btn btn-outline-success">-</button>
-                    </form>
-                    <!--TODO: lograr obtener el valor de este campo-->
-                    <input class="form-control" name="masomenos" type="number"/>
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <form th:action="@{|/actualizar/${pro.id}|}" method="post">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" class="btn btn-outline-success" name="action" id="mas" value="mas"
+                                        th:text="${mas}">ggg
+                                </button>
 
-                    <form th:action="@{|/${pro.id}|}" method="post"
-                          onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
-                        <button type="submit" class="btn btn-outline-danger">Borrar</button>
-                    </form>
+                                <button type="submit" class="btn btn-outline-success" name="action" id="menos"
+                                        value="menos" th:text="${menos}">jjj
+                                </button>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="masomenos"
+                                           aria-label="Input group example" aria-describedby="btnGroupAddon"
+                                           id="input-peque"/>
+                                </div>
+                            </div>
+                            <!--<input type="number" class="form-control" name="masomenos" aria-label="Input group example" aria-describedby="btnGroupAddon"/>-->
+                        </form>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <form th:action="@{|/${pro.id}|}" method="post"
+                                  onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
+                                <button type="submit" class="btn btn-outline-danger">Borrar</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </td>
         </tr>
@@ -68,7 +80,7 @@
     </table>
 </div>
 <footer th:replace="layout::footer"></footer>
-<script th:src="@{/javascript/app.js}"></script>
+<div th:replace="layout::scripts"></div>
 <script>
     $('#mydata').dataTable();
 </script>

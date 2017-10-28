@@ -3,15 +3,15 @@ body {
 }
 
 /*Esto hace que el container quede en un cuadro más claro que el resto y como que resalte*/
-.fondoGris{
-    background-color:#eee;
+.fondoGris {
+    background-color: #eee;
 }
 
-.letraGris{
+.letraGris {
     color: #666;
 }
 
-.container.uno{
+.container.uno {
     border-radius: 5px;
     background-color: white;
     box-shadow: 2px 0 7px #888888;
@@ -48,7 +48,7 @@ td a:hover, td a:visited, td a:link {
     color: #888888;
 }
 
-input[name="masomenos"] {
+#input-peque {
     width: 2rem;
     padding: 0;
     text-align: center;
@@ -56,8 +56,8 @@ input[name="masomenos"] {
 
 /*Esto es para que no aparezcan las flechitas en el input*/
 /*También quería practicar selectores :P*/
-div[class="btn-group"] > input[type=number]::-webkit-inner-spin-button,
-div[class="btn-group"] > input[type=number]::-webkit-outer-spin-button {
+div[class="input-group"] > input[name="masomenos"]::-webkit-inner-spin-button,
+div[class="input-group"] > input[name="masomenos"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

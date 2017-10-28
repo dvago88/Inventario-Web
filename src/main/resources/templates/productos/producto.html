@@ -34,18 +34,18 @@
         <div class="col-md-6">
             <ul class="list-group">
                 <!--<h4 class="letraGris">Vendidos en el último día</h4>-->
-                <li class="list-group-item" th:text="'Vendidos en el último día: ' + ${producto.diarias.get(0)}"></li>
+                <li class="list-group-item" th:text="'Vendidos en el último día: ' + ${dia}"></li>
                 <!--<h4 class="letraGris">Vendidos en la última semana</h4>-->
                 <li class="list-group-item" th:text="'Vendidos en la última semana: ' + ${semana}"></li>
                 <!--<h4 class="letraGris">Vendidos en los últimos 30 días</h4>-->
                 <li class="list-group-item" th:text="'Vendidos en los últimos 30 días: ' + ${mes}"></li>
                 <!--<h4 class="letraGris">Vendidos en el último año</h4>-->
                 <li class="list-group-item" th:text="'Vendidos en el último año: ' + ${ano}"></li>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
-                        aria-expanded="false" aria-controls="collapseExample">
-                    Editar Producto
-                </button>
             </ul>
+            <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="collapseExample">
+                Editar Producto
+            </button>
         </div>
 
 
@@ -92,5 +92,6 @@
     </form>
 </div>
 <footer th:replace="layout::footer"></footer>
+<div th:replace="layout::scripts"></div>
 </body>
 </html>

@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -41,6 +38,8 @@ public class ProductosController {
     public String todosLosProductos(Model model) {
         List<Productos> todos = productosService.todosLosProductos();
         model.addAttribute("productos", todos);
+        model.addAttribute("mas", "+");
+        model.addAttribute("menos", "-");
         return "productos/main";
     }
 
@@ -88,25 +87,18 @@ public class ProductosController {
         return "redirect:/agregar";
     }
 
-    @RequestMapping(value = "/actualizarMas/{productosId}", method = RequestMethod.POST)
-    public String agregarUno(@PathVariable int productosId, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/actualizar/{productosId}", method = RequestMethod.POST)
+    public String agregarUno(@PathVariable int productosId, RedirectAttributes redirectAttributes, @RequestParam(value = "action") String action, @RequestParam("masomenos") String masOMenos) {
+        if (masOMenos.length() == 0) {
+            masOMenos = "1";
+        }
+        int cantidad = Integer.parseInt(masOMenos);
         Productos pro = productosService.obtenerPorCodigo(productosId);
-        productosService.cantidadProducto(pro, true);
-        redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
-        productosService.agregarProducto(pro);
-        return "redirect:/";
-    }
-
-    // TODO: Implementar este metodo en uno solo con el de agregar 1 (Si es que se puede)
-    @RequestMapping(value = "/actualizarMenos/{productosId}", method = RequestMethod.POST)
-    public String eliminarUno(@PathVariable int productosId, RedirectAttributes redirectAttributes) {
-        Productos pro = productosService.obtenerPorCodigo(productosId);
-        boolean sePudo = productosService.cantidadProducto(pro, false);
-        if (!sePudo) {
+        //este if devulve si el numero restante del producto sería negativo o no.
+        if (!productosService.cantidadProducto(pro, action, cantidad)) {
             redirectAttributes.addFlashAttribute("flash", new FlashMessage("No puede haber menos de 0 productos, si deseas eliminar el producto has click en Borrar", FlashMessage.Status.FAILURE));
         } else {
-            productosService.numeroDeVentas(pro, 1);
-
+            productosService.numeroDeVentas(pro, cantidad);
             redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente actualizado", FlashMessage.Status.SUCCESS));
             productosService.agregarProducto(pro);
         }
@@ -122,7 +114,7 @@ public class ProductosController {
         //ProcesadorDeStrings no me deja llamar al services o al dao
         Iterator<Productos> iterator1 = procesadorDeStrings.getProducts().listIterator();
         Iterator<Proveedor> iterator2 = procesadorDeStrings.getProveedores().listIterator();
-//TODO: Arreglar: si el proveedor ya esta genera error
+        //TODO: Arreglar: si el proveedor ya está genera error
         while (iterator2.hasNext()) {
             Proveedor prov = iterator2.next();
             Productos prod = iterator1.next();
@@ -139,7 +131,11 @@ public class ProductosController {
             }
         }
 
-        if (error.length() > 0) {
+        if (error.length() > 0 || procesador.equals("")) {
+            //Este mensaje se puede pasar desde el procesaroDeStrings
+            if (procesador.equals("")) {
+                error = "No había nada escrito";
+            }
             redirectAttributes.addFlashAttribute("flash", new FlashMessage(error, FlashMessage.Status.FAILURE));
             return "redirect:/agregar";
         }
@@ -161,49 +157,38 @@ public class ProductosController {
         int sieteDias = productosService.vendidosPorSemana(pro);
         int treintaDias = productosService.vendidoPorMes(pro);
         int ano = productosService.vendidoPorAno(pro);
+        int dia = productosService.vendidosPorDia(pro);
         model.addAttribute("producto", pro);
         model.addAttribute("semana", sieteDias);
         model.addAttribute("mes", treintaDias);
         model.addAttribute("ano", ano);
+        model.addAttribute("dia", dia);
         return "productos/producto";
     }
 
     @RequestMapping(value = "/editar/{productosId}", method = RequestMethod.POST)
-    public String editarProducto(@PathVariable int productosId, RedirectAttributes redirectAttributes, Productos productos, BindingResult result) {
+    public String editarProducto(@PathVariable int productosId, @Valid Productos productos, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productos", result);
             redirectAttributes.addFlashAttribute("productos", productos);
-            return "redirect:/editar/{productosId}";
+            return "redirect:/{productosId}";
         }
         Productos prod = productosService.obtenerPorCodigo(productosId);
 //        Proveedor prov = prod.getProveedor();
 
-        //TODO: Pasar todos estos ifs para un metodo en el service
-        //(El controller no tiene porqué hacer esto)
-        if (!productos.getNombre().equals(prod.getNombre())) {
-            prod.setNombre(productos.getNombre());
-        }
-        if (productos.getCantidad() != prod.getCantidad()) {
-            prod.setCantidad(productos.getCantidad());
-        }
-        if (productos.getPrecio() != prod.getPrecio()) {
-            prod.setPrecio(productos.getPrecio());
-        }
-        if (productos.getPrecioEntrada() != prod.getPrecioEntrada()) {
-            prod.setPrecioEntrada(productos.getPrecioEntrada());
-        }
-        if (!productos.getDescripcion().equals(prod.getDescripcion())) {
-            prod.setDescripcion(productos.getDescripcion());
-        }
+        productosService.revisador(productos, prod);
         productosService.actualizarProducto(prod, false);
 
         return "redirect:/{productosId}";
     }
 
+
     @RequestMapping("/eliminar")
-    public String paginaEliminar(){
+    public String paginaEliminar() {
         return "eliminar";
     }
 }
+
+
 
 

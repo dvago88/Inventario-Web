@@ -17,16 +17,17 @@
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('precio')}? 'error': ''">
-                <input class="form-control" type="number" th:field="*{precio}" placeholder="Precio salida"/>
+                <input class="form-control ceros" type="number" th:field="*{precio}" placeholder="Precio salida"/>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('precioEntrada')}? 'error': ''">
-                <input class="form-control" type="number" th:field="*{precioEntrada}" placeholder="Precio entrada"/>
+                <input class="form-control ceros" type="number" th:field="*{precioEntrada}"
+                       placeholder="Precio entrada"/>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('precioEntrada')}"
                      th:errors="*{precioEntrada}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('cantidad')}? 'error': ''">
-                <input class="form-control" type="number" th:field="*{cantidad}" placeholder="Cantidad"/>
+                <input class="form-control ceros" type="number" th:field="*{cantidad}" placeholder="Cantidad"/>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('cantidad')}"
                      th:errors="*{cantidad}"></div>
             </div>
@@ -49,7 +50,7 @@
                 <input class="form-control" type="text" th:field="*{direccion}" placeholder="Direccion"/>
             </div>
             <div class="form-group">
-                <input class="form-control" type="number" th:field="*{telefono}" placeholder="Télefono"/>
+                <input class="form-control ceros" type="number" th:field="*{telefono}" placeholder="Télefono"/>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('descripcionP')}? 'error': ''">
                 <textarea class="form-control" name="Descripcion" rows="10" cols="30" th:field="*{descripcionP}"
@@ -58,13 +59,13 @@
                      th:errors="*{descripcionP}"></div>
             </div>
             <div class="form-group">
-                <button onclick="validatorOfNumbers()" th:text="${boton}" type="submit" class="btn btn-primary">
+                <button onclick="validatorOfNumbers()" th:text="${boton}" type="submit" class="btn btn-primary"
+                        id="agregarUno">
                     Agregar
                 </button>
                 <a th:href="@{/}" class="btn btn-primary">Cancelar</a>
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
-                        aria-expanded="false" aria-controls="collapseExample">
-                    Varios Productos
+                        aria-expanded="false" aria-controls="collapseExample">Varios Productos
                 </button>
             </div>
         </div>
@@ -90,6 +91,6 @@
     </form>
 </div>
 <footer th:replace="layout::footer"></footer>
-<script th:src="@{/javascript/app.js}"></script>
+<div th:replace="layout::scripts"></div>
 </body>
 </html>

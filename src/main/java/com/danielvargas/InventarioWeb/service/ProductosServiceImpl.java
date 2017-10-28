@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -78,7 +77,26 @@ public class ProductosServiceImpl implements ProductosService {
         }
     }
 
-    public int getDayFromDate(Productos productos) {
+    @Override
+    public void revisador(Productos productos, Productos prod) {
+        if (!productos.getNombre().equals(prod.getNombre())) {
+            prod.setNombre(productos.getNombre());
+        }
+        if (productos.getCantidad() != prod.getCantidad()) {
+            prod.setCantidad(productos.getCantidad());
+        }
+        if (productos.getPrecio() != prod.getPrecio()) {
+            prod.setPrecio(productos.getPrecio());
+        }
+        if (productos.getPrecioEntrada() != prod.getPrecioEntrada()) {
+            prod.setPrecioEntrada(productos.getPrecioEntrada());
+        }
+        if (!productos.getDescripcion().equals(prod.getDescripcion())) {
+            prod.setDescripcion(productos.getDescripcion());
+        }
+    }
+
+    private int getDayFromDate(Productos productos) {
         LocalDateTime now = LocalDateTime.now();
         return (int) ChronoUnit.DAYS.between(productos.getDateUploaded(), now);
     }
@@ -87,6 +105,10 @@ public class ProductosServiceImpl implements ProductosService {
     @Override
     public void numeroDeVentas(Productos productos, int cantidad) {
         int diaActual = getDayFromDate(productos);
+        //Esto es para que no se actualicen las ventas negativamente, no tiene sentido "desvender".
+        if (cantidad < 0) {
+            return;
+        }
         if (productos.getDiarias().get(diaActual) == null) {
             productos.actualizarDias(diaActual, cantidad);
         } else {
@@ -94,22 +116,21 @@ public class ProductosServiceImpl implements ProductosService {
             can += cantidad;
             productos.actualizarDias(diaActual, can);
         }
-        productos.setCantidadVendido(productos.getCantidadVendido() + 1);
+        productos.setCantidadVendido(productos.getCantidadVendido() + cantidad);
     }
 
     @Override
-    public boolean cantidadProducto(Productos productos, boolean mas) {
+    public boolean cantidadProducto(Productos productos, String masOMenos, int can) {
         int cantidad = productos.getCantidad();
-        if (mas) {
-            cantidad++;
-            productos.setCantidad(cantidad);
+        if (masOMenos.equals("mas")) {
+            cantidad += can;
         } else {
-            cantidad--;
-            if (cantidad < 0) {
-                return false;
-            }
-            productos.setCantidad(cantidad);
+            cantidad -= can;
         }
+        if (cantidad < 0) {
+            return false;
+        }
+        productos.setCantidad(cantidad);
         return true;
     }
 
@@ -145,12 +166,7 @@ public class ProductosServiceImpl implements ProductosService {
 
     private int getCantidad(Productos productos, int diaActual, int numeroDias) {
         int contador = 0;
-        if (diaActual <= numeroDias) {
-            return vendidosPorDia(productos);
-        }
-
         for (int i = diaActual; i > diaActual - numeroDias; i--) {
-            System.out.println(i); //for testing
             try {
                 contador += productos.getDiarias().get(i);
             } catch (NullPointerException ex) {

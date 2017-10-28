@@ -23,7 +23,7 @@ public interface ProductosService {
 
     void numeroDeVentas(Productos productos, int cantidad);
 
-    boolean cantidadProducto(Productos productos, boolean mas);
+    boolean cantidadProducto(Productos productos, String masOMenos, int can);
 
     int vendidosPorDia(Productos productos);
 
@@ -32,4 +32,7 @@ public interface ProductosService {
     int vendidoPorMes(Productos productos);
 
     int vendidoPorAno(Productos productos);
+
+    void revisador(Productos productos, Productos prod);
+
 }
