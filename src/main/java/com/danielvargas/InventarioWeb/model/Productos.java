@@ -1,6 +1,7 @@
 package com.danielvargas.InventarioWeb.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -45,10 +46,11 @@ public class Productos {
 
     @ManyToOne
     @JoinColumn(name = "proveedor_id")
+    @JsonIgnore
     private Proveedor proveedor;
 
     private LocalDateTime dateUploaded = LocalDateTime.now();
-//    TODO: Hacer algo para no desperdiciar tanto espacio, los BLOBs son muy grandes
+    //    TODO: Hacer algo para no desperdiciar tanto espacio, los BLOBs son muy grandes
     @Lob
     private HashMap<Integer, Integer> diarias = new HashMap<>();
     private int diaNumero = 1;
