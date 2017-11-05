@@ -1,5 +1,6 @@
 package com.danielvargas.InventarioWeb.service;
 
+import com.danielvargas.InventarioWeb.model.Productos;
 import com.danielvargas.InventarioWeb.model.Proveedor;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface ProveedorService {
     void eliminarProveedor(Proveedor proveedor);
 
     Proveedor actualizarProveedor(Proveedor proveedor);
+
+    List<Productos> todoslosProductos(Proveedor proveedor);
 }

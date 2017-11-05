@@ -9,18 +9,33 @@
 </head>
 <body>
 <div th:replace="layout::mainbar"></div>
-<div class="container text-center">
-    <h1 th:text="${proveedor.nombreP}" class="titulo">p</h1>
+<div class="container fondoGris rounded collapse multi-collapse show" id="multiCollapseExample1">
+    <div class="text-center">
+        <h1 th:text="${proveedor.nombreP}">p</h1>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item" th:text="'Dirección: ' + ${proveedor.direccion}">p</li>
+                <li class="list-group-item" th:text="'Télefono: ' + ${proveedor.telefono}">p</li>
+
+                <li class="list-group-item" th:text="'Descripcion: '+ ${proveedor.descripcionP}">p</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <!--Los productos no estan siendo agregados al proveedor (eso creo)
+            hay que agregarlos a la lista de productos en el controller de los productos y luego volver a probar esto-->
+            <ul th:each="prod:${productos}" class="list-group">
+                <li  class="list-group-item"><a th:text="'Productos: ' + ${prod.nombre}"
+                                               th:href="@{|/productos/${prod.id}|}"></a></li>
+            </ul>
+            <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="collapseExample">
+                Editar Proveedor
+            </button>
+        </div>
+    </div>
 </div>
-<div class="container">
-    <h2>Teléfono</h2>
-    <h3 th:text="${proveedor.telefono}">p</h3>
-    <h2>Dirección</h2>
-    <h3 th:text="${proveedor.direccion}">p</h3>
-    <h2>Descripcion</h2>
-    <h3 th:text="${proveedor.descripcionP}">p</h3>
-</div>
-<!--TODO: Agregar botón para editar el proveedor-->
 
 <footer th:replace="layout::footer"></footer>
 <div th:replace="layout::scripts"></div>

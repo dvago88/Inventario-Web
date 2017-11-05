@@ -14,32 +14,22 @@
     <div class="text-center">
         <h1 th:text="${producto.nombre}">p</h1>
     </div>
-    <!--TODO: cambiar el estilo (muy feo está)-->
     <div class="row mt-5">
         <div class="col-md-6">
             <ul class="list-group">
-                <!--<h4 class="letraGris">Cantidad</h4>-->
                 <li class="list-group-item" th:text="'Cantidad: ' + ${producto.cantidad}">p</li>
-                <!--<h4 class="letraGris">Proveedor</h4>-->
                 <li class="list-group-item"><a th:text="'Proveedor: ' + ${producto.proveedor}"
                                                th:href="@{|/proveedores/${producto.proveedor.id}|}"></a></li>
-                <!--<h4 class="letraGris">Precio de salida</h4>-->
                 <li class="list-group-item" th:text="'Precio de salida: ' + ${producto.precio}">p</li>
-                <!--<h4 class="letraGris">Precio de entrada</h4>-->
                 <li class="list-group-item" th:text="'Precio de entrada: ' + ${producto.precioEntrada}"></li>
-                <!--<h4 class="letraGris">Descripción</h4>-->
                 <li class="list-group-item" th:text="'Descripcion: '+ ${producto.descripcion}">p</li>
             </ul>
         </div>
         <div class="col-md-6">
             <ul class="list-group">
-                <!--<h4 class="letraGris">Vendidos en el último día</h4>-->
                 <li class="list-group-item" th:text="'Vendidos en el último día: ' + ${dia}"></li>
-                <!--<h4 class="letraGris">Vendidos en la última semana</h4>-->
                 <li class="list-group-item" th:text="'Vendidos en la última semana: ' + ${semana}"></li>
-                <!--<h4 class="letraGris">Vendidos en los últimos 30 días</h4>-->
                 <li class="list-group-item" th:text="'Vendidos en los últimos 30 días: ' + ${mes}"></li>
-                <!--<h4 class="letraGris">Vendidos en el último año</h4>-->
                 <li class="list-group-item" th:text="'Vendidos en el último año: ' + ${ano}"></li>
             </ul>
             <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target=".multi-collapse"
@@ -47,8 +37,6 @@
                 Editar Producto
             </button>
         </div>
-
-
     </div>
 </div>
 <div class="container collapse multi-collapse" id="multiCollapseExample2">

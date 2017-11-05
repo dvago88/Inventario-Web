@@ -20,7 +20,9 @@ public class ProveedorController {
     @RequestMapping("/proveedores/{proveedorId}")
     public String proveedor(@PathVariable int proveedorId, Model model) {
         Proveedor prov = proveedorService.obtenerPorCodigo(proveedorId);
+        List<Productos> productos = proveedorService.todoslosProductos(prov);
         model.addAttribute("proveedor", prov);
+        model.addAttribute("productos", productos);
         return "proveedores/proveedor";
     }
 
