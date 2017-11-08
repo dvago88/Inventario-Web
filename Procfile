@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar build/libs/Inventario-Web-1.0-SNAPSHOT.jar
+web: java -Dserver.port=5000 -jar build/libs/Inventario-Web-1.0-SNAPSHOT.jar
