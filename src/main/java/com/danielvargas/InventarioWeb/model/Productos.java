@@ -46,7 +46,7 @@ public class Productos {
 
     @ManyToOne
     @JoinColumn(name = "proveedor_id")
-    @JsonIgnore
+    @JsonIgnore //Esto hace que no de error pero no me deja ver el proveedor con json
     private Proveedor proveedor;
 
     private LocalDateTime dateUploaded = LocalDateTime.now();

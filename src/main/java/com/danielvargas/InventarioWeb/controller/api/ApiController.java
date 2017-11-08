@@ -23,6 +23,7 @@ public class ApiController {
     @GetMapping("/api/productos/{id}")
     public Productos getProductoPorId(@PathVariable int id) {
         return productosService.obtenerPorCodigo(id);
+        //TODO: si no encuentra el codigo devolver status 500
     }
 
 }

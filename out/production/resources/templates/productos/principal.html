@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('Principal')"></head>
+<body>
+
+    <div class="cuerpo-real">
+        <div th:replace="layout::mainbar"></div>
+        <h1 class="titulo">Inventario Papelería Carusso</h1>
+        <h2>Lista de productos</h2>
+        <div th:replace="layout :: flash"></div>
+        <div class="main-body">
+            <table border="1" class="tabla">
+                <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Precio Salida</th>
+                    <th>Precio Entrada</th>
+                    <th>Proveedor</th>
+                    <th>Cantidad</th>
+                </tr>
+                <tr th:each="pro:${productos}">
+                    <td th:text="${pro.id}">id</td>
+                    <td>
+                        <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">nombre</a>
+                    </td>
+                    <td class="moneda" th:text="${pro.precio}">precioE</td>
+                    <td class="moneda" th:text="${pro.precioEntrada}">precioE</td>
+                    <td>
+                        <a id="proveedor" th:text="${pro.proveedor}" th:href="@{|/proveedores/${pro.proveedor.id}|}"></a>
+                    </td>
+                    <td th:text="${pro.cantidad}">prueba</td>
+                    <td class="group">
+                        <div class="masYmenos">
+                            <form th:action="@{|/actualizarMas/${pro.id}|}" method="post">
+                                <button type="submit" id="mas" class="button">+</button>
+                            </form>
+                            <form th:action="@{|/actualizarMenos/${pro.id}|}" method="post">
+                                <button type="submit" id="menos" class="button">-</button>
+                            </form>
+                        </div>
+                        <form th:action="@{|/${pro.id}|}" method="post" class="tirarALaDerecha" onsubmit="return confirm('Realmente quieres eliminar este elemento?');">
+                            <button type="submit" class="button" id="borrar">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script th:src="@{/javascript/app.js}"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title th:text="'Inventario | ' +${producto.nombre}">Inventario</title>
+    <div th:replace="layout::importes"></div>
+</head>
+
+<body class="fondoGris">
+<div th:replace="layout::mainbar"></div>
+<div class="container fondoGris rounded collapse multi-collapse show" id="multiCollapseExample1">
+    <div class="text-center">
+        <h1 th:text="${producto.nombre}">p</h1>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item" th:text="'Cantidad: ' + ${producto.cantidad}">p</li>
+                <li class="list-group-item"><a th:text="'Proveedor: ' + ${producto.proveedor}"
+                                               th:href="@{|/proveedores/${producto.proveedor.id}|}"></a></li>
+                <li class="list-group-item" th:text="'Precio de salida: ' + ${producto.precio}">p</li>
+                <li class="list-group-item" th:text="'Precio de entrada: ' + ${producto.precioEntrada}"></li>
+                <li class="list-group-item" th:text="'Descripcion: '+ ${producto.descripcion}">p</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item" th:text="'Vendidos en el último día: ' + ${dia}"></li>
+                <li class="list-group-item" th:text="'Vendidos en la última semana: ' + ${semana}"></li>
+                <li class="list-group-item" th:text="'Vendidos en los últimos 30 días: ' + ${mes}"></li>
+                <li class="list-group-item" th:text="'Vendidos en el último año: ' + ${ano}"></li>
+            </ul>
+            <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="collapseExample">
+                Editar Producto
+            </button>
+        </div>
+    </div>
+</div>
+<div class="container collapse multi-collapse" id="multiCollapseExample2">
+    <form th:action="@{|/editar/${producto.id}|}" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" type="text" th:value="${producto.nombre}"
+                   th:field="${producto.nombre}"/>
+        </div>
+        <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input class="form-control" id="cantidad" type="text" th:value="${producto.cantidad}"
+                   th:field="${producto.cantidad}"/>
+        </div>
+        <!--<div class="form-group">
+            <label for="proveedor">Proveedor</label>
+            <input class="form-control" id="proveedor" type="text" th:value="${producto.proveedor}" th:field="${producto.proveedor}"/>
+        </div>-->
+        <div class="form-group">
+            <label for="precio">Precio Salida</label>
+            <input class="form-control" id="precio" type="number" th:value="${producto.precio}"
+                   th:field="${producto.precio}"/>
+        </div>
+        <div class="form-group">
+            <label for="precioEntrada">Precio Entrada</label>
+            <input class="form-control" id="precioEntrada" type="number" th:value="${producto.precioEntrada}"
+                   th:field="${producto.precioEntrada}"/>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input class="form-control" id="descripcion" type="text" th:value="${producto.descripcion}"
+                   th:field="${producto.descripcion}"/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
+                Cancelar
+            </button>
+            <button class="btn btn-primary" type="submit">Aceptar</button>
+        </div>
+    </form>
+</div>
+<footer th:replace="layout::footer"></footer>
+<div th:replace="layout::scripts"></div>
+</body>
+</html>

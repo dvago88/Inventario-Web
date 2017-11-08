@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title th:text="${proveedor.nombreP}">Inventario</title>
+    <div th:replace="layout::importes"></div>
+</head>
+<body>
+<div th:replace="layout::mainbar"></div>
+<div class="container fondoGris rounded collapse multi-collapse show" id="multiCollapseExample1">
+    <div class="text-center">
+        <h1 th:text="${proveedor.nombreP}">p</h1>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item" th:text="'Dirección: ' + ${proveedor.direccion}">p</li>
+                <li class="list-group-item" th:text="'Télefono: ' + ${proveedor.telefono}">p</li>
+
+                <li class="list-group-item" th:text="'Descripcion: '+ ${proveedor.descripcionP}">p</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <!--Los productos no estan siendo agregados al proveedor (eso creo)
+            hay que agregarlos a la lista de productos en el controller de los productos y luego volver a probar esto-->
+            <ul th:each="prod:${productos}" class="list-group">
+                <li  class="list-group-item"><a th:text="'Productos: ' + ${prod.nombre}"
+                                               th:href="@{|/productos/${prod.id}|}"></a></li>
+            </ul>
+            <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="collapseExample">
+                Editar Proveedor
+            </button>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="layout::footer"></footer>
+<div th:replace="layout::scripts"></div>
+</body>
+</html>

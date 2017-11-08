@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('Agregar Producto')"></head>
+<body>
+<div th:replace="layout::mainbar"></div>
+<div class="container text-center mb-5">
+    <h2 class="pt-3" th:text="${encabezado}">Prueba</h2>
+    <div th:replace="layout :: flash"></div>
+</div>
+<!--Este primer div es el formulario para un solo producto:-->
+<div class="container text-center collapse multi-collapse show" id="multiCollapseExample1">
+    <form th:action="@{${accion}}" method="post" class="row">
+        <div class="col-md-6" th:object="${productos}">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group" th:classappend="${#fields.hasErrors('nombre')}? 'error': ''">
+                <input class="form-control" type="text" th:field="*{nombre}" placeholder="Nombre del producto"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('precio')}? 'error': ''">
+                <input class="form-control ceros" type="number" th:field="*{precio}" placeholder="Precio salida"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('precioEntrada')}? 'error': ''">
+                <input class="form-control ceros" type="number" th:field="*{precioEntrada}"
+                       placeholder="Precio entrada"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('precioEntrada')}"
+                     th:errors="*{precioEntrada}"></div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('cantidad')}? 'error': ''">
+                <input class="form-control ceros" type="number" th:field="*{cantidad}" placeholder="Cantidad"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('cantidad')}"
+                     th:errors="*{cantidad}"></div>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('descripcion')}? 'error': ''">
+                <textarea class="form-control" name="Descripcion" rows="10" cols="30" th:field="*{descripcion}"
+                          placeholder="Pequeña descripción"></textarea>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}"
+                     th:errors="*{descripcion}"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6" th:object="${proveedor}">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group" th:classappend="${#fields.hasErrors('nombreP')}? 'error': ''">
+                <input class="form-control" type="text" th:field="*{nombreP}" placeholder="Proveedor"/>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('nombreP')}"
+                     th:errors="*{nombreP}"></div>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" th:field="*{direccion}" placeholder="Direccion"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control ceros" type="number" th:field="*{telefono}" placeholder="Télefono"/>
+            </div>
+            <div class="form-group" th:classappend="${#fields.hasErrors('descripcionP')}? 'error': ''">
+                <textarea class="form-control" name="Descripcion" rows="10" cols="30" th:field="*{descripcionP}"
+                          placeholder="Pequeña descripción"></textarea>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('descripcionP')}"
+                     th:errors="*{descripcionP}"></div>
+            </div>
+            <div class="form-group">
+                <button onclick="validatorOfNumbers()" th:text="${boton}" type="submit" class="btn btn-primary"
+                        id="agregarUno">
+                    Agregar
+                </button>
+                <a th:href="@{/}" class="btn btn-primary">Cancelar</a>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                        aria-expanded="false" aria-controls="collapseExample">Varios Productos
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--Este segundo div es el formulario para multiples productos-->
+<div class="container collapse multi-collapse" id="multiCollapseExample2">
+    <form th:action="@{/agregarvarios}" method="post">
+        <div class="form-group">
+            <label for="areaParaIngresarProdutos">Agregar productos:</label>
+            <textarea class="form-control" name="areaParaIngresarProdutos" cols="50" rows="20"
+                      id="areaParaIngresarProdutos" placeholder="Introduce todos los datos acá en orden"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
+                Cancelar
+            </button>
+            <button onclick="validatorOfNumbers()" type="submit" class="btn btn-primary">
+                Agregar
+            </button>
+        </div>
+    </form>
+</div>
+<footer th:replace="layout::footer"></footer>
+<div th:replace="layout::scripts"></div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+body {
+    padding-top: 3.5rem;
+}
+
+/*Esto hace que el container quede en un cuadro más claro que el resto y como que resalte*/
+.fondoGris {
+    background-color: #eee;
+}
+
+.letraGris {
+    color: #666;
+}
+
+.container.uno {
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 2px 0 7px #888888;
+}
+
+.dataTables_length {
+    padding-top: 1rem;
+}
+
+.btn-outline-danger, .btn-outline-success {
+    border: none;
+}
+
+/*.float-left, .float-right {
+     width: 45%;
+ }*/
+
+.list-group-item > ul {
+    width: 50%;
+}
+
+td a:hover, td a:visited, td a:link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.flash.failure {
+    background-color: #ffcccc;
+    color: #660000;
+    border-color: #ffe6e6;
+}
+
+.footer {
+    color: #888888;
+}
+
+#input-peque {
+    width: 2rem;
+    padding: 0;
+    text-align: center;
+}
+
+/*Esto es para que no aparezcan las flechitas en el input*/
+/*También quería practicar selectores :P*/
+div[class="input-group"] > input[name="masomenos"]::-webkit-inner-spin-button,
+div[class="input-group"] > input[name="masomenos"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+#mydata_filter {
+    padding-top: 1rem;
+}
+
+/*@media (max-width: 767px) {
+    .float-left, .float-right {
+        width: 100%;
+        float: none;
+    }
+}*/
+
+/*
+@media(min-width: 1200px){
+    .container.uno{
+        !*hacer que se centre*!
+        max-width: 90%;
+        text-align: center;
+        align-content: center;
+    }
+}
+*/
