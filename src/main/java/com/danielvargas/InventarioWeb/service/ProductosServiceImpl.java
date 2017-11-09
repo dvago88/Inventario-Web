@@ -109,12 +109,12 @@ public class ProductosServiceImpl implements ProductosService {
         if (cantidad < 0) {
             return;
         }
-        if (productos.getDiarias().get(diaActual) == null) {
-            productos.actualizarDias(diaActual, cantidad);
+        if (productos.obtenerDiarias(diaActual) == 0) {
+            productos.actualizarDiarias(diaActual, cantidad);
         } else {
-            int can = productos.getDiarias().get(diaActual);
+            int can = productos.obtenerDiarias(diaActual);
             can += cantidad;
-            productos.actualizarDias(diaActual, can);
+            productos.actualizarDiarias(diaActual, can);
         }
         productos.setCantidadVendido(productos.getCantidadVendido() + cantidad);
     }
@@ -139,7 +139,7 @@ public class ProductosServiceImpl implements ProductosService {
         int dia = getDayFromDate(productos);
         int d;
         try {
-            d = productos.getDiarias().get(dia);
+            d = productos.obtenerDiarias(dia);
             return d;
         } catch (NullPointerException ex) {
             return 0;
@@ -149,29 +149,40 @@ public class ProductosServiceImpl implements ProductosService {
     @Override
     public int vendidosPorSemana(Productos productos) {
         int diaActual = getDayFromDate(productos);
-        return getCantidad(productos, diaActual, 7);
+        return getCantidadArray(productos, diaActual, 7);
     }
 
     @Override
     public int vendidoPorMes(Productos productos) {
         int diaActual = getDayFromDate(productos);
-        return getCantidad(productos, diaActual, 30);
+        return getCantidadArray(productos, diaActual, 30);
     }
 
     @Override
     public int vendidoPorAno(Productos productos) {
         int diaActual = getDayFromDate(productos);
-        return getCantidad(productos, diaActual, 365);
+        return getCantidadArray(productos, diaActual, 365);
     }
 
-    private int getCantidad(Productos productos, int diaActual, int numeroDias) {
+    private int getCantidadHashMap(Productos productos, int diaActual, int numeroDias) {
         int contador = 0;
         for (int i = diaActual; i > diaActual - numeroDias; i--) {
             try {
-                contador += productos.getDiarias().get(i);
+                contador += productos.obtenerDiarias(i);
             } catch (NullPointerException ex) {
 
             }
+        }
+        return contador;
+    }
+
+    private int getCantidadArray(Productos productos, int diaActual, int numeroDias) {
+        int contador = 0;
+        for (int i = diaActual; i > diaActual - numeroDias; i--) {
+            if (i < 0) {
+                return contador;
+            }
+            contador += productos.obtenerDiarias(i);
         }
         return contador;
     }
