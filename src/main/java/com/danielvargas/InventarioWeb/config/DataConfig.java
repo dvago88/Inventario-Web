@@ -40,7 +40,7 @@ public class DataConfig {
         BasicDataSource ds = new BasicDataSource();
         URI dbUri = null;//Cuidado con este null...
         try {
-            dbUri = new URI(System.getenv("DATABASE_URL"));
+            dbUri = new URI(env.getProperty("DATABASE_URL"));
         } catch (URISyntaxException ex) {
             System.out.println("Algo salió mal con la URI");
         }
