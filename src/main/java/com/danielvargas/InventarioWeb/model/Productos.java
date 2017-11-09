@@ -50,8 +50,10 @@ public class Productos {
     private Proveedor proveedor;
 
     private LocalDateTime dateUploaded = LocalDateTime.now();
-    //    TODO: Hay que meter esto en otra estructura, esta se llena a los 3 dias
-    private HashMap<Integer, Integer> diarias = new HashMap<>();
+    //    TODO: Hacer algo para:
+//              *Almacenar más de 255 días
+//              *Evitar que se puedan poner más de 127 items en un día
+    private byte[] diarias = new byte[255];
     private int diaNumero = 1;
     private int cantidadVendido;
 
@@ -69,8 +71,12 @@ public class Productos {
         this.proveedor = builder.getProveedor();
     }
 
-    public void actualizarDias(int dia, int cantidad) {
-        diarias.put(dia, cantidad);
+    public void actualizarDiarias(int dia, int cantidad) {
+        diarias[(byte) dia] = (byte) cantidad;
+    }
+
+    public int obtenerDiarias(int dia){
+        return diarias[dia];
     }
 
     public int getId() {
@@ -137,11 +143,11 @@ public class Productos {
         this.dateUploaded = dateUploaded;
     }
 
-    public HashMap<Integer, Integer> getDiarias() {
+    public byte[] getDiarias() {
         return diarias;
     }
 
-    public void setDiarias(HashMap<Integer, Integer> diarias) {
+    public void setDiarias(byte[] diarias) {
         this.diarias = diarias;
     }
 
