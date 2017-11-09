@@ -50,8 +50,7 @@ public class Productos {
     private Proveedor proveedor;
 
     private LocalDateTime dateUploaded = LocalDateTime.now();
-    //    TODO: Hacer algo para no desperdiciar tanto espacio, los BLOBs son muy grandes
-    @Lob
+    //    TODO: Hay que meter esto en otra estructura, esta se llena a los 3 dias
     private HashMap<Integer, Integer> diarias = new HashMap<>();
     private int diaNumero = 1;
     private int cantidadVendido;
