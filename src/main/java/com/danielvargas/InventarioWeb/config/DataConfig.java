@@ -47,7 +47,9 @@ public class DataConfig {
         ds.setDriverClassName(env.getProperty("inventario.ds.driver"));
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath() + ":" + dbUri.getPort() + dbUri.getPath();
+//        database "d8g6soi7mdj5s9:5432/d8g6soi7mdj5s9" does not exist
+//      jdbc:postgresql://<host>:<port>/<dbname>?user=<username>&password=<password>
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
         ds.setUrl(dbUrl);
         ds.setUsername(username);
         ds.setPassword(password);
