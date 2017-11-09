@@ -11,6 +11,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 import javax.sql.DataSource;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Created by Daniel on 20/08/2017
@@ -24,9 +26,9 @@ public class DataConfig {
     private Environment env;
 
     @Bean
-    public LocalSessionFactoryBean sessionFactoryBean(){
-        Resource config=new ClassPathResource("hibernate.cfg.xml");
-        LocalSessionFactoryBean sessionFactoryBean=new LocalSessionFactoryBean();
+    public LocalSessionFactoryBean sessionFactoryBean() {
+        Resource config = new ClassPathResource("hibernate.cfg.xml");
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setConfigLocation(config);
         sessionFactoryBean.setPackagesToScan(env.getProperty("inventario.entity.package"));
         sessionFactoryBean.setDataSource(dataSource());
@@ -35,11 +37,20 @@ public class DataConfig {
 
     @Bean
     public DataSource dataSource() {
-        BasicDataSource ds=new BasicDataSource();
+        BasicDataSource ds = new BasicDataSource();
+        URI dbUri = null;//Cuidado con este null...
+        try {
+            dbUri = new URI(System.getenv("DATABASE_URL"));
+        } catch (URISyntaxException ex) {
+            System.out.println("Algo salió mal con la URI");
+        }
         ds.setDriverClassName(env.getProperty("inventario.ds.driver"));
-        ds.setUrl(env.getProperty("inventario.ds.url"));
-        ds.setUsername(env.getProperty("inventario.ds.username"));
-        ds.setPassword(env.getProperty("inventario.ds.password"));
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath() + ":" + dbUri.getPort() + dbUri.getPath();
+        ds.setUrl(dbUrl);
+        ds.setUsername(username);
+        ds.setPassword(password);
         return ds;
     }
 }
