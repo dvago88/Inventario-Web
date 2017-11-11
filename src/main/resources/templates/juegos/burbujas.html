@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>First</title>
+    <!-- Datatables -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.sound.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+          crossorigin="anonymous"/>
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+
+</head>
+<body>
+<div th:replace="layout::mainbar"></div>
+<button class="fixed-bottom btn btn-info" id="replay">Empezar</button>
+
+<script th:src="@{/javascript/juegos/burbujas.js}"></script>
+<script th:src="@{/javascript/juegos/bubble.js}"></script>
+</body>
+</html>
