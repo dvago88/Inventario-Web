@@ -82,5 +82,7 @@ document.getElementById("replay").onclick = () => {
     enJuego = true;
     noGanaste = true;
     bubbles = [];
+    x = 0;
+    y = 0;
     setup();
 };
