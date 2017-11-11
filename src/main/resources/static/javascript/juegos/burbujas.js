@@ -76,5 +76,11 @@ function tenPrint() {
         y = 0;
         x = 0;
     }
-
 }
+
+document.getElementById("replay").onclick(() => {
+    enJuego = true;
+    noGanaste = true;
+    setup();
+
+});
