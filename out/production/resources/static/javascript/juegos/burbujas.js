@@ -1,8 +1,8 @@
 let bubbles = [];
 let x = 0;
 let y = 0;
-let w = 1000;
-let h = 500;
+let w = 1200;
+let h = 600;
 let spacing = parseInt(prompt("Introduce el valor deseado:\nSe recomiendan valores entre 5 y 150"));
 if (isNaN(spacing)) {
     spacing = 20;
