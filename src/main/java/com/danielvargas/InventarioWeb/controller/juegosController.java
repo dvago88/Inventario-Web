@@ -8,6 +8,6 @@ public class juegosController {
 
     @RequestMapping("/juegos/burbujas")
     public String burbujas(){
-        return "/juegos/burbujas";
+        return "juegos/burbujas";
     }
 }
