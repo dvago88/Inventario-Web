@@ -85,5 +85,8 @@ document.getElementById("replay").onclick = () => {
     x = 0;
     y = 0;
     spacing = parseInt(prompt("Introduce el valor deseado:\nSe recomiendan valores entre 5 y 150"));
+    if (isNaN(spacing)) {
+        spacing = 20;
+    }
     setup();
 };
