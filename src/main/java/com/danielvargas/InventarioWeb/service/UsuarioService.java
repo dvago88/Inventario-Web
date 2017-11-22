@@ -5,5 +5,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UsuarioService extends UserDetailsService {
 
-    Usuario encontrarPorNombreUsuario(String nombreUsuario);
+    Usuario findByNombreUsuario(String nombreUsuario);
 }

@@ -32,7 +32,7 @@
                      th:errors="*{cantidad}"></div>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('descripcion')}? 'error': ''">
-                <textarea class="form-control" name="Descripcion" rows="10" cols="30" th:field="*{descripcion}"
+                <textarea class="form-control no-scroll" name="Descripcion" rows="10" cols="30" th:field="*{descripcion}"
                           placeholder="Pequeña descripción"></textarea>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('descripcion')}"
                      th:errors="*{descripcion}"></div>
@@ -53,7 +53,7 @@
                 <input class="form-control ceros" type="number" th:field="*{telefono}" placeholder="Télefono"/>
             </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('descripcionP')}? 'error': ''">
-                <textarea class="form-control" name="Descripcion" rows="10" cols="30" th:field="*{descripcionP}"
+                <textarea class="form-control no-scroll" name="Descripcion" rows="10" cols="30" th:field="*{descripcionP}"
                           placeholder="Pequeña descripción"></textarea>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('descripcionP')}"
                      th:errors="*{descripcionP}"></div>

@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
-    UsuarioDao usuarioDao;
+    private UsuarioDao usuarioDao;
 
     @Override
-    public Usuario encontrarPorNombreUsuario(String nombreUsuario) {
+    public Usuario findByNombreUsuario(String nombreUsuario) {
         return usuarioDao.findByNombreUsuario(nombreUsuario);
     }
 

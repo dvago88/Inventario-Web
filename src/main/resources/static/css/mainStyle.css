@@ -1,208 +1,214 @@
+html {
+    /*background: url(http://cdn.magdeleine.co/wp-content/uploads/2014/05/3jPYgeVCTWCMqjtb7Dqi_IMG_8251-1400x933.jpg) no-repeat center center fixed; */
+    background: url(http://russwittmann.com/wp-content/uploads/2017/04/interior-modern-office-interior-stylish-interior-office-room-with-with-full-size-of-decorations-photo-modern-office-decor.jpg) no-repeat center center fixed;
 
-* {
-    box-sizing: border-box;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow: hidden;
 }
 
-body {
-    color: #000;
-    margin: 0;
-    font: 1em/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #eee;
-}
-
-h2 {
-    margin-left: 25px;
-
-}
-
-/*table, th, tr, td{
-    border: 2px solid black;
-    border-collapse: collapse;
-}
-
-table{
-    width: 97%;
-}*/
-th{
-    /*height: 50px;*/
-    background-color: #959DFF;
-    color: white
-}
-
-
-a:link{
-    color: beige;
-    text-decoration: none;
-}
-
-a:visited{
-    color: beige;
-}
-
-/*tr:hover,#menos:hover,#mas:hover {*/
-    /*background-color: #f5f5f5*/
-/*}*/
-
-
-input[type=text], select, textarea, input[type=number] {
+img{
+    display: block;
+    margin: auto;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    resize: none;
+    height: auto;
 }
 
-
-/*input[type=submit]:hover {
-    background-color: #45a049;
-}*/
-
-.main-header {
-    /*padding: 8px 10px 8px 20px;*/
-    padding: 2rem 1rem 1rem 2rem;
-    background-color: cadetblue;
-    text-align: right;
-    color: beige;
-    margin: 0;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    font-size: 1.6rem;
-}
-
-.main-body {
-    width: 97%;
-    text-align: center;
-    padding: 5px 10px 5px 10px;
-    margin: 0 25px 0 25px;
-    font-size: 1.6rem;
-
-    background-color: white;
-    box-shadow: 2px 0 7px #888888;
-    border-radius: 15px;
-}
-
-.titulo {
-    text-align: center;
-    color: #111;
-    margin:60px 25px 15px 25px;
-    padding: 5px;
-
-    background-color: white;
-    box-shadow: 2px 0 7px #888888;
-    border-radius: 15px;
-}
-
-
-.main-header ul {
-    color: beige;
-    float: left;
-    padding-left: 3px;
-    padding-right: 3px;
-    list-style-type: none;
-}
-
-.main-header li {
-    border: 3px solid beige;
-    border-radius: 5px;
-    display: inline;
-    margin: 7px;
-    padding: 15px;
-}
-
-/*esto es para que no se dañe el layout por culpa del float*/
-.group:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.button {
-    background-color:cadetblue;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+#login-button{
     cursor: pointer;
-}
-
-.masYmenos{
-
-    float: left;
-}
-
-#mas,#menos{
-    color: #959DFF;
-    background-color: inherit;
-    padding: 0.5rem;
-    margin: 0 2px;
-}
-
-
-.formulario {
-
-    padding: 20px;
-}
-
-
-/*esto es para que quede centrado el formulario*/
-.container1{
     position: absolute;
-    left: 25%;
-    top: 55%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    height: 65%
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(3,3,3,.8);
+    overflow: hidden;
+    opacity: 0.4;
+    box-shadow: 10px 10px 30px #000;}
 
-}
-.container2{
+/* Login container */
+#container{
     position: absolute;
-    left: 75%;
-    top: 55%;
-    transform: translate(-50%, -50%);
-    width: 40%;
-    height: 65%
-}
-
-.moneda::before{
-    content: "$";
-}
-
-.cont{
-    background: #4CBB17;
-    padding: 0 0.5rem;
-    margin: 1rem;
-    width: 30rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 260px;
+    height: 260px;
     border-radius: 5px;
-    box-shadow: 1px 0 5px #888888;
+    background: rgba(3,3,3,0.25);
+    box-shadow: 1px 1px 50px #000;
+    display: none;
 }
 
-.error-message{
-    color: darkred;
+.close-btn{
+    position: absolute;
+    cursor: pointer;
+    font-family: 'Open Sans Condensed', sans-serif;
+    line-height: 18px;
+    top: 3px;
+    right: 3px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    opacity: .2;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
-
-
-#producto, #proveedor{
-    color: #111;
+.close-btn:hover{
+    opacity: .5;
 }
 
-/*esto es mientras tanto para que el boton cancelar se vea bien*/
-#dañado{
-    padding: 12px 29px;
+/* Heading */
+h1{
+    font-family: 'Open Sans Condensed', sans-serif;
+    position: relative;
+    margin-top: 0px;
+    text-align: center;
+    font-size: 40px;
+    color: #ddd;
+    text-shadow: 3px 3px 10px #000;
 }
 
-#borrar{
-    padding-left: 15px;
-    padding-right: 15px;
+/* Inputs */
+a,
+input{
+    font-family: 'Open Sans Condensed', sans-serif;
+    text-decoration: none;
+    position: relative;
+    width: 80%;
+    display: block;
+    margin: 9px auto;
+    font-size: 17px;
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(3,3,3,.1);
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
+input:focus{
+    outline: none;
+    box-shadow: 3px 3px 10px #333;
+    background: rgba(3,3,3,.18);
+}
 
+/* Placeholders */
+::-webkit-input-placeholder {
+    color: #ddd;  }
+:-moz-placeholder { /* Firefox 18- */
+    color: red;  }
+::-moz-placeholder {  /* Firefox 19+ */
+    color: red;  }
+:-ms-input-placeholder {
+    color: #333;  }
+
+/* Link */
+a{
+    font-family: 'Open Sans Condensed', sans-serif;
+    text-align: center;
+    padding: 4px 8px;
+    background: rgba(107,255,3,0.3);
+}
+
+a:hover{
+    opacity: 0.7;
+}
+
+#remember-container{
+    position: relative;
+    margin: -5px 20px;
+}
+
+.checkbox {
+    position: relative;
+    cursor: pointer;
+    -webkit-appearance: none;
+    padding: 5px;
+    border-radius: 4px;
+    background: rgba(3,3,3,.2);
+    display: inline-block;
+    width: 16px;
+    height: 15px;
+}
+
+.checkbox:checked:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checkbox:checked {
+    background: rgba(3,3,3,.4);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.5);
+    color: #fff;
+}
+
+.checkbox:checked:after {
+    content: '\2714';
+    font-size: 10px;
+    position: absolute;
+    top: 0px;
+    left: 4px;
+    color: #fff;
+}
+
+#remember{
+    position: absolute;
+    font-size: 13px;
+    font-family: 'Hind', sans-serif;
+    color: rgba(255,255,255,.5);
+    top: 7px;
+    left: 20px;
+}
+
+#forgotten{
+    position: absolute;
+    font-size: 12px;
+    font-family: 'Hind', sans-serif;
+    color: rgba(255,255,255,.2);
+    right: 0px;
+    top: 8px;
+    cursor: pointer;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    -o-transition: all 2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+#forgotten:hover{
+    color: rgba(255,255,255,.6);
+}
+
+#forgotten-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 260px;
+    height: 180px;
+    border-radius: 10px;
+    background: rgba(3,3,3,0.25);
+    box-shadow: 1px 1px 50px #000;
+    display: none;
+}
+
+.orange-btn{
+    background: rgba(87,198,255,.5);
+}

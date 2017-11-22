@@ -48,6 +48,10 @@ td a:hover, td a:visited, td a:link {
     color: #888888;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+
 #input-peque {
     width: 2rem;
     padding: 0;
@@ -57,7 +61,7 @@ td a:hover, td a:visited, td a:link {
 /*Esto es para que no aparezcan las flechitas en el input*/
 /*También quería practicar selectores :P*/
 div[class="input-group"] > input[name="masomenos"]::-webkit-inner-spin-button,
-div[class="input-group"] > input[name="masomenos"]::-webkit-outer-spin-button {
+div[class="input-group"] > input[name="masomenos"]::-webkit-outer-spin-button{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
