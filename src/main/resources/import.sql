@@ -1,0 +1,5 @@
+-- INSERT INTO role (name) VALUES ('ROLE_USER');
+-- password = pass   https://www.browserling.com/tools/bcrypt
+-- INSERT INTO user (username, enabled, password, role_id) VALUES ('daniel', TRUE, '$2a$10$tFOphGnmxAbfq.okCOLYJu1dEPtii4z/bnEgd7K0GAkCfPPepZ6n6', 1);
+-- INSERT INTO proveedor (nombre, descripcion, telefono) VALUES ('baks', 'ddsdiso', 123456);
+-- INSERT INTO productos (nombre, precio, precioEntrada, cantidad, descripcion,cantidadVendido, proveedor_id) VALUES ('prod1', 1200, 1000, 12, 'bla bla', 1, 1);

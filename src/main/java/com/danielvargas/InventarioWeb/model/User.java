@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Usuario implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,10 @@ public class Usuario implements UserDetails {
 
     @Column(unique = true)
     @Size(min = 3, max = 20)
-    private String nombreUsuario;
+    private String username;
 
     @Column(length = 150)
-    private String contrasena;
+    private String password;
 
     @Column(nullable = false)
     private boolean enabled;
@@ -32,6 +32,9 @@ public class Usuario implements UserDetails {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    public User() {
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -39,14 +42,22 @@ public class Usuario implements UserDetails {
         return authorities;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String getPassword() {
-        return contrasena;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return nombreUsuario;
+        return username;
     }
 
     @Override

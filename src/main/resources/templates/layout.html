@@ -46,6 +46,15 @@
                 <li class="nav-item"><a class="nav-link disabled" th:href="@{/eliminar}">App Android</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/juegos/burbujas}">Juegos</a></li>
             </ul>
+            <div class="navbar-text">
+                <form class="form-inline" th:action="@{/logout}" method="post">
+                    <span class="nombreUsuario" sec:authentication="name"></span>
+                    <button type="submit" class="close" aria-label="Close">
+                        <span aria-hidden="true" class="text-white">&times;</span>
+                    </button>
+                </form>
+
+            </div>
         </div>
     </nav>
 </div>

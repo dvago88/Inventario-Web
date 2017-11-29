@@ -30,12 +30,7 @@ public class ProductosController {
     @Autowired
     ProveedorService proveedorService;
 
-   /* @RequestMapping("/login")
-    public String loginPage(){
-        return "login";
-    }*/
-
-    @RequestMapping("/productos")
+    @RequestMapping({"/productos", "/"})
     public String todosLosProductos(Model model) {
         List<Productos> todos = productosService.todosLosProductos();
         model.addAttribute("productos", todos);

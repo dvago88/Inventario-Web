@@ -1,6 +1,7 @@
 html {
     /*background: url(http://cdn.magdeleine.co/wp-content/uploads/2014/05/3jPYgeVCTWCMqjtb7Dqi_IMG_8251-1400x933.jpg) no-repeat center center fixed; */
-    background: url(http://russwittmann.com/wp-content/uploads/2017/04/interior-modern-office-interior-stylish-interior-office-room-with-with-full-size-of-decorations-photo-modern-office-decor.jpg) no-repeat center center fixed;
+    /*background: url(http://russwittmann.com/wp-content/uploads/2017/04/interior-modern-office-interior-stylish-interior-office-room-with-with-full-size-of-decorations-photo-modern-office-decor.jpg) no-repeat center center fixed;*/
+    background: url(https://i.pinimg.com/originals/6b/49/85/6b498530dfa9f1fd16169e06e6046adc.jpg) no-repeat center center fixed;
 
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -84,7 +85,8 @@ h1{
 
 /* Inputs */
 a,
-input{
+input,
+.acopy{
     font-family: 'Open Sans Condensed', sans-serif;
     text-decoration: none;
     position: relative;
@@ -120,20 +122,26 @@ input:focus{
     color: #333;  }
 
 /* Link */
-a{
+a,.acopy{
     font-family: 'Open Sans Condensed', sans-serif;
     text-align: center;
     padding: 4px 8px;
     background: rgba(107,255,3,0.3);
 }
 
-a:hover{
+a:hover,.acopy:hover{
     opacity: 0.7;
 }
 
 #remember-container{
     position: relative;
     margin: -5px 20px;
+}
+
+.flash.failure {
+    background-color: #ffcccc;
+    color: #660000;
+    border-color: #ffe6e6;
 }
 
 .checkbox {
