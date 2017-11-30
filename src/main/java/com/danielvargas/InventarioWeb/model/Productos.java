@@ -49,6 +49,10 @@ public class Productos {
     @JsonIgnore //Esto hace que no de error pero no me deja ver el proveedor con json
     private Proveedor proveedor;
 
+    /*@Version
+    private long version;*/
+
+
     private LocalDateTime dateUploaded = LocalDateTime.now();
     //    TODO: Hacer algo para:
 //              *Almacenar más de 255 días
