@@ -1,8 +1,10 @@
 package com.danielvargas.InventarioWeb.controller;
 
-import com.danielvargas.InventarioWeb.model.Productos;
-import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.model.storage.Historial;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 import com.danielvargas.InventarioWeb.operation.ProcesadorDeStrings;
+import com.danielvargas.InventarioWeb.service.HistorialService;
 import com.danielvargas.InventarioWeb.service.ProductosService;
 import com.danielvargas.InventarioWeb.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ import java.util.List;
 //TODO: Evitar field injection creando un costructor
 @Controller
 public class ProductosController {
+
+    @Autowired
+    HistorialService historialService;
 
     @Autowired
     ProductosService productosService;
@@ -64,20 +69,30 @@ public class ProductosController {
             redirectAttributes.addFlashAttribute("proveedor", proveedor);
             return "redirect:/agregar";
         }
-
+        int provId;
         if (proveedorService.obtenerPorNombre(proveedor.getNombreP()) == null) {
-            proveedorService.agregarProveedor(proveedor);
-            productos.setProveedor(proveedor);//Esto no lo debe hacer el controller
+            provId = proveedorService.agregarProveedor(proveedor);
         } else {
-            Proveedor pro = proveedorService.actualizarProveedor(proveedor);
-            productos.setProveedor(pro);//Esto no lo debe hacer el controller
+            provId = proveedorService.actualizarProveedor(proveedor);
+        }
+        productos.setProveedor(proveedorService.obtenerPorCodigo(provId));
+
+        int prodId;
+        if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
+            prodId = productosService.agregarProducto(productos);
+        } else {
+            prodId = productosService.actualizarProducto(productos, true);
         }
 
-        if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
-            productosService.agregarProducto(productos);
-        } else {
-            productosService.actualizarProducto(productos, true);
-        }
+        Historial historial = new Historial(
+                prodId,
+                provId,
+                productos.getNombre(),
+                proveedor.getNombreP(),
+                productos.getPrecio(),
+                productos.getPrecioEntrada()
+        );
+        historialService.crear(historial);
 
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente agregado", FlashMessage.Status.SUCCESS));
         return "redirect:/agregar";

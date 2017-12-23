@@ -1,8 +1,8 @@
 package com.danielvargas.InventarioWeb.controller;
 
-import com.danielvargas.InventarioWeb.model.Productos;
-import com.danielvargas.InventarioWeb.model.ProductosBuilder;
-import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.ProductosBuilder;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 import com.danielvargas.InventarioWeb.service.ProductosService;
 import com.danielvargas.InventarioWeb.service.ProveedorService;
 import org.junit.Before;

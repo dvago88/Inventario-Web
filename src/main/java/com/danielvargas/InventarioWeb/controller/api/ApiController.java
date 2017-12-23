@@ -1,6 +1,6 @@
 package com.danielvargas.InventarioWeb.controller.api;
 
-import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
 import com.danielvargas.InventarioWeb.service.ProductosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

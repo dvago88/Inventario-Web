@@ -1,6 +1,6 @@
 package com.danielvargas.InventarioWeb.dao;
 
-import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +36,13 @@ public class ProductosDaoImpl implements ProductosDao {
     }
 
     @Override
-    public void agregarProducto(Productos productos) {
+    public int agregarProducto(Productos productos) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.saveOrUpdate(productos);
         session.getTransaction().commit();
         session.close();
+        return productos.getId();
     }
 
     @Override
@@ -54,12 +55,13 @@ public class ProductosDaoImpl implements ProductosDao {
     }
 
     @Override
-    public void actualizarProducto(Productos productos) {
+    public int actualizarProducto(Productos productos) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(productos);
         session.getTransaction().commit();
         session.close();
+        return productos.getId();
     }
 }
 

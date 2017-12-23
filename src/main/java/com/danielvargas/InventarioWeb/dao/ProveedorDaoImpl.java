@@ -1,9 +1,8 @@
 package com.danielvargas.InventarioWeb.dao;
 
-import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,12 +33,13 @@ public class ProveedorDaoImpl implements ProveedorDao {
     }
 
     @Override
-    public void agregarProveedor(Proveedor proveedor) {
+    public int agregarProveedor(Proveedor proveedor) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.saveOrUpdate(proveedor);
         session.getTransaction().commit();
         session.close();
+        return proveedor.getId();
     }
 
     @Override
@@ -52,12 +52,13 @@ public class ProveedorDaoImpl implements ProveedorDao {
     }
 
     @Override
-    public void actualizarProveedor(Proveedor proveedor) {
+    public int actualizarProveedor(Proveedor proveedor) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(proveedor);
         session.getTransaction().commit();
         session.close();
+        return proveedor.getId();
     }
 }
 

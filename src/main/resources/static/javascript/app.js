@@ -42,7 +42,12 @@ $("#agregarUno").click(function () {
 //TODO: Crear grafíca interactiva en la página principal
 //Usar un click event y tomar los datos pasados por java de la base de datos para forma la grafica en tiempo real
 
-
+let xhr = new XMLHttpRequest();
+xhr.onreadystatechange=function () {
+    if(xhr.readyState===4){
+        
+    }
+}
 
 
 

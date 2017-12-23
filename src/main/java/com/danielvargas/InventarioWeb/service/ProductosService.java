@@ -1,8 +1,7 @@
 package com.danielvargas.InventarioWeb.service;
 
-import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,11 +14,11 @@ public interface ProductosService {
 
     Productos obtenerPorNombre(String nombre);
 
-    void agregarProducto(Productos productos);
+    int agregarProducto(Productos productos);
 
     void eliminarProducto(Productos productos);
 
-    void actualizarProducto(Productos productos, boolean revisar);
+    int actualizarProducto(Productos productos, boolean revisar);
 
     void numeroDeVentas(Productos productos, int cantidad);
 

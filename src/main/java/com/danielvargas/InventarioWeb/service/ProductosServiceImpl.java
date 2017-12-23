@@ -1,7 +1,7 @@
 package com.danielvargas.InventarioWeb.service;
 
 import com.danielvargas.InventarioWeb.dao.ProductosDao;
-import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     //Si el producto esta lo devuelve, sino devuelve null
-    //TODO: Mejorar la eficiencia de este metodo
+    //TODO: Mejorar la eficiencia de este metodo (si se puede)
     @Override
     public Productos obtenerPorNombre(String nombre) {
         List<Productos> productos = todosLosProductos();
@@ -47,8 +47,8 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public void agregarProducto(Productos productos) {
-        productosDao.agregarProducto(productos);
+    public int agregarProducto(Productos productos) {
+        return productosDao.agregarProducto(productos);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public void actualizarProducto(Productos productos, boolean revisar) {
+    public int actualizarProducto(Productos productos, boolean revisar) {
         if (revisar) {
             Productos prod = obtenerPorNombre(productos.getNombre());
             prod.setCantidad(prod.getCantidad() + productos.getCantidad());
@@ -71,9 +71,12 @@ public class ProductosServiceImpl implements ProductosService {
             if (productos.getPrecioEntrada() != prod.getPrecioEntrada()) {
                 prod.setPrecioEntrada(productos.getPrecioEntrada());
             }
-            productosDao.actualizarProducto(prod);
+            if (prod.getProveedor().getId() != productos.getProveedor().getId()) {
+                prod.setProveedor(productos.getProveedor());
+            }
+            return productosDao.actualizarProducto(prod);
         } else {
-            productosDao.actualizarProducto(productos);
+            return productosDao.actualizarProducto(productos);
         }
     }
 

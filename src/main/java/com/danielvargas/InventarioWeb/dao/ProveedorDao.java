@@ -1,6 +1,6 @@
 package com.danielvargas.InventarioWeb.dao;
 
-import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ public interface ProveedorDao {
 
     Proveedor obtenerPorCodigo(int id);
 
-    void agregarProveedor(Proveedor proveedor);
+    int agregarProveedor(Proveedor proveedor);
 
     void eliminarProveedor(Proveedor proveedor);
 
-    void actualizarProveedor(Proveedor proveedor);
+    int actualizarProveedor(Proveedor proveedor);
 
 }

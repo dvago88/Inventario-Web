@@ -1,9 +1,9 @@
 package com.danielvargas.InventarioWeb.dao;
 
 import com.danielvargas.InventarioWeb.InventarioWebWebApplication;
-import com.danielvargas.InventarioWeb.model.Productos;
-import com.danielvargas.InventarioWeb.model.ProductosBuilder;
-import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.ProductosBuilder;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Before;

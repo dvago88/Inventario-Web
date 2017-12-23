@@ -1,8 +1,8 @@
 package com.danielvargas.InventarioWeb.operation;
 
 
-import com.danielvargas.InventarioWeb.model.Productos;
-import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 
 import java.util.Iterator;
 import java.util.LinkedList;

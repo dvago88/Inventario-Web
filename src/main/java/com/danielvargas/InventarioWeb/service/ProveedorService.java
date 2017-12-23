@@ -1,7 +1,7 @@
 package com.danielvargas.InventarioWeb.service;
 
-import com.danielvargas.InventarioWeb.model.Productos;
-import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ public interface ProveedorService {
 
     Proveedor obtenerPorCodigo(int id);
 
-    void agregarProveedor(Proveedor proveedor);
+    int agregarProveedor(Proveedor proveedor);
 
     void eliminarProveedor(Proveedor proveedor);
 
-    Proveedor actualizarProveedor(Proveedor proveedor);
+    int actualizarProveedor(Proveedor proveedor);
 
     List<Productos> todoslosProductos(Proveedor proveedor);
 }

@@ -1,9 +1,8 @@
 package com.danielvargas.InventarioWeb.service;
 
 import com.danielvargas.InventarioWeb.dao.ProveedorDao;
-import com.danielvargas.InventarioWeb.dao.ProveedorDaoImpl;
-import com.danielvargas.InventarioWeb.model.Productos;
-import com.danielvargas.InventarioWeb.model.Proveedor;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +44,8 @@ public class ProveedorServiceImpl implements ProveedorService {
     }
 
     @Override
-    public void agregarProveedor(Proveedor proveedor) {
-        proveedorDao.agregarProveedor(proveedor);
+    public int agregarProveedor(Proveedor proveedor) {
+        return proveedorDao.agregarProveedor(proveedor);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class ProveedorServiceImpl implements ProveedorService {
 
     //Revisa si los campos del proveedor están vacios y de ser así los deja como estaban antes.
     @Override
-    public Proveedor actualizarProveedor(Proveedor proveedor) {
+    public int actualizarProveedor(Proveedor proveedor) {
         Proveedor pro = obtenerPorNombre(proveedor.getNombreP());
         if (!proveedor.getDireccion().equals("")) {
             pro.setDireccion(proveedor.getDireccion());
@@ -69,7 +68,8 @@ public class ProveedorServiceImpl implements ProveedorService {
         }
         proveedorDao.actualizarProveedor(pro);
 
-        return pro;
+//        return pro;
+        return pro.getId();
     }
 
     @Override

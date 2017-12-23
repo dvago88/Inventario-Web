@@ -1,7 +1,7 @@
 package com.danielvargas.InventarioWeb.Service;
 
 import com.danielvargas.InventarioWeb.dao.ProductosDao;
-import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
 import com.danielvargas.InventarioWeb.service.ProductosService;
 import com.danielvargas.InventarioWeb.service.ProductosServiceImpl;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.danielvargas.InventarioWeb.dao;
 
-import com.danielvargas.InventarioWeb.model.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Productos;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ public interface ProductosDao {
 
     Productos obtenerPorCodigo(int id);
 
-    void agregarProducto(Productos productos);
+    int agregarProducto(Productos productos);
 
     void eliminarProducto(Productos productos);
 
-    void actualizarProducto(Productos productos);
+    int actualizarProducto(Productos productos);
 }
