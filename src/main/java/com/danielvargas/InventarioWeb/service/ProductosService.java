@@ -24,9 +24,11 @@ public interface ProductosService {
 
     boolean cantidadProducto(Productos productos, String masOMenos, int can);
 
-    int vendidosPorDia(Productos productos);
+    int vendidosPorXDias(Productos productos, int dias);
 
-    int vendidosPorSemana(Productos productos);
+    /*int vendidosPorDia(Productos productos);
+
+    int vendidosPorSemana(Productos productos);*/
 
     int vendidoPorMes(Productos productos);
 

@@ -9,11 +9,25 @@ public class Historial extends BaseEntity implements Comparable<Historial> {
 
     private double precio;
     private double precioEntrada;
+    private int stock;
+    private int cantidadVendido;
+    private int cantidadComprado;
 
-    public Historial(int idProducto, int idProveedor, String nombreProducto, String nombreProveedor, double precio, double precioEntrada) {
+    public Historial(int idProducto,
+                     int idProveedor,
+                     String nombreProducto,
+                     String nombreProveedor,
+                     double precio,
+                     double precioEntrada,
+                     int stock,
+                     int cantidadVendido,
+                     int cantidadComprado) {
         super(idProducto, idProveedor, nombreProducto, nombreProveedor);
         this.precio = precio;
         this.precioEntrada = precioEntrada;
+        this.stock = stock;
+        this.cantidadVendido = cantidadVendido;
+        this.cantidadComprado = cantidadComprado;
     }
 
     public Historial() {
@@ -34,6 +48,30 @@ public class Historial extends BaseEntity implements Comparable<Historial> {
 
     public void setPrecioEntrada(double precioEntrada) {
         this.precioEntrada = precioEntrada;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getCantidadVendido() {
+        return cantidadVendido;
+    }
+
+    public void setCantidadVendido(int cantidadVendido) {
+        this.cantidadVendido = cantidadVendido;
+    }
+
+    public int getCantidadComprado() {
+        return cantidadComprado;
+    }
+
+    public void setCantidadComprado(int cantidadComprado) {
+        this.cantidadComprado = cantidadComprado;
     }
 
     @Override

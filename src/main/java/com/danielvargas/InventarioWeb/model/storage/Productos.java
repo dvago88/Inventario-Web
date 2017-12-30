@@ -62,9 +62,10 @@ public class Productos {
     //    TODO: Hacer algo para:
 //              *Almacenar más de 255 días
 //              *Evitar que se puedan poner más de 127 items en un día
-    private byte[] diarias = new byte[255];
+//    private byte[] diarias = new byte[255];
     private int diaNumero = 1;
     private int cantidadVendido;
+    private int cantidadComprado;
 
 
     public Productos() {
@@ -80,13 +81,13 @@ public class Productos {
         this.proveedor = builder.getProveedor();
     }
 
-    public void actualizarDiarias(int dia, int cantidad) {
+    /*public void actualizarDiarias(int dia, int cantidad) {
         diarias[(byte) dia] = (byte) cantidad;
     }
 
-    public int obtenerDiarias(int dia){
+    public int obtenerDiarias(int dia) {
         return diarias[dia];
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -152,13 +153,13 @@ public class Productos {
         this.dateUploaded = dateUploaded;
     }
 
-    public byte[] getDiarias() {
+  /*  public byte[] getDiarias() {
         return diarias;
     }
 
     public void setDiarias(byte[] diarias) {
         this.diarias = diarias;
-    }
+    }*/
 
     public int getDiaNumero() {
         return diaNumero;
@@ -174,5 +175,13 @@ public class Productos {
 
     public void setCantidadVendido(int cantidadVendido) {
         this.cantidadVendido = cantidadVendido;
+    }
+
+    public int getCantidadComprado() {
+        return cantidadComprado;
+    }
+
+    public void setCantidadComprado(int cantidadComprado) {
+        this.cantidadComprado = cantidadComprado;
     }
 }

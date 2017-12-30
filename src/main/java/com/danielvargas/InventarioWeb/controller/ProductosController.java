@@ -77,6 +77,8 @@ public class ProductosController {
         }
         productos.setProveedor(proveedorService.obtenerPorCodigo(provId));
 
+//        TODO: refactorizar: llamar actualizar y en actualizar tener un try-catch rodeando "obetnerPorNombre" si es null
+//        llamar agregar
         int prodId;
         if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
             prodId = productosService.agregarProducto(productos);
@@ -84,15 +86,18 @@ public class ProductosController {
             prodId = productosService.actualizarProducto(productos, true);
         }
 
-        Historial historial = new Historial(
+       /* Historial historial = new Historial(
                 prodId,
                 provId,
                 productos.getNombre(),
                 proveedor.getNombreP(),
                 productos.getPrecio(),
-                productos.getPrecioEntrada()
+                productos.getPrecioEntrada(),
+                productos.getCantidad(),
+                productos.getCantidadVendido(),
+                productos.getCantidadComprado()
         );
-        historialService.crear(historial);
+        historialService.crear(historial);*/
 
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente agregado", FlashMessage.Status.SUCCESS));
         return "redirect:/agregar";

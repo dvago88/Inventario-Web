@@ -1,12 +1,16 @@
 package com.danielvargas.InventarioWeb.service;
 
 import com.danielvargas.InventarioWeb.dao.ProductosDao;
+import com.danielvargas.InventarioWeb.model.storage.Historial;
 import com.danielvargas.InventarioWeb.model.storage.Productos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.Year;
 import java.time.temporal.ChronoUnit;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,6 +21,9 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Autowired
     private ProductosDao productosDao;
+
+    @Autowired
+    private HistorialService historialService;
 
     @Override
     public List<Productos> todosLosProductos() {
@@ -48,7 +55,22 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public int agregarProducto(Productos productos) {
-        return productosDao.agregarProducto(productos);
+        productos.setCantidadComprado(productos.getCantidad());
+        int prodId = productosDao.agregarProducto(productos);
+        Historial historial = new Historial(
+                prodId,
+                productos.getProveedor().getId(),
+                productos.getNombre(),
+                productos.getProveedor().getNombreP(),
+                productos.getPrecio(),
+                productos.getPrecioEntrada(),
+                productos.getCantidad(),
+                productos.getCantidadVendido(),
+                productos.getCantidadComprado()
+        );
+        historialService.crear(historial);
+
+        return prodId;
     }
 
     @Override
@@ -58,9 +80,13 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public int actualizarProducto(Productos productos, boolean revisar) {
+        int prodId;
         if (revisar) {
             Productos prod = obtenerPorNombre(productos.getNombre());
             prod.setCantidad(prod.getCantidad() + productos.getCantidad());
+            int comprados = prod.getCantidadComprado() + productos.getCantidad();
+            prod.setCantidadComprado(comprados);
+            productos.setCantidadComprado(comprados);
 
             if (!productos.getDescripcion().equals("")) {
                 prod.setDescripcion(productos.getDescripcion());
@@ -74,10 +100,24 @@ public class ProductosServiceImpl implements ProductosService {
             if (prod.getProveedor().getId() != productos.getProveedor().getId()) {
                 prod.setProveedor(productos.getProveedor());
             }
-            return productosDao.actualizarProducto(prod);
+            prodId = productosDao.actualizarProducto(prod);
         } else {
-            return productosDao.actualizarProducto(productos);
+            prodId = productosDao.actualizarProducto(productos);
         }
+        Historial historial = new Historial(
+                prodId,
+                productos.getProveedor().getId(),
+                productos.getNombre(),
+                productos.getProveedor().getNombreP(),
+                productos.getPrecio(),
+                productos.getPrecioEntrada(),
+                productos.getCantidad(),
+                productos.getCantidadVendido(),
+                productos.getCantidadComprado()
+        );
+        historialService.crear(historial);
+
+        return prodId;
     }
 
     @Override
@@ -87,6 +127,9 @@ public class ProductosServiceImpl implements ProductosService {
         }
         if (productos.getCantidad() != prod.getCantidad()) {
             prod.setCantidad(productos.getCantidad());
+            int cantComprado = prod.getCantidadComprado();
+            cantComprado -= prod.getCantidad() - productos.getCantidad();
+            prod.setCantidadComprado(cantComprado);
         }
         if (productos.getPrecio() != prod.getPrecio()) {
             prod.setPrecio(productos.getPrecio());
@@ -107,17 +150,9 @@ public class ProductosServiceImpl implements ProductosService {
     //TODO: Agregar exception para cuando el numero es mayor a 32000
     @Override
     public void numeroDeVentas(Productos productos, int cantidad) {
-        int diaActual = getDayFromDate(productos);
         //Esto es para que no se actualicen las ventas negativamente, no tiene sentido "desvender".
         if (cantidad < 0) {
             return;
-        }
-        if (productos.obtenerDiarias(diaActual) == 0) {
-            productos.actualizarDiarias(diaActual, cantidad);
-        } else {
-            int can = productos.obtenerDiarias(diaActual);
-            can += cantidad;
-            productos.actualizarDiarias(diaActual, can);
         }
         productos.setCantidadVendido(productos.getCantidadVendido() + cantidad);
     }
@@ -138,55 +173,106 @@ public class ProductosServiceImpl implements ProductosService {
     }
 
     @Override
-    public int vendidosPorDia(Productos productos) {
-        int dia = getDayFromDate(productos);
-        int d;
-        try {
-            d = productos.obtenerDiarias(dia);
-            return d;
-        } catch (NullPointerException ex) {
-            return 0;
+    public int vendidosPorXDias(Productos productos, int dias) {
+        int fechaEntera = getFechaEntera(LocalDateTime.now().minusDays(dias));
+        int contador = 0;
+        List<Historial> historial = historialService.obtenerProductosPorId(productos.getId());
+        for (int i = 0; i < historial.size(); i++) {
+            Historial his = historial.get(i);
+            if (his.getFechaEntera() >= fechaEntera) {
+                if (i + 1 < historial.size()) {
+//                    Acumula la diferencia de cada día
+                    contador += his.getCantidadVendido() - historial.get(i + 1).getCantidadVendido();
+                } else {
+                    contador += his.getCantidadVendido();
+                }
+            } else {
+                return contador;
+            }
         }
+        return contador;
     }
+
+/*    @Override
+    public int vendidosPorDia(Productos productos) {
+        int fechaEntera = getFechaEntera(LocalDateTime.now());
+        List<Historial> historial = historialService.obtenerProductosPorId(productos.getId());
+        Historial primero = historial.get(0);
+        if (primero.getFechaEntera() == fechaEntera) {
+//            la cantidad del día es el último menos el penúltimo (pues siempre se guarda el total)
+            return primero.getCantidadVendido() - historial.get(1).getCantidadVendido();
+        }
+        return 0;
+    }
+
 
     @Override
     public int vendidosPorSemana(Productos productos) {
-        int diaActual = getDayFromDate(productos);
-        return getCantidadArray(productos, diaActual, 7);
-    }
+        int fechaEntera = getFechaEntera(LocalDateTime.now().minusDays(7));
+        int contador = 0;
+        List<Historial> historial = historialService.obtenerProductosPorId(productos.getId());
+        for (int i = 0; i < historial.size(); i++) {
+            Historial his = historial.get(i);
+            if (his.getFechaEntera() > fechaEntera) {
+                if (i + 1 < historial.size()) {
+//                    Acumula la diferencia de cada día
+                    contador += his.getCantidadVendido() - historial.get(i + 1).getCantidadVendido();
+                } else {
+                    contador += his.getCantidadVendido();
+                }
+            } else {
+                return contador;
+            }
+        }
+        return 0;
+    }*/
 
     @Override
     public int vendidoPorMes(Productos productos) {
-        int diaActual = getDayFromDate(productos);
-        return getCantidadArray(productos, diaActual, 30);
+        LocalDateTime loc = LocalDateTime.now();
+        int contador = 0;
+        Month mes = loc.getMonth();
+        List<Historial> historial = historialService.obtenerProductosPorId(productos.getId());
+        for (int i = 0; i < historial.size(); i++) { //Esto es mejor hacer con un lamda
+            Historial his = historial.get(i);
+            if (his.getLocalDateTime().getMonth().equals(mes)) {
+                if (i + 1 < historial.size()) {
+                    contador += his.getCantidadVendido() - historial.get(i + 1).getCantidadVendido();
+                } else {
+                    contador += his.getCantidadVendido();
+                }
+            } else {
+                return contador;
+            }
+        }
+        return contador;
     }
 
     @Override
     public int vendidoPorAno(Productos productos) {
-        int diaActual = getDayFromDate(productos);
-        return getCantidadArray(productos, diaActual, 365);
-    }
-
-    private int getCantidadHashMap(Productos productos, int diaActual, int numeroDias) {
+        LocalDateTime loc = LocalDateTime.now();
         int contador = 0;
-        for (int i = diaActual; i > diaActual - numeroDias; i--) {
-            try {
-                contador += productos.obtenerDiarias(i);
-            } catch (NullPointerException ex) {
-
-            }
-        }
-        return contador;
-    }
-
-    private int getCantidadArray(Productos productos, int diaActual, int numeroDias) {
-        int contador = 0;
-        for (int i = diaActual; i > diaActual - numeroDias; i--) {
-            if (i < 0) {
+        int ano = loc.getYear();
+        List<Historial> historial = historialService.obtenerProductosPorId(productos.getId());
+        for (int i = 0; i < historial.size(); i++) { //Esto es mejor hacer con un lamda
+            Historial his = historial.get(i);
+            if (his.getLocalDateTime().getYear() == ano) {
+                if (i + 1 < historial.size()) {
+                    contador += his.getCantidadVendido() - historial.get(i + 1).getCantidadVendido();
+                } else {
+                    contador += his.getCantidadVendido();
+                }
+            } else {
                 return contador;
             }
-            contador += productos.obtenerDiarias(i);
         }
         return contador;
+    }
+
+    //    TODO: Refactorizar, este metodo se repite en el constructor del baseEntity
+    private int getFechaEntera(LocalDateTime localDateTime) {
+        return localDateTime.getYear() * 10000
+                + localDateTime.getMonthValue() * 100
+                + localDateTime.getDayOfMonth();
     }
 }

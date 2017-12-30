@@ -27,10 +27,12 @@ public class ProductoController {
     @RequestMapping("/{productosId}")
     public String producto(@PathVariable int productosId, Model model) {
         Productos pro = productosService.obtenerPorCodigo(productosId);
-        int sieteDias = productosService.vendidosPorSemana(pro);
+//        int sieteDias = productosService.vendidosPorSemana(pro);
+        int sieteDias = productosService.vendidosPorXDias(pro,7);
         int treintaDias = productosService.vendidoPorMes(pro);
         int ano = productosService.vendidoPorAno(pro);
-        int dia = productosService.vendidosPorDia(pro);
+//        int dia = productosService.vendidosPorDia(pro);
+        int dia = productosService.vendidosPorXDias(pro,1);// revisar si es 0 en vez de 1
         model.addAttribute("producto", pro);
         model.addAttribute("semana", sieteDias);
         model.addAttribute("mes", treintaDias);
