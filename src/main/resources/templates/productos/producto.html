@@ -29,13 +29,20 @@
             <ul class="list-group">
                 <li class="list-group-item" th:text="'Vendidos en el último día: ' + ${dia}"></li>
                 <li class="list-group-item" th:text="'Vendidos en la última semana: ' + ${semana}"></li>
-                <li class="list-group-item" th:text="'Vendidos en los últimos 30 días: ' + ${mes}"></li>
-                <li class="list-group-item" th:text="'Vendidos en el último año: ' + ${ano}"></li>
+                <li class="list-group-item" th:text="'Vendidos este mes: ' + ${mes}"></li>
+                <li class="list-group-item" th:text="'Vendidos este año: ' + ${ano}"></li>
             </ul>
             <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target=".multi-collapse"
                     aria-expanded="false" aria-controls="collapseExample">
                 Editar Producto
             </button>
+        </div>
+        <div class="container">
+            <form action="#" method="post">
+                <label for="startDate">Desde</label><input id="startDate" width="276"/>
+                <label for="endDate">Hasta</label><input id="endDate" width="276"/>
+                <button class="btn btn-primary mt-3">Ir</button>
+            </form>
         </div>
     </div>
 </div>

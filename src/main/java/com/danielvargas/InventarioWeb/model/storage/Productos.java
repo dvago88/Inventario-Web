@@ -59,10 +59,6 @@ public class Productos {
 
 
     private LocalDateTime dateUploaded = LocalDateTime.now();
-    //    TODO: Hacer algo para:
-//              *Almacenar más de 255 días
-//              *Evitar que se puedan poner más de 127 items en un día
-//    private byte[] diarias = new byte[255];
     private int diaNumero = 1;
     private int cantidadVendido;
     private int cantidadComprado;
@@ -80,14 +76,6 @@ public class Productos {
         this.descripcion = builder.getDescripcion();
         this.proveedor = builder.getProveedor();
     }
-
-    /*public void actualizarDiarias(int dia, int cantidad) {
-        diarias[(byte) dia] = (byte) cantidad;
-    }
-
-    public int obtenerDiarias(int dia) {
-        return diarias[dia];
-    }*/
 
     public int getId() {
         return id;
@@ -152,14 +140,6 @@ public class Productos {
     public void setDateUploaded(LocalDateTime dateUploaded) {
         this.dateUploaded = dateUploaded;
     }
-
-  /*  public byte[] getDiarias() {
-        return diarias;
-    }
-
-    public void setDiarias(byte[] diarias) {
-        this.diarias = diarias;
-    }*/
 
     public int getDiaNumero() {
         return diaNumero;

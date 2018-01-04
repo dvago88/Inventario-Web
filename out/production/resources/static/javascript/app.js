@@ -26,28 +26,48 @@ $(".ceros").val("");
 
 //Hace que la primera letra del proveedor y el producto este capitalizada
 $("#agregarUno").click(function () {
-    nombreProducto = $("input[placeholder$='producto']").val();
-    nombreProveedor = $("input[placeholder^='Proveedor']").val();
+    let $nomProd = $("input[placeholder$='producto']");
+    let $nomProv = $("input[placeholder^='Proveedor']");
+    nombreProducto = $nomProd.val();
+    nombreProveedor = $nomProv.val();
     if (nombreProducto.length > 0) {
         nombreProducto = capitalizeFirstLetter(nombreProducto);
-        $("input[placeholder$='producto']").val(nombreProducto);
+        $nomProd.val(nombreProducto);
     }
     if (nombreProveedor.length > 0) {
         nombreProveedor = capitalizeFirstLetter(nombreProveedor);
-        $("input[placeholder^='Proveedor']").val(nombreProveedor);
+        $nomProv.val(nombreProveedor);
+    }
+});
+
+// let todayDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+$('#startDate').datepicker({
+    uiLibrary: 'bootstrap4',
+    iconsLibrary: 'fontawesome',
+    // minDate: todayDate,
+    maxDate: function () {
+        return $('#endDate').val();
+    }
+});
+$('#endDate').datepicker({
+    uiLibrary: 'bootstrap4',
+    iconsLibrary: 'fontawesome',
+    minDate: function () {
+        return $('#startDate').val();
     }
 });
 
 
-//TODO: Crear grafíca interactiva en la página principal
+
+
 //Usar un click event y tomar los datos pasados por java de la base de datos para forma la grafica en tiempo real
 
-let xhr = new XMLHttpRequest();
-xhr.onreadystatechange=function () {
-    if(xhr.readyState===4){
-        
+/*let xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+
     }
-}
+};*/
 
 
 
