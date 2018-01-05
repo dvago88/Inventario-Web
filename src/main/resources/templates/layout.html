@@ -63,6 +63,8 @@
         </div>
     </nav>
 </div>
+
+
 <div th:fragment="flash" th:if="${flash != null}" class="container">
     <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}"
          class="alert alert-success flash" role="alert">

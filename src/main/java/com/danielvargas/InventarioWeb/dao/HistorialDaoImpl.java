@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -43,5 +44,14 @@ public class HistorialDaoImpl implements HistorialDao {
         SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Historial.class);
         return query.list();
 //        return query.getFirstResult();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Historial> obtenerProductosPorFecha(int fechaEntera) {
+//        String slq = "SELECT * FROM historial WHERE fechaEntera = " + fechaEntera + ";";
+        String slq = "SELECT * FROM historial WHERE fechaEntera = '" + fechaEntera + "'";
+        SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(slq).addEntity(Historial.class);
+        return query.list();
     }
 }

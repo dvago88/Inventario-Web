@@ -9,9 +9,9 @@
 <div th:replace="layout :: flash"></div>
 <div class="container">
     <div>
-        <!--<label for="startDate">Fecha</label>-->
-        <form action="#" method="post" class="form-inline">
-            <input id="startDate" width="276"/>
+        <!--TODO: como pasar la fecha como /historico{fecha}-->
+        <form th:action="@{/historico}" method="get" class="form-inline">
+            <input id="startDate" width="276" name="startDate"/>
             <button type="submit" class="btn btn-outline-success">Ir</button>
         </form>
     </div>

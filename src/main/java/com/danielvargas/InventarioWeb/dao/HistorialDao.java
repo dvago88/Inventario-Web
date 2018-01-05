@@ -3,6 +3,7 @@ package com.danielvargas.InventarioWeb.dao;
 import com.danielvargas.InventarioWeb.model.storage.Historial;
 import com.danielvargas.InventarioWeb.model.storage.Productos;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface HistorialDao {
@@ -13,4 +14,5 @@ public interface HistorialDao {
 
     List<Historial> obtenerProductosPorId(int idProductos);
 
+    List<Historial> obtenerProductosPorFecha(int fechaEntera);
 }

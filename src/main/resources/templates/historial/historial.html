@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head('Historico')"></head>
+<body>
+<div th:replace="layout::mainbar"></div>
+<div class="container">
+    <h1 th:text="'Historico ' + ${fecha}">Lista de productos</h1>
+</div>
+<div th:replace="layout :: flash"></div>
+<div class="container">
+    <div>
+        <form th:action="@{/historico}" method="get" class="form-inline">
+            <input id="startDate" width="276" name="startDate"/>
+            <button type="submit" class="btn btn-outline-success">Ir</button>
+        </form>
+    </div>
+
+    <table class="table table-sm table-hover table-responsive" id="mydata">
+        <thead class="thead-inverse">
+        <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Precio Salida</th>
+            <th>Precio Entrada</th>
+            <th>Proveedor</th>
+            <th>En Stock</th>
+            <th>Vendidos</th>
+            <th>Comprados</th>
+        </tr>
+        </thead>
+        <tfoot class="thead-default">
+        <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Precio Salida</th>
+            <th>Precio Entrada</th>
+            <th>Proveedor</th>
+            <th>En Stock</th>
+            <th>Vendidos</th>
+            <th>Comprados</th>
+        </tr>
+        </tfoot>
+        <tbody>
+        <tr th:each="pro:${productos}">
+            <td th:text="${pro.id}">id</td>
+            <td>
+                <a id="producto" th:text="${pro.nombre}" th:href="@{|/${pro.id}|}">nombre</a>
+            </td>
+            <td class="moneda" th:text="${pro.precio}">precioE</td>
+            <td class="moneda" th:text="${pro.precioEntrada}">precioE</td>
+            <td>
+                <a id="proveedor" th:text="${pro.proveedor}" th:href="@{|/proveedores/${pro.proveedor.id}|}"></a>
+            </td>
+            <td th:text="${pro.cantidad}">prueba</td>
+            <td th:text="${pro.cantidadVendido}"></td>
+            <td th:text="${pro.cantidadComprado}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="layout::footer"></footer>
+<div th:replace="layout::scripts"></div>
+<script>
+    $('#mydata').dataTable();
+</script>
+</body>
+</html>
