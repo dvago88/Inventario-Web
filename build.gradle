@@ -39,9 +39,7 @@ dependencies {
 //    compile 'org.springframework.data:spring-data-jpa:1.9.2.RELEASE' //Para utilizar el crudrepository
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE'
-    compile 'com.h2database:h2:1.4.195'
-
-//    runtime 'com.h2database:h2'
+    compile 'org.postgresql:postgresql:42.1.4'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.springframework.security:spring-security-test'
