@@ -1,7 +1,7 @@
 package com.danielvargas.InventarioWeb.service;
 
 import com.danielvargas.InventarioWeb.dao.UserDao;
-import com.danielvargas.InventarioWeb.model.autentication.User;
+import com.danielvargas.InventarioWeb.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,6 +1,6 @@
 package com.danielvargas.InventarioWeb.controller;
 
-import com.danielvargas.InventarioWeb.model.autentication.User;
+import com.danielvargas.InventarioWeb.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
