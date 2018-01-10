@@ -41,7 +41,7 @@ public class ProductoController {
         return "productos/producto";
     }
 
-    @RequestMapping(value = "/actualizar/{productosId}", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/actualizar/{productosId}", method = RequestMethod.POST)
     public String agregarUno(@PathVariable int productosId, RedirectAttributes redirectAttributes, @RequestParam(value = "action") String action, @RequestParam("masomenos") String masOMenos) {
         if (masOMenos.length() == 0) {
             masOMenos = "1";
@@ -59,7 +59,7 @@ public class ProductoController {
             productosService.agregarProducto(pro);
         }
         return "redirect:/";
-    }
+    }*/
 
     @RequestMapping(value = "/editar/{productosId}", method = RequestMethod.POST)
     public String editarProducto(@PathVariable int productosId, @Valid Productos productos, BindingResult result, RedirectAttributes redirectAttributes) {

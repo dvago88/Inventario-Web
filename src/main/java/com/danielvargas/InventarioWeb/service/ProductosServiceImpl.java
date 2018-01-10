@@ -193,39 +193,6 @@ public class ProductosServiceImpl implements ProductosService {
         return contador;
     }
 
-/*    @Override
-    public int vendidosPorDia(Productos productos) {
-        int fechaEntera = getFechaEntera(LocalDateTime.now());
-        List<Historial> historial = historialService.obtenerProductosPorId(productos.getId());
-        Historial primero = historial.get(0);
-        if (primero.getFechaEntera() == fechaEntera) {
-//            la cantidad del día es el último menos el penúltimo (pues siempre se guarda el total)
-            return primero.getCantidadVendido() - historial.get(1).getCantidadVendido();
-        }
-        return 0;
-    }
-
-
-    @Override
-    public int vendidosPorSemana(Productos productos) {
-        int fechaEntera = getFechaEntera(LocalDateTime.now().minusDays(7));
-        int contador = 0;
-        List<Historial> historial = historialService.obtenerProductosPorId(productos.getId());
-        for (int i = 0; i < historial.size(); i++) {
-            Historial his = historial.get(i);
-            if (his.getFechaEntera() > fechaEntera) {
-                if (i + 1 < historial.size()) {
-//                    Acumula la diferencia de cada día
-                    contador += his.getCantidadVendido() - historial.get(i + 1).getCantidadVendido();
-                } else {
-                    contador += his.getCantidadVendido();
-                }
-            } else {
-                return contador;
-            }
-        }
-        return 0;
-    }*/
 
     @Override
     public int vendidoPorMes(Productos productos) {
