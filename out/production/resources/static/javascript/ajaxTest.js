@@ -68,6 +68,13 @@ function editarProveedor(elem) {
     console.log(url);
     let headers = {};
     headers[header] = token;
+    /*let data = {
+        // "id":$("#id"),
+        "nombre": "\"" + $("#nombre").val() + "\"",
+        "telefono": "\"" + $("#telefono").val() + "\"",
+        "direccion": "\"" + $("#direccion").val() + "\"",
+        "descripcion": "\"" + $("#descripcion").val() + "\""
+    };*/
     let data = {
         // "id":$("#id"),
         nombre: $("#nombre").val(),
