@@ -1,6 +1,7 @@
 package com.danielvargas.InventarioWeb.service;
 
 import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 
 import java.util.List;
 
@@ -36,4 +37,5 @@ public interface ProductosService {
 
     void revisador(Productos productos, Productos prod);
 
+    List<Productos> obtenerPorProveedor(int provId);
 }

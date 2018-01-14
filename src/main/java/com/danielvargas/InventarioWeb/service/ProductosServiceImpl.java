@@ -3,6 +3,7 @@ package com.danielvargas.InventarioWeb.service;
 import com.danielvargas.InventarioWeb.dao.ProductosDao;
 import com.danielvargas.InventarioWeb.model.storage.Historial;
 import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -241,5 +242,14 @@ public class ProductosServiceImpl implements ProductosService {
         return localDateTime.getYear() * 10000
                 + localDateTime.getMonthValue() * 100
                 + localDateTime.getDayOfMonth();
+    }
+
+    @Override
+    public List<Productos> obtenerPorProveedor(int provId) {
+       /* List<Productos> productos = new LinkedList<>();
+        for(Object prod:productosDao.obtenerPorProveedor(provId)){
+            productos.add((Productos) prod);
+        }*/
+        return productosDao.obtenerPorProveedor(provId);
     }
 }

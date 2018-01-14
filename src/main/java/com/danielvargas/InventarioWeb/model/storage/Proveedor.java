@@ -1,6 +1,8 @@
 package com.danielvargas.InventarioWeb.model.storage;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class Proveedor {
     @Column(name = "nombre", unique = true)
     private String nombreP;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "proveedor")
     private List<Productos> productos = new ArrayList<>();
 

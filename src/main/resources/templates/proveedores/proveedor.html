@@ -7,27 +7,29 @@
     <title th:text="${proveedor.nombreP}">Inventario</title>
     <div th:replace="layout::importes"></div>
 </head>
-<body>
+<body class="fondoGris">
 <div th:replace="layout::mainbar"></div>
 <div class="container fondoGris rounded collapse multi-collapse show" id="multiCollapseExample1">
     <div class="text-center">
-        <h1 th:text="${proveedor.nombreP}">p</h1>
+        <h1 id="labelNombre" th:text="${proveedor.nombreP}">p</h1>
+    </div>
+    <div style="display: none;" class="container" id="status">
+        <div class="alert alert-success flash" text="" role="alert"></div>
     </div>
     <div class="row mt-5">
         <div class="col-md-6">
             <ul class="list-group">
-                <li class="list-group-item" th:text="'Dirección: ' + ${proveedor.direccion}">p</li>
-                <li class="list-group-item" th:text="'Télefono: ' + ${proveedor.telefono}">p</li>
+                <li class="list-group-item" id="labelDireccion" th:text="'Dirección: ' + ${proveedor.direccion}">p</li>
+                <li class="list-group-item" id="labelTelefono" th:text="'Télefono: ' + ${proveedor.telefono}">p</li>
 
-                <li class="list-group-item" th:text="'Descripcion: '+ ${proveedor.descripcionP}">p</li>
+                <li class="list-group-item" id="labelDescripcion" th:text="'Descripcion: '+ ${proveedor.descripcionP}">p</li>
             </ul>
         </div>
         <div class="col-md-6">
-            <!--Los productos no estan siendo agregados al proveedor (eso creo)
-            hay que agregarlos a la lista de productos en el controller de los productos y luego volver a probar esto-->
+            <div>Productos:</div>
             <ul th:each="prod:${productos}" class="list-group">
-                <li  class="list-group-item"><a th:text="'Productos: ' + ${prod.nombre}"
-                                               th:href="@{|/productos/${prod.id}|}"></a></li>
+                <li class="list-group-item"><a th:text="${prod.nombre}"
+                                               th:href="@{|/${prod.id}|}"></a></li>
             </ul>
             <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target=".multi-collapse"
                     aria-expanded="false" aria-controls="collapseExample">
@@ -36,8 +38,45 @@
         </div>
     </div>
 </div>
+<div class="container collapse multi-collapse" id="multiCollapseExample2">
+    <form th:action="@{|/editar/proveedor/${proveedor.id}|}" method="post">
+        <input class="test" type="hidden" th:name="${_csrf.headerName}"
+               th:value="${_csrf.token}"/>
+        <div><input type="hidden" id="id" th:field="${proveedor.id}"/></div>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" type="text" th:value="${proveedor.nombreP}"
+                   th:field="${proveedor.nombreP}"/>
+        </div>
+        <div class="form-group">
+            <label for="telefono">Telefono</label>
+            <input class="form-control" id="telefono" type="text" th:value="${proveedor.telefono}"
+                   th:field="${proveedor.telefono}"/>
+        </div>
+        <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input class="form-control" id="direccion" type="text" th:value="${proveedor.direccion}"
+                   th:field="${proveedor.direccion}"/>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input class="form-control" id="descripcion" type="text" th:value="${proveedor.descripcionP}"
+                   th:field="${proveedor.descripcionP}"/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">
+                Cancelar
+            </button>
+            <button class="btn btn-primary" type="button" onclick="editarProveedor(this);return false;"
+                    data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false"
+                    aria-controls="multiCollapseExample1 multiCollapseExample2">Aceptar</button>
+        </div>
+    </form>
+</div>
 
 <footer th:replace="layout::footer"></footer>
 <div th:replace="layout::scripts"></div>
+<script th:src="@{/javascript/ajaxTest.js}"></script>
 </body>
 </html>

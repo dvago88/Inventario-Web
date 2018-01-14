@@ -67,6 +67,7 @@ public class ProductosController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.proveedor", result2);
             redirectAttributes.addFlashAttribute("productos", productos);
             redirectAttributes.addFlashAttribute("proveedor", proveedor);
+            redirectAttributes.addFlashAttribute("flash", new FlashMessage("Algo salió mal, revisa bien los datos e intenta de nuevo", FlashMessage.Status.FAILURE));
             return "redirect:/agregar";
         }
         int provId;
@@ -85,19 +86,6 @@ public class ProductosController {
         } else {
             prodId = productosService.actualizarProducto(productos, true);
         }
-
-       /* Historial historial = new Historial(
-                prodId,
-                provId,
-                productos.getNombre(),
-                proveedor.getNombreP(),
-                productos.getPrecio(),
-                productos.getPrecioEntrada(),
-                productos.getCantidad(),
-                productos.getCantidadVendido(),
-                productos.getCantidadComprado()
-        );
-        historialService.crear(historial);*/
 
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Producto exitosamente agregado", FlashMessage.Status.SUCCESS));
         return "redirect:/agregar";

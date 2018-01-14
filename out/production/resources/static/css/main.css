@@ -72,6 +72,10 @@ div[class="input-group"] > input[name="masomenos"]::-webkit-outer-spin-button {
     padding-top: 1rem;
 }
 
+#status {
+    display: none;
+}
+
 .nombreUsuario {
     text-transform: capitalize;
     margin-right: 2rem;

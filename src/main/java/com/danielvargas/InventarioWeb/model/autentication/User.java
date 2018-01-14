@@ -1,6 +1,5 @@
-package com.danielvargas.InventarioWeb.model;
+package com.danielvargas.InventarioWeb.model.autentication;
 
-import com.danielvargas.InventarioWeb.model.autentication.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

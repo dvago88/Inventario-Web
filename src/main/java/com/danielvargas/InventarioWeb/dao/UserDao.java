@@ -1,6 +1,6 @@
 package com.danielvargas.InventarioWeb.dao;
 
-import com.danielvargas.InventarioWeb.model.User;
+import com.danielvargas.InventarioWeb.model.autentication.User;
 //import com.danielvargas.InventarioWeb.model.autentication.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

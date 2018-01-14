@@ -1,10 +1,14 @@
 package com.danielvargas.InventarioWeb.dao;
 
 import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.model.storage.Proveedor;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +17,7 @@ import java.util.List;
  */
 
 @Repository
+@Transactional
 public class ProductosDaoImpl implements ProductosDao {
 
     @Autowired
@@ -62,6 +67,19 @@ public class ProductosDaoImpl implements ProductosDao {
         session.getTransaction().commit();
         session.close();
         return productos.getId();
+    }
+
+    @Override
+    public List<Productos> obtenerPorProveedor(int provId) {
+        /*Session session = sessionFactory.openSession();
+        Query query = session.createSQLQuery("SELECT * FROM productos WHERE proveedor_id=" + provId + ";");
+//        Query query= session.createQuery("from Productos where proveedor_id = :provId");
+//        query.setParameter("provId", provId);
+        List<Productos> productos =  query.list();
+        session.close();*/
+        String sql = "SELECT * FROM productos WHERE proveedor_id=" + provId + ";";
+        SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Productos.class);
+        return query.list();
     }
 }
 

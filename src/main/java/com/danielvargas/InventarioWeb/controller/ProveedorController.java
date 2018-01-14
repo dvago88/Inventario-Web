@@ -2,6 +2,7 @@ package com.danielvargas.InventarioWeb.controller;
 
 import com.danielvargas.InventarioWeb.model.storage.Productos;
 import com.danielvargas.InventarioWeb.model.storage.Proveedor;
+import com.danielvargas.InventarioWeb.service.ProductosService;
 import com.danielvargas.InventarioWeb.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,13 @@ public class ProveedorController {
     @Autowired
     ProveedorService proveedorService;
 
+    @Autowired
+    ProductosService productosService;
+
     @RequestMapping("/proveedores/{proveedorId}")
     public String proveedor(@PathVariable int proveedorId, Model model) {
         Proveedor prov = proveedorService.obtenerPorCodigo(proveedorId);
-        List<Productos> productos = proveedorService.todoslosProductos(prov);
+        List<Productos> productos = productosService.obtenerPorProveedor(prov.getId());
         model.addAttribute("proveedor", prov);
         model.addAttribute("productos", productos);
         return "proveedores/proveedor";
@@ -32,4 +36,6 @@ public class ProveedorController {
         model.addAttribute("proveedor", todos);
         return "proveedores/proveedores";
     }
+
+//    @RequestMapping("/editar/proveedor/{id}")
 }

@@ -41,7 +41,8 @@ dependencies {
     compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE'
     compile 'org.postgresql:postgresql:42.1.4'
 //    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.3'
-
+    compile("com.fasterxml.jackson.core:jackson-databind")
+    compile 'org.json:json:20171018'
 //    compile 'com.h2database:h2:1.4.195'
 //    runtime 'com.h2database:h2'
 

@@ -40,6 +40,7 @@ $("#agregarUno").click(function () {
     }
 });
 
+//Select dates of the calendar:
 // let todayDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 $('#startDate').datepicker({
     uiLibrary: 'bootstrap4',
@@ -57,17 +58,4 @@ $('#endDate').datepicker({
     }
 });
 
-
-
-
 //Usar un click event y tomar los datos pasados por java de la base de datos para forma la grafica en tiempo real
-
-/*let xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-
-    }
-};*/
-
-
-

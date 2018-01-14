@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout::head('Todos los Productos')">
-
-    <!--<meta name="_csrf" content="${_csrf.token}"/>-->
-    <!-- default header name is X-CSRF-TOKEN -->
-    <!--<meta name="_csrf_header" content="${_csrf.headerName}"/>-->
-
     <meta th:name="_csrf" th:content="${_csrf.token}"/>
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <!-- ... -->
@@ -15,7 +10,9 @@
 <div class="container">
     <h1>Lista de productos</h1>
 </div>
-<div th:replace="layout :: flash"></div>
+<div style="display: none;" class="container" id="status">
+    <div class="alert alert-success flash" text="" role="alert"></div>
+</div>
 <div class="container">
     <div>
         <!--TODO: como pasar la fecha como /historico{fecha}-->
@@ -62,7 +59,7 @@
                 <a id="proveedor" th:text="${pro.proveedor}" th:href="@{|/proveedores/${pro.proveedor.id}|}"></a>
             </td>
             <td name="cantidad" th:text="${pro.cantidad}">prueba</td>
-            <td th:text="${pro.cantidadVendido}"></td>
+            <td name="cantidadVendido" th:text="${pro.cantidadVendido}"></td>
             <td class="group">
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -72,11 +69,11 @@
                                        th:value="${_csrf.token}"/>
 
                                 <button type="button" class="btn btn-outline-success" name="action" id="mas" value="mas"
-                                        th:text="${mas}" onclick="myFunction(this);return false;">ggg
+                                        th:text="${mas}" onclick="masmenos(this);return false;">ggg
                                 </button>
 
                                 <button type="button" class="btn btn-outline-success" name="action" id="menos"
-                                        value="menos" th:text="${menos}" onclick="myFunction(this);return false;">jjj
+                                        value="menos" th:text="${menos}" onclick="masmenos(this);return false;">jjj
                                 </button>
                                 <div class="input-group">
                                     <input type="number" class="form-control" name="masomenos"

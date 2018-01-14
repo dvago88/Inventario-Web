@@ -66,7 +66,7 @@ public class DataConfig {
         ds.setDriverClassName(env.getProperty("inventario.ds.driver"));
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://ec2-50-17-203-84.compute-1.amazonaws.com:"+ dbUri.getPort() + dbUri.getPath()+"?sslmode=require";
+        String dbUrl = "jdbc:postgresql://ec2-50-17-203-84.compute-1.amazonaws.com:" + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
         ds.setUrl(dbUrl);
         ds.setUsername(username);
         ds.setPassword(password);

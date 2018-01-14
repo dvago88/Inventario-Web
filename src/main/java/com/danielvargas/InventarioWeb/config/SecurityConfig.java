@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //Esto es para que se puede acceder al css sin problema, spring mira como directorio base resourses/
-        web.ignoring().antMatchers("/css/**");
+        web.ignoring().antMatchers("/css/**").antMatchers("/javascript/**");
     }
 
 
