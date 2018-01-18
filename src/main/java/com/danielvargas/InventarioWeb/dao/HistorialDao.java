@@ -15,4 +15,6 @@ public interface HistorialDao {
     List<Historial> obtenerProductosPorId(int idProductos);
 
     List<Historial> obtenerProductosPorFecha(int fechaEntera);
+
+    List<Historial> obtenerProductoPorFecha(int idProducto, int fechaEntera);
 }

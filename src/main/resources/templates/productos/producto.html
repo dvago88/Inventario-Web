@@ -37,13 +37,7 @@
                 Editar Producto
             </button>
         </div>
-        <div class="container">
-            <form action="#" method="post">
-                <label for="startDate">Desde</label><input id="startDate" width="276"/>
-                <label for="endDate">Hasta</label><input id="endDate" width="276"/>
-                <button class="btn btn-primary mt-3">Ir</button>
-            </form>
-        </div>
+        <div th:replace="layout::historico"></div>
     </div>
 </div>
 <div class="container collapse multi-collapse" id="multiCollapseExample2">

@@ -59,7 +59,6 @@ public class Productos {
 
 
     private LocalDateTime dateUploaded = LocalDateTime.now();
-    private int diaNumero = 1;
     private int cantidadVendido;
     private int cantidadComprado;
 
@@ -75,6 +74,8 @@ public class Productos {
         this.precioEntrada = builder.getPrecioEntrada();
         this.descripcion = builder.getDescripcion();
         this.proveedor = builder.getProveedor();
+        this.cantidadVendido=builder.getCantidadVendido();
+        this.cantidadComprado=builder.getCantidadComprado();
     }
 
     public int getId() {
@@ -139,14 +140,6 @@ public class Productos {
 
     public void setDateUploaded(LocalDateTime dateUploaded) {
         this.dateUploaded = dateUploaded;
-    }
-
-    public int getDiaNumero() {
-        return diaNumero;
-    }
-
-    public void setDiaNumero(int diaNumero) {
-        this.diaNumero = diaNumero;
     }
 
     public int getCantidadVendido() {

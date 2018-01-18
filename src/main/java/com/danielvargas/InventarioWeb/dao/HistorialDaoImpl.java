@@ -48,6 +48,18 @@ public class HistorialDaoImpl implements HistorialDao {
 
     @SuppressWarnings("unchecked")
     @Override
+    public List<Historial> obtenerProductoPorFecha(int idProducto, int fechaEntera) {
+        String sql = "SELECT * FROM historial WHERE idProducto = '" + idProducto + "' AND fechaEntera <= '" + fechaEntera + "' ORDER BY localdatetime DESC ;";
+        SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity(Historial.class);
+        List his = query.list();
+        if (his.isEmpty()) {
+            return null;
+        }
+        return query.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
     public List<Historial> obtenerProductosPorFecha(int fechaEntera) {
 //        String slq = "SELECT * FROM historial WHERE fechaEntera = " + fechaEntera + ";";
         String slq = "SELECT * FROM historial WHERE fechaEntera = '" + fechaEntera + "'";

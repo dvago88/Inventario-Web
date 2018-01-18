@@ -42,7 +42,9 @@ $("#agregarUno").click(function () {
 
 //Select dates of the calendar:
 // let todayDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-$('#startDate').datepicker({
+$starDate = $("#startDate");
+$endDate = $('#endDate');
+$starDate.datepicker({
     uiLibrary: 'bootstrap4',
     iconsLibrary: 'fontawesome',
     // minDate: todayDate,
@@ -50,12 +52,19 @@ $('#startDate').datepicker({
         return $('#endDate').val();
     }
 });
-$('#endDate').datepicker({
+$endDate.datepicker({
     uiLibrary: 'bootstrap4',
     iconsLibrary: 'fontawesome',
     minDate: function () {
         return $('#startDate').val();
     }
 });
+
+if ($starDate.val() === "") {
+    $starDate.val(" ");
+}
+if ($endDate.val() === "") {
+    $endDate.val(" ");
+}
 
 //Usar un click event y tomar los datos pasados por java de la base de datos para forma la grafica en tiempo real

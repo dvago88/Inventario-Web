@@ -67,24 +67,21 @@ public class ApiController {
         Productos producto = productosService.obtenerPorCodigo(id);
         MultiValueMap<String, String> headers = new HttpHeaders();
 
-
         if (!productosService.cantidadProducto(producto, accion, cantidad)) {
             headers.add("queFue", "fail");
         } else {
-            headers.add("queFue", "success");
             if (accion.equals("menos")) {
                 productosService.numeroDeVentas(producto, cantidad);
             }
             productosService.agregarProducto(producto);
+            headers.add("queFue", "success");
         }
-
         return new ResponseEntity<>(producto, headers, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(path = "/editar/proveedor/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Proveedor> editarProveedor(@RequestBody String data, @PathVariable int id) {
-
         System.out.println(data);
         JSONObject jsonObject = new JSONObject(data);
 
@@ -97,5 +94,4 @@ public class ApiController {
 
         return new ResponseEntity<>(proveedor, HttpStatus.ACCEPTED);
     }
-
 }

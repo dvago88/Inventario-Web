@@ -1,20 +1,19 @@
 package com.danielvargas.InventarioWeb.controller;
 
-//import com.danielvargas.InventarioWeb.model.storage.Productos;
+
 import com.danielvargas.InventarioWeb.model.storage.Productos;
+import com.danielvargas.InventarioWeb.service.HistorialService;
 import com.danielvargas.InventarioWeb.service.ProductosService;
 import com.danielvargas.InventarioWeb.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 
 @Controller
 public class ProductoController {
@@ -25,15 +24,18 @@ public class ProductoController {
     @Autowired
     ProveedorService proveedorService;
 
+    @Autowired
+    HistorialService historialService;
+
     @RequestMapping("/{productosId}")
     public String producto(@PathVariable int productosId, Model model) {
         Productos pro = productosService.obtenerPorCodigo(productosId);
 //        int sieteDias = productosService.vendidosPorSemana(pro);
-        int sieteDias = productosService.vendidosPorXDias(pro,7);
+        int sieteDias = productosService.vendidosPorXDias(pro, 7);
         int treintaDias = productosService.vendidoPorMes(pro);
         int ano = productosService.vendidoPorAno(pro);
 //        int dia = productosService.vendidosPorDia(pro);
-        int dia = productosService.vendidosPorXDias(pro,1);// revisar si es 0 en vez de 1
+        int dia = productosService.vendidosPorXDias(pro, 1);// revisar si es 0 en vez de 1
         model.addAttribute("producto", pro);
         model.addAttribute("semana", sieteDias);
         model.addAttribute("mes", treintaDias);

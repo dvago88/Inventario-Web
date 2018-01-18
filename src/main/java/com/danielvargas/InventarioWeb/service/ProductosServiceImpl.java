@@ -56,7 +56,6 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public int agregarProducto(Productos productos) {
-        productos.setCantidadComprado(productos.getCantidad());
         int prodId = productosDao.agregarProducto(productos);
         Historial historial = new Historial(
                 prodId,
@@ -121,6 +120,7 @@ public class ProductosServiceImpl implements ProductosService {
         return prodId;
     }
 
+
     @Override
     public void revisador(Productos productos, Productos prod) {
         if (!productos.getNombre().equals(prod.getNombre())) {
@@ -161,8 +161,11 @@ public class ProductosServiceImpl implements ProductosService {
     @Override
     public boolean cantidadProducto(Productos productos, String masOMenos, int can) {
         int cantidad = productos.getCantidad();
+        int cantidadComprado = productos.getCantidadComprado();
         if (masOMenos.equals("mas")) {
             cantidad += can;
+            cantidadComprado += can;
+            productos.setCantidadComprado(cantidadComprado);
         } else {
             cantidad -= can;
         }
@@ -170,6 +173,7 @@ public class ProductosServiceImpl implements ProductosService {
             return false;
         }
         productos.setCantidad(cantidad);
+
         return true;
     }
 
@@ -246,10 +250,6 @@ public class ProductosServiceImpl implements ProductosService {
 
     @Override
     public List<Productos> obtenerPorProveedor(int provId) {
-       /* List<Productos> productos = new LinkedList<>();
-        for(Object prod:productosDao.obtenerPorProveedor(provId)){
-            productos.add((Productos) prod);
-        }*/
         return productosDao.obtenerPorProveedor(provId);
     }
 }

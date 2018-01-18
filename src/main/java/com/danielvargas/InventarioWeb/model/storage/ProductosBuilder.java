@@ -9,6 +9,8 @@ public class ProductosBuilder {
     private double precioEntrada;
     private String descripcion;
     private Proveedor proveedor;
+    private int cantidadVendido;
+    private int cantidadComprado;
 
     public ProductosBuilder(int id, String nombre) {
         this.id = id;
@@ -37,6 +39,16 @@ public class ProductosBuilder {
 
     public ProductosBuilder conProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
+        return this;
+    }
+
+    public ProductosBuilder conCantidadVendido(int cantidadVendido) {
+        this.cantidadVendido = cantidadVendido;
+        return this;
+    }
+
+    public ProductosBuilder conCantidadComprado(int cantidadComprado) {
+        this.cantidadComprado = cantidadComprado;
         return this;
     }
 
@@ -70,5 +82,13 @@ public class ProductosBuilder {
 
     public Proveedor getProveedor() {
         return proveedor;
+    }
+
+    public int getCantidadVendido() {
+        return cantidadVendido;
+    }
+
+    public int getCantidadComprado() {
+        return cantidadComprado;
     }
 }

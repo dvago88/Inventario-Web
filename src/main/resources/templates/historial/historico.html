@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title th:text="'Inventario | ' +${producto.nombre}">Inventario</title>
+    <div th:replace="layout::importes"></div>
+</head>
+<body class="fondoGris">
+<div th:replace="layout::mainbar"></div>
+<div class="container fondoGris rounded">
+    <div class="text-center">
+        <h1 th:text="${producto.nombre}">p</h1>
+        <h2 th:text="${inicio}+' - '+${fin}"></h2>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item" th:text="'Vendidos: ' + ${vendidos}">p</li>
+                <li class="list-group-item" th:text="'Comprados: ' + ${comprados}">p</li>
+                <li class="list-group-item" th:text="'Ganacia*: '+ ${ganancia}">p</li>
+                <li class="list-group-item" th:text="'Ventas promedio por día: ' + ${ventasPromedio}"></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+           <!-- <ul class="list-group">
+                <li class="list-group-item" th:text="'Vendidos en el último día: ' + ${dia}"></li>
+                <li class="list-group-item" th:text="'Vendidos en la última semana: ' + ${semana}"></li>
+                <li class="list-group-item" th:text="'Vendidos este mes: ' + ${mes}"></li>
+                <li class="list-group-item" th:text="'Vendidos este año: ' + ${ano}"></li>
+            </ul>
+            <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false" aria-controls="collapseExample">
+                Editar Producto
+            </button>-->
+        </div>
+        <div th:replace="layout::historico"></div>
+    </div>
+</div>
+<footer th:replace="layout::footer"></footer>
+<div th:replace="layout::scripts"></div>
+</body>
+</html>

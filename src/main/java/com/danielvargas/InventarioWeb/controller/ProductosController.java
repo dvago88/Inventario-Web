@@ -26,8 +26,8 @@ import java.util.List;
 @Controller
 public class ProductosController {
 
-    @Autowired
-    HistorialService historialService;
+//    @Autowired
+//    HistorialService historialService;
 
     @Autowired
     ProductosService productosService;
@@ -82,6 +82,7 @@ public class ProductosController {
 //        llamar agregar
         int prodId;
         if (productosService.obtenerPorNombre(productos.getNombre()) == null) {
+            productos.setCantidadComprado(productos.getCantidad());
             prodId = productosService.agregarProducto(productos);
         } else {
             prodId = productosService.actualizarProducto(productos, true);

@@ -15,4 +15,8 @@ public interface HistorialService {
     List<Historial> obtenerProductosPorId(int idProductos);
 
     List<Productos> obtenerProductosPorFecha(String fecha);
+
+    Productos obtenerProductoPorFecha(int idProducto, String fecha);
+
+    Productos obtenerProximoHaciaAtras(int productoId, String fin);
 }
