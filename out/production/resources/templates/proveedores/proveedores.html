@@ -10,10 +10,10 @@
     <div th:each="pro:${proveedor}">
         <ul class="list-group">
             <li class="list-group-item"><a th:text="${pro.nombreP}" th:href="@{|/proveedores/${pro.id}|}"></a>
-                <ul class="list-group">
+                <!--<ul class="list-group">
                     <li class="list-group-item">Producto</li>
                     <li class="list-group-item">Producto</li>
-                </ul>
+                </ul>-->
             </li>
         </ul>
     </div>
