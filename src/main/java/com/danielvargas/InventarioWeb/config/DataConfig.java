@@ -32,9 +32,10 @@ public class DataConfig {
 
     @Bean
     public LocalSessionFactoryBean sessionFactoryBean() {
-        Resource config = new ClassPathResource("hibernate.cfg.xml");
+//        Resource config = new ClassPathResource("hibernate.cfg.xml");
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-        sessionFactoryBean.setConfigLocation(config);
+        sessionFactoryBean.setHibernateProperties(getHibernateProperties());
+//        sessionFactoryBean.setConfigLocation(config);
         sessionFactoryBean.setPackagesToScan(env.getProperty("inventario.entity.package"));
         sessionFactoryBean.setDataSource(dataSource());
         return sessionFactoryBean;
